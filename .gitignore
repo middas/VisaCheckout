@@ -39,3 +39,4 @@ Thumbs.db
 # Visual Studio Files #
 #######################
 *.suo
+*\obj\*
