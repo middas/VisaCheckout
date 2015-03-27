@@ -34,10 +34,17 @@
     /// <summary>
     /// Options specific to how the button is displayed.
     /// </summary>
-    public class ButtonOptions
+    public class ButtonOptions : IOptions
     {
-        private const string ProductionButtonUrl = "";
-        private const string SandboxButtonUrl = "";
+        /// <summary>
+        /// The production URL for the button image
+        /// </summary>
+        protected const string ProductionButtonUrl = "https://secure.checkout.visa.com/wallet-services-web/xo/button.png";
+
+        /// <summary>
+        /// The sandbox URL for the button image
+        /// </summary>
+        protected const string SandboxButtonUrl = "https://sandbox.secure.checkout.visa.com/ wallet-services-web/xo/button.png";
 
         /// <summary>
         /// Whether a Canadian merchant accepts Visa Canada debit cards; required for Canadian merchants, otherwise, ignored.
@@ -93,5 +100,14 @@
         /// The default value is used if the value for width is invalid for the specified height.
         /// </remarks>
         public int? Width { get; set; }
+
+        /// <summary>
+        /// Gets the options HTML
+        /// </summary>
+        /// <returns></returns>
+        public string GetHtml()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

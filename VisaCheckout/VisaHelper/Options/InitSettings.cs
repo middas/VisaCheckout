@@ -21,7 +21,7 @@ namespace VisaCheckout.VisaHelper.Options
     /// <summary>
     /// Settings specific to the Javascript init.
     /// </summary>
-    public class InitSettings
+    public class InitSettings : IOptions
     {
         /// <summary>
         /// (Optional) Override value for the country code, which controls how text displays in the Visa Checkout checkout button and lightbox. By default, Visa Checkout determines the country from the consumer's IP address. Do not use the countryCode attribute unless explicit control over the display is required.
@@ -43,7 +43,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <summary>
         /// (Optional) Whether the payment.success event response should include summary information or full information. Permission to receive full information must be configured in Visa Checkout; otherwise, you will always receive only summary information, regardless of the data value you specify.
         /// </summary>
-        public DataLevel DataLevel { get; set; }
+        public DataLevel? DataLevel { get; set; }
 
         /// <summary>
         /// (Optional) The merchant's name as it appears on the Review panel of the lightbox; typically, it is the name of your company.
@@ -81,5 +81,14 @@ namespace VisaCheckout.VisaHelper.Options
         /// (Optional) Complete URL to your website.
         /// </summary>
         public Uri WebsiteUrl { get; set; }
+
+        /// <summary>
+        /// Gets the options HTML
+        /// </summary>
+        /// <returns></returns>
+        public string GetHtml()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

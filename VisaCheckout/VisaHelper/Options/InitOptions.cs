@@ -1,17 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace VisaCheckout.VisaHelper.Options
 {
     /// <summary>
     /// The init Javascript options.
     /// </summary>
-    public class InitOptions
+    public class InitOptions : IOptions
     {
-        public InitOptions()
-        {
-            PaymentRequest = new Dictionary<string, string>();
-        }
-
         /// <summary>
         /// (Required) The API key that Visa Checkout created when you created the Visa Checkout account. You will use both a live key and a sandbox key, which are different from each other.
         /// </summary>
@@ -28,9 +25,9 @@ namespace VisaCheckout.VisaHelper.Options
         public string ExternalProfileID { get; set; }
 
         /// <summary>
-        /// (Optional) One or more name-value pairs, each of which specifies a payment request attribute.
+        /// (Required) One or more name-value pairs, each of which specifies a payment request attribute.
         /// </summary>
-        public Dictionary<string, string> PaymentRequest { get; set; }
+        public PaymentRequestOptions PaymentRequest { get; set; }
 
         /// <summary>
         /// (Optional) One or more name-value pairs, each of which specifies a configuration attribute.
@@ -41,5 +38,42 @@ namespace VisaCheckout.VisaHelper.Options
         /// (Optional) Your merchant reference ID.
         /// </summary>
         public string SourceID { get; set; }
+
+        /// <summary>
+        /// Gets the options HTML
+        /// </summary>
+        /// <returns></returns>
+        public string GetHtml()
+        {
+            if (PaymentRequest == null)
+            {
+                throw new ArgumentNullException("PaymentRequest cannot be null");
+            }
+
+            StringBuilder sb = new StringBuilder("V.init({");
+            sb.Append("apikey:\"").Append(ApiKey).Append("\"");
+
+            if (!string.IsNullOrEmpty(ExternalClientID))
+            {
+                sb.Append(",ExternalClientId:\"").Append(ExternalClientID).Append("\"");
+            }
+            if (!string.IsNullOrEmpty(ExternalProfileID))
+            {
+                sb.Append(",ExternalProfileId:\"").Append(ExternalProfileID).Append("\"");
+            }
+            sb.Append(",").Append(PaymentRequest.GetHtml());
+            if (Settings != null)
+            {
+                sb.Append(",").Append(Settings.GetHtml());
+            }
+            if (!string.IsNullOrEmpty(SourceID))
+            {
+                sb.Append(",SourceID:\"").Append(SourceID).Append("\"");
+            }
+
+            sb.Append("});");
+
+            return sb.ToString();
+        }
     }
 }

@@ -21,16 +21,25 @@
     /// <summary>
     /// Review options.
     /// </summary>
-    public class ReviewOptions
+    public class ReviewOptions : IOptions
     {
         /// <summary>
         /// (Optional) The button label in the Visa Checkout lightbox.
         /// </summary>
-        public ButtonActions ButtonAction { get; set; }
+        public ButtonActions? ButtonAction { get; set; }
 
         /// <summary>
         /// (Optional) Your message to display on the Review page. You are responsible for translating the message.
         /// </summary>
         public string Message { get; set; }
+
+        /// <summary>
+        /// Gets the options HTML
+        /// </summary>
+        /// <returns></returns>
+        public string GetHtml()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

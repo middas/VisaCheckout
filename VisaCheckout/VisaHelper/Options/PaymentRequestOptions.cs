@@ -26,7 +26,7 @@ namespace VisaCheckout.VisaHelper.Options
     /// <summary>
     /// Payment request options.
     /// </summary>
-    public class PaymentRequestOptions
+    public class PaymentRequestOptions : IOptions
     {
         /// <summary>
         /// (Required) The currency with which to process the transaction.
@@ -43,12 +43,12 @@ namespace VisaCheckout.VisaHelper.Options
         /// <summary>
         /// (Optional) Total of discounts related to the payment. If provided, it is a positive value representing the amount to be deducted from the total.
         /// </summary>
-        public decimal Discount { get; set; }
+        public decimal? Discount { get; set; }
 
         /// <summary>
         /// (Optional) Total gift-wrapping charges in the payment.
         /// </summary>
-        public decimal GiftWrap { get; set; }
+        public decimal? GiftWrap { get; set; }
 
         /// <summary>
         /// (Optional) Merchant's ID associated with the request. Visa Checkout stores this value for your use as a convenience.
@@ -60,7 +60,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <summary>
         /// (Optional) Total uncategorized charges in the payment.
         /// </summary>
-        public decimal Misc { get; set; }
+        public decimal? Misc { get; set; }
 
         /// <summary>
         /// (Optional) Merchant's order ID associated with the payment.
@@ -80,7 +80,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <summary>
         /// (Optional) Total of shipping and handling charges in the payment.
         /// </summary>
-        public decimal ShippingHandling { get; set; }
+        public decimal? ShippingHandling { get; set; }
 
         /// <summary>
         /// (Required) Subtotal of the payment.
@@ -90,11 +90,20 @@ namespace VisaCheckout.VisaHelper.Options
         /// <summary>
         /// (Optional) Total tax-related charges in the payment.
         /// </summary>
-        public decimal Tax { get; set; }
+        public decimal? Tax { get; set; }
 
         /// <summary>
         /// (Optional) Total of the payment including all amounts.
         /// </summary>
-        public decimal Total { get; set; }
+        public decimal? Total { get; set; }
+
+        /// <summary>
+        /// Gets the options HTML
+        /// </summary>
+        /// <returns></returns>
+        public string GetHtml()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
