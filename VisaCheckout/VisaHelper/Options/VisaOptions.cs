@@ -57,7 +57,7 @@ namespace VisaCheckout.VisaHelper.Options
                 throw new ArgumentNullException("InitOptions cannot be null");
             }
             TagBuilder scriptTag = new TagBuilder("script");
-            scriptTag.Attributes.Add("type", "text\\javascript");
+            scriptTag.Attributes.Add("type", "text/javascript");
 
             StringBuilder sb = new StringBuilder(@"function onVisaCheckoutReady(){");
             sb.Append(InitOptions.GetHtml());

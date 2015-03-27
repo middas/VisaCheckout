@@ -195,7 +195,7 @@ namespace VisaCheckout.VisaHelper.Options
             sb.Append(WriteOptionalJavascriptValue("total", Total));
             sb.Append(WriteOptionalJavascriptValue("orderId", OrderID));
             sb.Append(WriteOptionalJavascriptValue("description", Description));
-            sb.Append(WriteOptionalJavascriptValue("promoCode", string.Join(".", PromoCodes.Select(p => string.Format("\"{0}\"")))));
+            sb.Append(WriteOptionalJavascriptValue("promoCode", string.Join(".", PromoCodes.Select(p => string.Format("\"{0}\"", p))), false));
             sb.Append(WriteOptionalJavascriptValue("customData", CustomData));
 
             if (sb[sb.Length - 1] == ',')

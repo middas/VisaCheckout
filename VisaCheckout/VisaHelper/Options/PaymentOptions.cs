@@ -5,22 +5,70 @@ namespace VisaCheckout.VisaHelper.Options
     [Flags]
     public enum BillingCountries
     {
-        AR,
-        AU,
-        BR,
-        CA,
-        CN,
-        CL,
-        CO,
-        HK,
-        MY,
-        MX,
-        NZ,
-        PE,
-        SG,
-        ZA,
-        AE,
-        US
+        /// <summary>
+        /// Argentina
+        /// </summary>
+        AR = 1,
+        /// <summary>
+        /// Australia
+        /// </summary>
+        AU = 2,
+        /// <summary>
+        /// Brazil
+        /// </summary>
+        BR = 4,
+        /// <summary>
+        /// Canada
+        /// </summary>
+        CA = 8,
+        /// <summary>
+        /// China
+        /// </summary>
+        CN = 16,
+        /// <summary>
+        /// Chile
+        /// </summary>
+        CL = 32,
+        /// <summary>
+        /// Colombia
+        /// </summary>
+        CO = 64,
+        /// <summary>
+        /// Hong Kong
+        /// </summary>
+        HK = 128,
+        /// <summary>
+        /// Malaysia
+        /// </summary>
+        MY = 256,
+        /// <summary>
+        /// Mexico
+        /// </summary>
+        MX = 512,
+        /// <summary>
+        /// New Zealand
+        /// </summary>
+        NZ = 1024,
+        /// <summary>
+        /// Peru
+        /// </summary>
+        PE = 2048,
+        /// <summary>
+        /// Singapore
+        /// </summary>
+        SG = 4096,
+        /// <summary>
+        /// South Africa
+        /// </summary>
+        ZA = 8192,
+        /// <summary>
+        /// United Arab Emirates
+        /// </summary>
+        AE = 16384,
+        /// <summary>
+        /// United States
+        /// </summary>
+        US = 32768
     }
 
     /// <summary>

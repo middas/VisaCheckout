@@ -8,7 +8,7 @@ namespace VisaCheckout.VisaHelper.Options
 {
     public abstract class OptionsBase
     {
-        protected string WriteOptionalJavascriptValue(string parameterName, object parameterValue)
+        protected string WriteOptionalJavascriptValue(string parameterName, object parameterValue, bool surroundValueInQuotes = true)
         {
             bool doWrite = false;
 
@@ -27,18 +27,18 @@ namespace VisaCheckout.VisaHelper.Options
             {
                 if (parameterValue is IOptions)
                 {
-                    data = ((IOptions)parameterValue).GetHtml();
+                    data = string.Format("{0},", ((IOptions)parameterValue).GetHtml());
                 }
                 else
                 {
-                    data = string.Format("{0}:\"{1}\",", parameterName, GetJavascriptValue(parameterValue));
+                    data = string.Format("{0}:{1},", parameterName, GetJavascriptValue(parameterValue, surroundValueInQuotes));
                 }
             }
 
             return data;
         }
 
-        private object GetJavascriptValue(object parameterValue)
+        private object GetJavascriptValue(object parameterValue, bool surroundInQuotes)
         {
             object value = parameterValue;
 
@@ -56,7 +56,8 @@ namespace VisaCheckout.VisaHelper.Options
                         }
                     }
 
-                    value = string.Format("[{0}]", string.Join(",", values.Select(v => string.Format("\"{0}\""))));
+                    value = string.Format("[{0}]", string.Join(",", values.Select(v => string.Format("\"{0}\"", v))));
+                    surroundInQuotes = false;
                 }
                 else
                 {
@@ -65,7 +66,12 @@ namespace VisaCheckout.VisaHelper.Options
             }
             if (parameterValue is Uri)
             {
-                value = ((Uri)parameterValue).AbsolutePath;
+                value = ((Uri)parameterValue).AbsoluteUri;
+            }
+
+            if (surroundInQuotes)
+            {
+                value = string.Format("\"{0}\"", value);
             }
 
             return value;
