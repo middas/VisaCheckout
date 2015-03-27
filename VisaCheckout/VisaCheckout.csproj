@@ -57,11 +57,13 @@
     <Compile Include="VisaHelper\Options\InitOptions.cs" />
     <Compile Include="VisaHelper\Options\InitSettings.cs" />
     <Compile Include="VisaHelper\Options\IOptions.cs" />
+    <Compile Include="VisaHelper\Options\OptionsBase.cs" />
     <Compile Include="VisaHelper\Options\PaymentOptions.cs" />
     <Compile Include="VisaHelper\Options\PaymentRequestOptions.cs" />
     <Compile Include="VisaHelper\Options\ReviewOptions.cs" />
     <Compile Include="VisaHelper\Options\ShippingOptions.cs" />
     <Compile Include="VisaHelper\Options\TellMeMoreLinkOptions.cs" />
+    <Compile Include="VisaHelper\Options\ThreeDSSetupOptions.cs" />
     <Compile Include="VisaHelper\Options\VisaOptions.cs" />
   </ItemGroup>
   <ItemGroup>

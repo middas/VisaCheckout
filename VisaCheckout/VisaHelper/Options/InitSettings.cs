@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace VisaCheckout.VisaHelper.Options
 {
@@ -10,18 +11,23 @@ namespace VisaCheckout.VisaHelper.Options
         /// <summary>
         /// Summary information (default)
         /// </summary>
-        Summary,
+        SUMMARY,
 
         /// <summary>
         /// Full information, which is only available if you are configured to receive it.
         /// </summary>
-        Full
+        FULL,
+
+        /// <summary>
+        /// Consumer and payment information is not returned in the payment.success event response, in which case the Get Payment Data API must be used to obtain the information.
+        /// </summary>
+        NONE
     }
 
     /// <summary>
     /// Settings specific to the Javascript init.
     /// </summary>
-    public class InitSettings : IOptions
+    public class InitSettings : OptionsBase, IOptions
     {
         /// <summary>
         /// (Optional) Override value for the country code, which controls how text displays in the Visa Checkout checkout button and lightbox. By default, Visa Checkout determines the country from the consumer's IP address. Do not use the countryCode attribute unless explicit control over the display is required.
@@ -78,17 +84,42 @@ namespace VisaCheckout.VisaHelper.Options
         public ShippingOptions Shipping { get; set; }
 
         /// <summary>
+        /// (Optional) Verified by Visa setup properties.
+        /// </summary>
+        public ThreeDSSetupOptions ThreeDSSetup { get; set; }
+
+        /// <summary>
         /// (Optional) Complete URL to your website.
         /// </summary>
         public Uri WebsiteUrl { get; set; }
 
         /// <summary>
-        /// Gets the options HTML
+        /// Gets the options HTML.
         /// </summary>
         /// <returns></returns>
         public string GetHtml()
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder("settings:{");
+
+            sb.Append(WriteOptionalJavascriptValue("locale", Locale));
+            sb.Append(WriteOptionalJavascriptValue("countryCode", CountryCode));
+            sb.Append(WriteOptionalJavascriptValue("logoUrl", LogoUrl));
+            sb.Append(WriteOptionalJavascriptValue("displayName", DisplayName));
+            sb.Append(WriteOptionalJavascriptValue("websiteUrl", WebsiteUrl));
+            sb.Append(WriteOptionalJavascriptValue("customerSupportUrl", CustomerSupportUrl));
+            sb.Append(WriteOptionalJavascriptValue(null, Shipping));
+            sb.Append(WriteOptionalJavascriptValue(null, Review));
+            sb.Append(WriteOptionalJavascriptValue(null, Payment));
+            sb.Append(WriteOptionalJavascriptValue(null, ThreeDSSetup));
+            sb.Append(WriteOptionalJavascriptValue("dataLevel", DataLevel));
+
+            if (sb[sb.Length - 1] == ',')
+            {
+                sb.Length = sb.Length - 1;
+            }
+            sb.Append("}");
+
+            return sb.ToString();
         }
     }
 }

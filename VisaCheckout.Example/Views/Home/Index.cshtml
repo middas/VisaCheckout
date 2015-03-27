@@ -1,6 +1,8 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@using VisaCheckout;
+
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
@@ -43,3 +45,18 @@
         <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
     </li>
 </ol>
+@{
+    VisaCheckout.VisaHelper.Options.VisaOptions options = new VisaCheckout.VisaHelper.Options.VisaOptions
+    {
+        InitOptions = new VisaCheckout.VisaHelper.Options.InitOptions
+        {
+            ApiKey = "api_key",
+            PaymentRequest = new VisaCheckout.VisaHelper.Options.PaymentRequestOptions
+            {
+                Subtotal = 2.50M,
+                CurrencyCode = VisaCheckout.VisaHelper.Options.CurrencyCodes.USD
+            }
+        }
+    };
+}
+@Html.WriteVisaCheckoutLink(options)

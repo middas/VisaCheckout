@@ -1,4 +1,5 @@
-﻿namespace VisaCheckout.VisaHelper.Options
+﻿using System.Text;
+namespace VisaCheckout.VisaHelper.Options
 {
     /// <summary>
     /// Possible button actions on the Review page
@@ -21,7 +22,7 @@
     /// <summary>
     /// Review options.
     /// </summary>
-    public class ReviewOptions : IOptions
+    public class ReviewOptions : OptionsBase, IOptions
     {
         /// <summary>
         /// (Optional) The button label in the Visa Checkout lightbox.
@@ -34,12 +35,23 @@
         public string Message { get; set; }
 
         /// <summary>
-        /// Gets the options HTML
+        /// Gets the options HTML.
         /// </summary>
         /// <returns></returns>
         public string GetHtml()
         {
-            throw new System.NotImplementedException();
+            StringBuilder sb = new StringBuilder("review:{");
+
+            sb.Append(WriteOptionalJavascriptValue("message", Message));
+            sb.Append(WriteOptionalJavascriptValue("buttonAction", ButtonAction));
+
+            if (sb[sb.Length - 1] == ',')
+            {
+                sb.Length = sb.Length - 1;
+            }
+            sb.Append("}");
+
+            return sb.ToString();
         }
     }
 }

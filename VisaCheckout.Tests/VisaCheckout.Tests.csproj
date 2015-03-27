@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4DD94460-724C-4843-9E00-A7ECA89B57D3}</ProjectGuid>
+    <ProjectGuid>{D0FCDE63-4C95-412A-8ECF-A66D5C82AB9E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VisaCheckout.Tests</RootNamespace>

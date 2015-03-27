@@ -16,7 +16,7 @@
         public string Locale { get; set; }
 
         /// <summary>
-        /// Gets the options HTML
+        /// Gets the options HTML.
         /// </summary>
         /// <returns></returns>
         public string GetHtml()

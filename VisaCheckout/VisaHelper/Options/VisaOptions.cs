@@ -47,7 +47,7 @@ namespace VisaCheckout.VisaHelper.Options
         public TellMeMoreLinkOptions TellMeMoreLinkOptions { get; set; }
 
         /// <summary>
-        /// Gets the options HTML
+        /// Gets the options HTML.
         /// </summary>
         /// <returns></returns>
         public string GetHtml()
@@ -65,7 +65,7 @@ namespace VisaCheckout.VisaHelper.Options
 
             scriptTag.InnerHtml = sb.ToString();
 
-            return sb.ToString();
+            return scriptTag.ToString();
         }
     }
 }

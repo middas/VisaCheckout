@@ -7,7 +7,7 @@ namespace VisaCheckout.VisaHelper.Options
     /// <summary>
     /// The init Javascript options.
     /// </summary>
-    public class InitOptions : IOptions
+    public class InitOptions : OptionsBase, IOptions
     {
         /// <summary>
         /// (Required) The API key that Visa Checkout created when you created the Visa Checkout account. You will use both a live key and a sandbox key, which are different from each other.
@@ -30,6 +30,13 @@ namespace VisaCheckout.VisaHelper.Options
         public PaymentRequestOptions PaymentRequest { get; set; }
 
         /// <summary>
+        /// (Optional) Visa Checkout transaction ID. The referenceCallID can be used with the Preselected Checkout Feature.
+        /// 
+        /// Format: Alphanumeric; maximum 48 characters
+        /// </summary>
+        public string ReferenceCallID { get; set; }
+
+        /// <summary>
         /// (Optional) One or more name-value pairs, each of which specifies a configuration attribute.
         /// </summary>
         public InitSettings Settings { get; set; }
@@ -40,7 +47,7 @@ namespace VisaCheckout.VisaHelper.Options
         public string SourceID { get; set; }
 
         /// <summary>
-        /// Gets the options HTML
+        /// Gets the options HTML.
         /// </summary>
         /// <returns></returns>
         public string GetHtml()
@@ -51,26 +58,18 @@ namespace VisaCheckout.VisaHelper.Options
             }
 
             StringBuilder sb = new StringBuilder("V.init({");
-            sb.Append("apikey:\"").Append(ApiKey).Append("\"");
+            sb.Append(WriteOptionalJavascriptValue("apikey", ApiKey));
+            sb.Append(WriteOptionalJavascriptValue("referenceCallID", ReferenceCallID));
+            sb.Append(WriteOptionalJavascriptValue("externalProfileId", ExternalProfileID));
+            sb.Append(WriteOptionalJavascriptValue("externalClientId", ExternalClientID));
+            sb.Append(WriteOptionalJavascriptValue("sourceId", SourceID));
+            sb.Append(WriteOptionalJavascriptValue(null, Settings));
+            sb.Append(WriteOptionalJavascriptValue(null, PaymentRequest));
 
-            if (!string.IsNullOrEmpty(ExternalClientID))
+            if (sb[sb.Length - 1] == ',')
             {
-                sb.Append(",ExternalClientId:\"").Append(ExternalClientID).Append("\"");
+                sb.Length = sb.Length - 1;
             }
-            if (!string.IsNullOrEmpty(ExternalProfileID))
-            {
-                sb.Append(",ExternalProfileId:\"").Append(ExternalProfileID).Append("\"");
-            }
-            sb.Append(",").Append(PaymentRequest.GetHtml());
-            if (Settings != null)
-            {
-                sb.Append(",").Append(Settings.GetHtml());
-            }
-            if (!string.IsNullOrEmpty(SourceID))
-            {
-                sb.Append(",SourceID:\"").Append(SourceID).Append("\"");
-            }
-
             sb.Append("});");
 
             return sb.ToString();
