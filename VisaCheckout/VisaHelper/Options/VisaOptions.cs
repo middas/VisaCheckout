@@ -21,6 +21,21 @@ namespace VisaCheckout.VisaHelper.Options
     /// </summary>
     public class VisaOptions : IOptions
     {
+        public VisaOptions(string apiKey, decimal subTotal, CurrencyCodes currencyCode)
+        {
+            InitOptions = new InitOptions
+            {
+                ApiKey = apiKey,
+                PaymentRequest = new PaymentRequestOptions
+                {
+                    CurrencyCode = currencyCode,
+                    Subtotal = subTotal
+                }
+            };
+
+            ButtonOptions = new ButtonOptions();
+        }
+
         /// <summary>
         /// The production URL for the SDK
         /// </summary>

@@ -100,7 +100,7 @@ namespace VisaCheckout.VisaHelper.Options
             StringBuilder sb = new StringBuilder("payment: {");
 
             sb.Append(WriteOptionalJavascriptValue("cardBrands", CardBrands));
-            sb.Append(WriteOptionalJavascriptValue("acceptCanadianVisaDebit", AcceptCanadianVisaDebit));
+            sb.Append(WriteOptionalJavascriptValue("acceptCanadianVisaDebit", AcceptCanadianVisaDebit.ToString().ToLower()));
             sb.Append(WriteOptionalJavascriptValue("billingCountries", BillingCountries));
 
             if (sb[sb.Length - 1] == ',')

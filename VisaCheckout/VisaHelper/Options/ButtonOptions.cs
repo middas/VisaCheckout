@@ -160,7 +160,7 @@ namespace VisaCheckout.VisaHelper.Options
             sb.Append(WriteOptionalQueryStringValue("locale", Locale));
             sb.Append(WriteOptionalQueryStringValue("color", Color).ToLower());
             sb.Append(WriteOptionalQueryStringValue("cardBrands", CardBrands).Replace("[","").Replace("]",""));
-            sb.Append(WriteOptionalQueryStringValue("acceptCanadianVisaDebit", AcceptCanadianVisaDebit));
+            sb.Append(WriteOptionalQueryStringValue("acceptCanadianVisaDebit", AcceptCanadianVisaDebit.ToString().ToLower()));
 
             if (sb[sb.Length - 1] == '&')
             {

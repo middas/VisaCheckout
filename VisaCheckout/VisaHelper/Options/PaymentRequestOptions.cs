@@ -97,7 +97,7 @@ namespace VisaCheckout.VisaHelper.Options
     {
         public PaymentRequestOptions()
         {
-            PromoCodes = new List<string>();
+            CustomData = new Dictionary<string, string>();
         }
 
         /// <summary>
@@ -106,11 +106,11 @@ namespace VisaCheckout.VisaHelper.Options
         public CurrencyCodes CurrencyCode { get; set; }
 
         /// <summary>
-        /// (Optional) Merchant-supplied data, as name-value pairs in JSON format.
+        /// (Optional) Merchant-supplied data, as name-value pairs
         ///
         /// Format: Alphanumeric; maximum 1024 characters
         /// </summary>
-        public string CustomData { get; set; }
+        public Dictionary<string,string> CustomData { get; set; }
 
         /// <summary>
         /// (Optional) Description associated with the payment.
@@ -150,11 +150,10 @@ namespace VisaCheckout.VisaHelper.Options
 
         /// <summary>
         /// (Optional) Promotion codes associated with the payment.
-        ///
-        /// Each promotional code is surrounded by quotes (") and separated by a period (.)
+        /// 
         /// The total length cannot be more than 100 characters
         /// </summary>
-        public List<string> PromoCodes { get; set; }
+        public string PromoCodes { get; set; }
 
         /// <summary>
         /// (Optional) Total of shipping and handling charges in the payment.
@@ -195,8 +194,12 @@ namespace VisaCheckout.VisaHelper.Options
             sb.Append(WriteOptionalJavascriptValue("total", Total));
             sb.Append(WriteOptionalJavascriptValue("orderId", OrderID));
             sb.Append(WriteOptionalJavascriptValue("description", Description));
-            sb.Append(WriteOptionalJavascriptValue("promoCode", string.Join(".", PromoCodes.Select(p => string.Format("\"{0}\"", p))), false));
-            sb.Append(WriteOptionalJavascriptValue("customData", CustomData));
+            sb.Append(WriteOptionalJavascriptValue("promoCode", PromoCodes));
+
+            if (CustomData.Count > 0)
+            {
+                sb.Append(string.Format("customData:{{\"nvPair\":[{0}]}}", string.Join(",", CustomData.Select(c => string.Format("{{\"name\":\"{0}\",\"value\":\"{1}\"}}", c.Key.ToString(), c.Value.ToString())))));
+            }
 
             if (sb[sb.Length - 1] == ',')
             {
