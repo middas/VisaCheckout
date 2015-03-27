@@ -46,11 +46,28 @@
     </li>
 </ol>
 @{
-    VisaCheckout.VisaHelper.Options.VisaOptions options = new VisaCheckout.VisaHelper.Options.VisaOptions
+    VisaCheckout.VisaHelper.Options.VisaOptions minOptions = new VisaCheckout.VisaHelper.Options.VisaOptions
+    {
+        IsSandbox = true,
+        InitOptions = new VisaCheckout.VisaHelper.Options.InitOptions
+        {
+            ApiKey = "17SOX33VCFW1A9FVJI4J13tvR2oX1EzHzYP5exFIuA1Ej1XyQ",
+            PaymentRequest = new VisaCheckout.VisaHelper.Options.PaymentRequestOptions
+            {
+                Subtotal = 2.5M
+            }
+        },
+        ButtonOptions = new VisaCheckout.VisaHelper.Options.ButtonOptions
+        {            
+            IsSandbox = true,
+        }
+    };
+
+    VisaCheckout.VisaHelper.Options.VisaOptions fullOptions = new VisaCheckout.VisaHelper.Options.VisaOptions
     {
         InitOptions = new VisaCheckout.VisaHelper.Options.InitOptions
         {
-            ApiKey = "api_key",
+            ApiKey = "17SOX33VCFW1A9FVJI4J13tvR2oX1EzHzYP5exFIuA1Ej1XyQ",
             PaymentRequest = new VisaCheckout.VisaHelper.Options.PaymentRequestOptions
             {
                 Subtotal = 2.50M,
@@ -62,7 +79,7 @@
                 MerchantRequestID = "some id",
                 Misc = 0.50M,
                 OrderID = "123abc",
-                PromoCodes = new List<string> { "abc", "123", "abc123"},
+                PromoCodes = new List<string> { "abc" },
                 ShippingHandling = 3.5M,
                 Tax = 1.27M,
                 Total = 10.73M
@@ -71,8 +88,7 @@
             {
                 Payment = new VisaCheckout.VisaHelper.Options.PaymentOptions
                 {
-                    CardBrands = VisaCheckout.VisaHelper.Options.SupportedCards.VISA | 
-                    VisaCheckout.VisaHelper.Options.SupportedCards.AMEX,
+                    CardBrands = VisaCheckout.VisaHelper.Options.SupportedCards.VISA | VisaCheckout.VisaHelper.Options.SupportedCards.MASTERCARD | VisaCheckout.VisaHelper.Options.SupportedCards.DISCOVER | VisaCheckout.VisaHelper.Options.SupportedCards.AMEX,
                     AcceptCanadianVisaDebit = true,
                     BillingCountries = VisaCheckout.VisaHelper.Options.BillingCountries.US
                 },
@@ -98,11 +114,24 @@
                 },
                 WebsiteUrl = new Uri("http://www.test.com")
             },
-            ExternalClientID = "some client id",
-            ExternalProfileID = "some profile id",
             ReferenceCallID = "some reference",
             SourceID = "some source"
+        },
+        ButtonOptions = new VisaCheckout.VisaHelper.Options.ButtonOptions
+        {
+            AcceptCanadianVisaDebit = true,
+            CardBrands = VisaCheckout.VisaHelper.Options.SupportedCards.VISA | VisaCheckout.VisaHelper.Options.SupportedCards.MASTERCARD | VisaCheckout.VisaHelper.Options.SupportedCards.DISCOVER | VisaCheckout.VisaHelper.Options.SupportedCards.AMEX,
+            Color = VisaCheckout.VisaHelper.Options.ButtonColors.neutral,
+            Locale = "en_US",
+            Size = VisaCheckout.VisaHelper.Options.ButtonSizes.Medium,
+            TabIndex = 1,
+            IsSandbox = true
+        },
+        IsSandbox = true,
+        TellMeMoreLinkOptions = new VisaCheckout.VisaHelper.Options.TellMeMoreLinkOptions
+        {
+            DataLocale = "en_US"
         }
     };
 }
-@Html.WriteVisaCheckoutLink(options)
+@Html.WriteVisaCheckoutLink(fullOptions)

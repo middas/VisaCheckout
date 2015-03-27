@@ -22,7 +22,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <returns></returns>
         public string GetHtml()
         {
-            StringBuilder sb = new StringBuilder("settings:{");
+            StringBuilder sb = new StringBuilder("shipping:{");
 
             sb.Append(WriteOptionalJavascriptValue("acceptedRegions", AcceptedRegions));
             sb.Append(WriteOptionalJavascriptValue("collectShipping", CollectShipping));

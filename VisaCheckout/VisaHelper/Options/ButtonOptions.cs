@@ -1,29 +1,42 @@
-﻿namespace VisaCheckout.VisaHelper.Options
+﻿using System;
+using System.Text;
+using System.Web.Mvc;
+namespace VisaCheckout.VisaHelper.Options
 {
     /// <summary>
     /// Preset colors of the button.
     /// </summary>
-    public enum ButtonColor { Standard, Neutral }
+    public enum ButtonColors 
+    { 
+        /// <summary>
+        /// The standard colors (default)
+        /// </summary>
+        standard, 
+        /// <summary>
+        /// Neutral colors
+        /// </summary>
+        neutral 
+    }
 
     /// <summary>
     /// Preset widths of the button.
     /// </summary>
-    public enum ButtonSize
+    public enum ButtonSizes
     {
         /// <summary>
         /// 154 pixels
         /// </summary>
-        Small,
+        Small = 154,
 
         /// <summary>
         /// 213 pixels (default)
         /// </summary>
-        Medium,
+        Medium = 213,
 
         /// <summary>
         /// 425 pixels
         /// </summary>
-        Large,
+        Large = 425,
 
         /// <summary>
         /// Custom size defined by Width and Height properties.
@@ -34,7 +47,7 @@
     /// <summary>
     /// Options specific to how the button is displayed.
     /// </summary>
-    public class ButtonOptions : IOptions
+    public class ButtonOptions : OptionsBase, IOptions
     {
         /// <summary>
         /// The production URL for the button image
@@ -44,7 +57,7 @@
         /// <summary>
         /// The sandbox URL for the button image
         /// </summary>
-        protected const string SandboxButtonUrl = "https://sandbox.secure.checkout.visa.com/ wallet-services-web/xo/button.png";
+        protected const string SandboxButtonUrl = "https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png";
 
         /// <summary>
         /// Whether a Canadian merchant accepts Visa Canada debit cards; required for Canadian merchants, otherwise, ignored.
@@ -54,7 +67,7 @@
         /// <summary>
         /// (Optional) The color of the Visa Checkout button.
         /// </summary>
-        public ButtonColor? Color { get; set; }
+        public ButtonColors? Color { get; set; }
 
         /// <summary>
         /// (Optional) Height of the button, in pixels, for custom button sizes.
@@ -73,7 +86,7 @@
         ///
         /// You can either specify size to display a standard size button, or you can specify height and width to specify a custom size. If you do not specify size or both height and width, the button size is 213 pixels. If you specify height or width, the value of size is ignored.
         /// </summary>
-        public ButtonSize? Size { get; set; }
+        public ButtonSizes? Size { get; set; }
 
         /// <summary>
         /// (Optional) Override value for brands associated with card art to be displayed. If a brand matching the consumer's preferred card is specified, the card art is displayed on the button; otherwise, a generic button is displayed.
@@ -81,7 +94,7 @@
         /// <remarks>
         /// This property supports flags
         /// </remarks>
-        public SupportedCards? SupportedCards { get; set; }
+        public SupportedCards? CardBrands { get; set; }
 
         /// <summary>
         /// (Optional) The tab index of the button.
@@ -102,12 +115,59 @@
         public int? Width { get; set; }
 
         /// <summary>
+        /// Whether the environment is the sandbox or production
+        /// </summary>
+        public bool IsSandbox { get; set; }
+
+        /// <summary>
         /// Gets the options HTML.
         /// </summary>
         /// <returns></returns>
         public string GetHtml()
         {
-            throw new System.NotImplementedException();
+            TagBuilder tag = new TagBuilder("image");
+            tag.Attributes.Add("alt", "Visa Checkout");
+            tag.Attributes.Add("class", "v-button");
+            tag.Attributes.Add("role", "button");
+            tag.Attributes.Add("src", BuildUrl());
+
+            if (TabIndex.HasValue)
+            {
+                tag.Attributes.Add("tabindex", TabIndex.Value.ToString());
+            }
+
+            return tag.ToString(TagRenderMode.SelfClosing);
+        }
+
+        private string BuildUrl()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(IsSandbox ? SandboxButtonUrl : ProductionButtonUrl).Append("?");
+
+            if (Size == ButtonSizes.Custom)
+            {
+                sb.Append(WriteOptionalQueryStringValue("height", Height));
+                sb.Append(WriteOptionalQueryStringValue("width", Width));
+            }
+            else
+            {
+                if (Size != null)
+                {
+                    sb.Append(WriteOptionalQueryStringValue("size", (int)Size));
+                }
+            }
+
+            sb.Append(WriteOptionalQueryStringValue("locale", Locale));
+            sb.Append(WriteOptionalQueryStringValue("color", Color));
+            sb.Append(WriteOptionalQueryStringValue("cardBrands", CardBrands).Replace("[","").Replace("]",""));
+            sb.Append(WriteOptionalQueryStringValue("acceptCanadianVisaDebit", AcceptCanadianVisaDebit));
+
+            if (sb[sb.Length - 1] == '&')
+            {
+                sb.Length = sb.Length - 1;
+            }
+
+            return sb.ToString();
         }
     }
 }

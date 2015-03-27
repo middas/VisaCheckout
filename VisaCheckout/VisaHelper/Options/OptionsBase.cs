@@ -8,22 +8,23 @@ namespace VisaCheckout.VisaHelper.Options
 {
     public abstract class OptionsBase
     {
-        protected string WriteOptionalJavascriptValue(string parameterName, object parameterValue, bool surroundValueInQuotes = true)
+        protected string WriteOptionalQueryStringValue(string parameterName, object parameterValue)
         {
-            bool doWrite = false;
-
-            if (parameterValue is string)
-            {
-                doWrite = !string.IsNullOrEmpty((string)parameterValue);
-            }
-            else
-            {
-                doWrite = parameterValue != null;
-            }
-
             string data = string.Empty;
 
-            if (doWrite)
+            if (IsValueNotNull(parameterValue))
+            {
+                data = string.Format("{0}={1}&", parameterName, GetValue(parameterValue, false));
+            }
+
+            return data;
+        }
+
+        protected string WriteOptionalJavascriptValue(string parameterName, object parameterValue, bool surroundValueInQuotes = true)
+        {
+            string data = string.Empty;
+
+            if (IsValueNotNull(parameterValue))
             {
                 if (parameterValue is IOptions)
                 {
@@ -31,14 +32,30 @@ namespace VisaCheckout.VisaHelper.Options
                 }
                 else
                 {
-                    data = string.Format("{0}:{1},", parameterName, GetJavascriptValue(parameterValue, surroundValueInQuotes));
+                    data = string.Format("{0}:{1},", parameterName, GetValue(parameterValue, surroundValueInQuotes));
                 }
             }
 
             return data;
         }
 
-        private object GetJavascriptValue(object parameterValue, bool surroundInQuotes)
+        private bool IsValueNotNull(object parameterValue)
+        {
+            bool notNull;
+
+            if (parameterValue is string)
+            {
+                notNull = !string.IsNullOrEmpty((string)parameterValue);
+            }
+            else
+            {
+                notNull = parameterValue != null;
+            }
+
+            return notNull;
+        }
+
+        private object GetValue(object parameterValue, bool surroundInQuotes)
         {
             object value = parameterValue;
 
@@ -57,6 +74,17 @@ namespace VisaCheckout.VisaHelper.Options
                     }
 
                     value = string.Format("[{0}]", string.Join(",", values.Select(v => string.Format("\"{0}\"", v))));
+
+                    if (surroundInQuotes)
+                    {
+                        value = string.Format("[{0}]", string.Join(",", values.Select(v => string.Format("\"{0}\"", v))));
+                    }
+                    else
+                    {
+                        value = string.Format("[{0}]", string.Join(",", values.Select(v => string.Format("{0}", v))));
+                    }
+
+                    // don't surround everything in quotes
                     surroundInQuotes = false;
                 }
                 else

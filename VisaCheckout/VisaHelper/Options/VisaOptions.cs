@@ -24,15 +24,15 @@ namespace VisaCheckout.VisaHelper.Options
         /// <summary>
         /// The production URL for the SDK
         /// </summary>
-        public const string ProductionSdkUrl = "https://assets.secure.checkout.visa.com/ checkout-widget/resources/js/integration/v1/sdk.js";
+        public const string ProductionSdkUrl = "https://assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js";
 
         /// <summary>
         /// The sandbox URL for the SDK
         /// </summary>
-        public const string SandboxSdkUrl = "https://sandbox-assets.secure.checkout.visa.com/ checkout-widget/resources/js/integration/v1/sdk.js";
+        public const string SandboxSdkUrl = "https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js";
 
         /// <summary>
-        /// (Optional) Defines how the button will be displayed.
+        /// (Required) Defines how the button will be displayed.
         /// </summary>
         public ButtonOptions ButtonOptions { get; set; }
 
@@ -47,6 +47,11 @@ namespace VisaCheckout.VisaHelper.Options
         public TellMeMoreLinkOptions TellMeMoreLinkOptions { get; set; }
 
         /// <summary>
+        /// Whether the environment is the sandbox or production
+        /// </summary>
+        public bool IsSandbox { get; set; }
+
+        /// <summary>
         /// Gets the options HTML.
         /// </summary>
         /// <returns></returns>
@@ -56,16 +61,32 @@ namespace VisaCheckout.VisaHelper.Options
             {
                 throw new ArgumentNullException("InitOptions cannot be null");
             }
-            TagBuilder scriptTag = new TagBuilder("script");
-            scriptTag.Attributes.Add("type", "text/javascript");
 
-            StringBuilder sb = new StringBuilder(@"function onVisaCheckoutReady(){");
-            sb.Append(InitOptions.GetHtml());
-            sb.Append("}");
+            if (ButtonOptions == null)
+            {
+                throw new ArgumentNullException("ButtonOptions cannot be null");
+            }
 
-            scriptTag.InnerHtml = sb.ToString();
+            StringBuilder sb = new StringBuilder();
+            TagBuilder tag = new TagBuilder("script");
+            tag.Attributes.Add("type", "text/javascript");
+            tag.InnerHtml = string.Format("function onVisaCheckoutReady(){{{0}}}", InitOptions.GetHtml());
 
-            return scriptTag.ToString();
+            sb.Append(tag.ToString()).Append("\r\n");
+
+            tag = new TagBuilder("div");
+            tag.Attributes.Add("class", "v-checkout-wrapper");
+            tag.InnerHtml = string.Format("{0}\r\n{1}", ButtonOptions.GetHtml(), TellMeMoreLinkOptions == null ? "" : TellMeMoreLinkOptions.GetHtml());
+
+            sb.Append(tag.ToString());
+
+            tag = new TagBuilder("script");
+            tag.Attributes.Add("type", "text/javascript");
+            tag.Attributes.Add("src", IsSandbox ? SandboxSdkUrl : ProductionSdkUrl);
+
+            sb.Append(tag.ToString());
+
+            return sb.ToString();
         }
     }
 }
