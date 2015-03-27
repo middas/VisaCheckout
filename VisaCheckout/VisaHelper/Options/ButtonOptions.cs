@@ -1,12 +1,12 @@
 ﻿namespace VisaCheckout.VisaHelper.Options
 {
     /// <summary>
-    /// Preset colors of the button
+    /// Preset colors of the button.
     /// </summary>
     public enum ButtonColor { Standard, Neutral }
 
     /// <summary>
-    /// Preset widths of the button
+    /// Preset widths of the button.
     /// </summary>
     public enum ButtonSize
     {
@@ -26,13 +26,13 @@
         Large,
 
         /// <summary>
-        /// Custom size defined by Width and Height properties
+        /// Custom size defined by Width and Height properties.
         /// </summary>
         Custom
     }
 
     /// <summary>
-    /// Options specific to how the button is displayed
+    /// Options specific to how the button is displayed.
     /// </summary>
     public class ButtonOptions
     {
@@ -50,7 +50,7 @@
         public ButtonColor? Color { get; set; }
 
         /// <summary>
-        /// Height of the button, in pixels, for custom button sizes.
+        /// (Optional) Height of the button, in pixels, for custom button sizes.
         ///
         /// You must specify the height if you specify a value for width. The value you choose determines the range of allowable values for width.
         /// </summary>
@@ -77,7 +77,12 @@
         public SupportedCards? SupportedCards { get; set; }
 
         /// <summary>
-        /// Width of the button, in pixels, for custom button sizes. You must specify the width if you specify a value for height.
+        /// (Optional) The tab index of the button.
+        /// </summary>
+        public int? TabIndex { get; set; }
+
+        /// <summary>
+        /// (Optional) Width of the button, in pixels, for custom button sizes. You must specify the width if you specify a value for height.
         /// </summary>
         /// <remarks>
         /// Format: It is one of the following values:
