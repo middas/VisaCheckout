@@ -11,11 +11,11 @@ namespace VisaCheckout.VisaHelper.Options
         /// <summary>
         /// The standard colors (default)
         /// </summary>
-        standard, 
+        Standard, 
         /// <summary>
         /// Neutral colors
         /// </summary>
-        neutral 
+        Neutral 
     }
 
     /// <summary>
@@ -158,7 +158,7 @@ namespace VisaCheckout.VisaHelper.Options
             }
 
             sb.Append(WriteOptionalQueryStringValue("locale", Locale));
-            sb.Append(WriteOptionalQueryStringValue("color", Color));
+            sb.Append(WriteOptionalQueryStringValue("color", Color).ToLower());
             sb.Append(WriteOptionalQueryStringValue("cardBrands", CardBrands).Replace("[","").Replace("]",""));
             sb.Append(WriteOptionalQueryStringValue("acceptCanadianVisaDebit", AcceptCanadianVisaDebit));
 
