@@ -46,11 +46,18 @@
     </li>
 </ol>
 @{
-    VisaCheckout.VisaHelper.Options.VisaOptions minOptions = new VisaCheckout.VisaHelper.Options.VisaOptions("17SOX33VCFW1A9FVJI4J13tvR2oX1EzHzYP5exFIuA1Ej1XyQ", 2.5M, VisaCheckout.VisaHelper.Options.CurrencyCodes.USD);
+    VisaCheckout.VisaHelper.Options.OnOptions onOptions = new VisaCheckout.VisaHelper.Options.OnOptions
+    {
+        PaymentSuccess = "alert(JSON.stringify(payment));",
+        PaymentCancel = "alert(JSON.stringify(payment));",
+        PaymentError = "alert(JSON.stringify(payment));"
+    };
+    
+    VisaCheckout.VisaHelper.Options.VisaOptions minOptions = new VisaCheckout.VisaHelper.Options.VisaOptions("17SOX33VCFW1A9FVJI4J13tvR2oX1EzHzYP5exFIuA1Ej1XyQ", 2.5M, VisaCheckout.VisaHelper.Options.CurrencyCodes.USD, onOptions);
     minOptions.IsSandbox = true;
     minOptions.ButtonOptions.IsSandbox = true;
 
-    VisaCheckout.VisaHelper.Options.VisaOptions fullOptions = new VisaCheckout.VisaHelper.Options.VisaOptions("17SOX33VCFW1A9FVJI4J13tvR2oX1EzHzYP5exFIuA1Ej1XyQ", 2.5M, VisaCheckout.VisaHelper.Options.CurrencyCodes.USD)
+    VisaCheckout.VisaHelper.Options.VisaOptions fullOptions = new VisaCheckout.VisaHelper.Options.VisaOptions("17SOX33VCFW1A9FVJI4J13tvR2oX1EzHzYP5exFIuA1Ej1XyQ", 2.5M, VisaCheckout.VisaHelper.Options.CurrencyCodes.USD, onOptions)
     {
         InitOptions = new VisaCheckout.VisaHelper.Options.InitOptions
         {
@@ -123,4 +130,4 @@
     fullOptions.InitOptions.PaymentRequest.CustomData.Add("test", "testValue");
     fullOptions.InitOptions.PaymentRequest.CustomData.Add("test1", "test1Value");
 }
-@Html.WriteVisaCheckoutLink(minOptions)
+@Html.WriteVisaCheckoutLink(fullOptions)

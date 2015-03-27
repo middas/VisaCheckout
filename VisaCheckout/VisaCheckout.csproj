@@ -57,6 +57,7 @@
     <Compile Include="VisaHelper\Options\InitOptions.cs" />
     <Compile Include="VisaHelper\Options\InitSettings.cs" />
     <Compile Include="VisaHelper\Options\IOptions.cs" />
+    <Compile Include="VisaHelper\Options\OnOptions.cs" />
     <Compile Include="VisaHelper\Options\OptionsBase.cs" />
     <Compile Include="VisaHelper\Options\PaymentOptions.cs" />
     <Compile Include="VisaHelper\Options\PaymentRequestOptions.cs" />

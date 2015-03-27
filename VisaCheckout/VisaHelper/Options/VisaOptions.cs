@@ -21,7 +21,7 @@ namespace VisaCheckout.VisaHelper.Options
     /// </summary>
     public class VisaOptions : IOptions
     {
-        public VisaOptions(string apiKey, decimal subTotal, CurrencyCodes currencyCode)
+        public VisaOptions(string apiKey, decimal subTotal, CurrencyCodes currencyCode, OnOptions on)
         {
             InitOptions = new InitOptions
             {
@@ -32,6 +32,8 @@ namespace VisaCheckout.VisaHelper.Options
                     Subtotal = subTotal
                 }
             };
+
+            On = on;
 
             ButtonOptions = new ButtonOptions();
         }
@@ -67,6 +69,11 @@ namespace VisaCheckout.VisaHelper.Options
         public bool IsSandbox { get; set; }
 
         /// <summary>
+        /// V.on event handler options
+        /// </summary>
+        public OnOptions On { get; set; }
+
+        /// <summary>
         /// Gets the options HTML.
         /// </summary>
         /// <returns></returns>
@@ -82,10 +89,15 @@ namespace VisaCheckout.VisaHelper.Options
                 throw new ArgumentNullException("ButtonOptions cannot be null");
             }
 
+            if (On == null)
+            {
+                throw new ArgumentNullException("On event handlers cannot be null");
+            }
+
             StringBuilder sb = new StringBuilder();
             TagBuilder tag = new TagBuilder("script");
             tag.Attributes.Add("type", "text/javascript");
-            tag.InnerHtml = string.Format("function onVisaCheckoutReady(){{{0}}}", InitOptions.GetHtml());
+            tag.InnerHtml = string.Format("function onVisaCheckoutReady(){{{0}{1}}}", InitOptions.GetHtml(), On.GetHtml());
 
             sb.Append(tag.ToString()).Append("\r\n");
 
