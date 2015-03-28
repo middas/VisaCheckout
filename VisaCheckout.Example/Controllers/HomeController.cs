@@ -28,7 +28,7 @@ namespace VisaCheckout.Example.Controllers
         {
             ViewBag.Message = "Visa Checkout - Cancel result.";
 
-            return View();
+            return View(response);
         }
 
         [HttpPost]
