@@ -14,5 +14,29 @@ namespace VisaCheckout.Example.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Success(string response)
+        {
+            ViewBag.Message = "Visa Checkout - Success result.";
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Cancel(string response)
+        {
+            ViewBag.Message = "Visa Checkout - Cancel result.";
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Error(string response)
+        {
+            ViewBag.Message = "Visa Checkout - Error result.";
+
+            return View();
+        }
     }
 }
