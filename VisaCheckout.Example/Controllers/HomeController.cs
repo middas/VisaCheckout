@@ -40,6 +40,9 @@ namespace VisaCheckout.Example.Controllers
         {
             ViewBag.Message = "Visa Checkout - Error result.";
 
+            dynamic result = JsonConvert.DeserializeObject(response);
+            ViewBag.Result = JsonConvert.SerializeObject(result, Formatting.Indented);
+
             return View();
         }
     }
