@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -28,7 +29,10 @@ namespace VisaCheckout.Example.Controllers
         {
             ViewBag.Message = "Visa Checkout - Cancel result.";
 
-            return View(response);
+            dynamic result = JsonConvert.DeserializeObject(response);
+            ViewBag.Result = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+            return View();
         }
 
         [HttpPost]

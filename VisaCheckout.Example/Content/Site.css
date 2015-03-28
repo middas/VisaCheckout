@@ -1,4 +1,8 @@
-﻿.v-checkout-wrapper {
+﻿code {
+    white-space: pre;
+}
+
+.v-checkout-wrapper {
     width: 213px;
 }
 
