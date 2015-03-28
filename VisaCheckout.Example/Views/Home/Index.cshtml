@@ -17,7 +17,7 @@
     {
         PaymentSuccess = "alert(JSON.stringify(payment));",
         PaymentCancel = string.Format("postResults(JSON.stringify(payment), '{0}');", Url.Action("Cancel")),
-        PaymentError = "alert(JSON.stringify(payment));"
+        PaymentError = string.Format("postResults(JSON.stringify(payment), '{0}');", Url.Action("Error"))
     };
     
     VisaCheckout.VisaHelper.Options.VisaOptions minOptions = new VisaCheckout.VisaHelper.Options.VisaOptions("17SOX33VCFW1A9FVJI4J13tvR2oX1EzHzYP5exFIuA1Ej1XyQ", 2.5M, VisaCheckout.VisaHelper.Options.CurrencyCodes.USD, onOptions);
