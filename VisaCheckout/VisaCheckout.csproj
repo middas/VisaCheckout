@@ -66,6 +66,7 @@
     <Compile Include="VisaHelper\Options\TellMeMoreLinkOptions.cs" />
     <Compile Include="VisaHelper\Options\ThreeDSSetupOptions.cs" />
     <Compile Include="VisaHelper\Options\VisaOptions.cs" />
+    <Compile Include="VisaHelper\ResponseHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
