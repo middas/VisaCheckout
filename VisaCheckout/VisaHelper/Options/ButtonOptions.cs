@@ -1,21 +1,22 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Web.Mvc;
+
 namespace VisaCheckout.VisaHelper.Options
 {
     /// <summary>
     /// Preset colors of the button.
     /// </summary>
-    public enum ButtonColors 
-    { 
+    public enum ButtonColors
+    {
         /// <summary>
         /// The standard colors (default)
         /// </summary>
-        Standard, 
+        Standard,
+
         /// <summary>
         /// Neutral colors
         /// </summary>
-        Neutral 
+        Neutral
     }
 
     /// <summary>
@@ -65,6 +66,14 @@ namespace VisaCheckout.VisaHelper.Options
         public bool AcceptCanadianVisaDebit { get; set; }
 
         /// <summary>
+        /// (Optional) Override value for brands associated with card art to be displayed. If a brand matching the consumer's preferred card is specified, the card art is displayed on the button; otherwise, a generic button is displayed.
+        /// </summary>
+        /// <remarks>
+        /// This property supports flags
+        /// </remarks>
+        public SupportedCards? CardBrands { get; set; }
+
+        /// <summary>
         /// (Optional) The color of the Visa Checkout button.
         /// </summary>
         public ButtonColors? Color { get; set; }
@@ -77,6 +86,11 @@ namespace VisaCheckout.VisaHelper.Options
         public int? Height { get; set; }
 
         /// <summary>
+        /// Whether the environment is the sandbox or production
+        /// </summary>
+        public bool IsSandbox { get; set; }
+
+        /// <summary>
         /// (Optional) The locale, which controls how text displays in a Visa Checkout button and the Visa Checkout lightbox. If not specified, the Accepted-Language value in HTTPS header is used, or if not present, en_US is used.
         /// </summary>
         public string Locale { get; set; }
@@ -87,14 +101,6 @@ namespace VisaCheckout.VisaHelper.Options
         /// You can either specify size to display a standard size button, or you can specify height and width to specify a custom size. If you do not specify size or both height and width, the button size is 213 pixels. If you specify height or width, the value of size is ignored.
         /// </summary>
         public ButtonSizes? Size { get; set; }
-
-        /// <summary>
-        /// (Optional) Override value for brands associated with card art to be displayed. If a brand matching the consumer's preferred card is specified, the card art is displayed on the button; otherwise, a generic button is displayed.
-        /// </summary>
-        /// <remarks>
-        /// This property supports flags
-        /// </remarks>
-        public SupportedCards? CardBrands { get; set; }
 
         /// <summary>
         /// (Optional) The tab index of the button.
@@ -113,11 +119,6 @@ namespace VisaCheckout.VisaHelper.Options
         /// The default value is used if the value for width is invalid for the specified height.
         /// </remarks>
         public int? Width { get; set; }
-
-        /// <summary>
-        /// Whether the environment is the sandbox or production
-        /// </summary>
-        public bool IsSandbox { get; set; }
 
         /// <summary>
         /// Gets the options HTML.
@@ -159,7 +160,7 @@ namespace VisaCheckout.VisaHelper.Options
 
             sb.Append(WriteOptionalQueryStringValue("locale", Locale));
             sb.Append(WriteOptionalQueryStringValue("color", Color).ToLower());
-            sb.Append(WriteOptionalQueryStringValue("cardBrands", CardBrands).Replace("[","").Replace("]",""));
+            sb.Append(WriteOptionalQueryStringValue("cardBrands", CardBrands).Replace("[", "").Replace("]", ""));
             sb.Append(WriteOptionalQueryStringValue("acceptCanadianVisaDebit", AcceptCanadianVisaDebit.ToString().ToLower()));
 
             if (sb[sb.Length - 1] == '&')

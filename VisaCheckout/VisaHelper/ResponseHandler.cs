@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace VisaCheckout.VisaHelper
 {
@@ -13,22 +10,8 @@ namespace VisaCheckout.VisaHelper
     /// </summary>
     public class ResponseHandler
     {
-        const int HmacLength = 32;
-        const int IvLength = 16;
-
-        /// <summary>
-        /// Decrypt the payment data
-        /// </summary>
-        /// <param name="secretKey">The secret key given by Visa</param>
-        /// <param name="encKey">The encrypted key from the response</param>
-        /// <param name="paymentData">The encrypted response data</param>
-        /// <returns>The decrypted payment data as a string</returns>
-        public string DecryptPaymentData(string secretKey, string encKey, string paymentData)
-        {
-            byte[] dynamicKey = Decrypt(Encoding.UTF8.GetBytes(secretKey), Convert.FromBase64String(encKey));
-
-            return Encoding.UTF8.GetString(Decrypt(dynamicKey, Convert.FromBase64String(paymentData)));
-        }
+        private const int HmacLength = 32;
+        private const int IvLength = 16;
 
         /// <summary>
         /// Decrypt data
@@ -72,6 +55,20 @@ namespace VisaCheckout.VisaHelper
             }
 
             return returnData;
+        }
+
+        /// <summary>
+        /// Decrypt the payment data
+        /// </summary>
+        /// <param name="secretKey">The secret key given by Visa</param>
+        /// <param name="encKey">The encrypted key from the response</param>
+        /// <param name="paymentData">The encrypted response data</param>
+        /// <returns>The decrypted payment data as a string</returns>
+        public string DecryptPaymentData(string secretKey, string encKey, string paymentData)
+        {
+            byte[] dynamicKey = Decrypt(Encoding.UTF8.GetBytes(secretKey), Convert.FromBase64String(encKey));
+
+            return Encoding.UTF8.GetString(Decrypt(dynamicKey, Convert.FromBase64String(paymentData)));
         }
 
         private byte[] Hash(byte[] key)

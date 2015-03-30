@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace VisaCheckout.VisaHelper.Options
 {
@@ -12,23 +8,25 @@ namespace VisaCheckout.VisaHelper.Options
     public class OnOptions : IOptions
     {
         /// <summary>
-        /// On payment success Javascript
-        /// 
-        /// function(payment) { ... }
-        /// </summary>
-        public string PaymentSuccess { get; set; }
-        /// <summary>
         /// On payment cancel Javascript
-        /// 
+        ///
         /// function(payment) { ... }
         /// </summary>
         public string PaymentCancel { get; set; }
+
         /// <summary>
         /// On payment error Javascript
-        /// 
+        ///
         /// function(payment) { ... }
         /// </summary>
         public string PaymentError { get; set; }
+
+        /// <summary>
+        /// On payment success Javascript
+        ///
+        /// function(payment) { ... }
+        /// </summary>
+        public string PaymentSuccess { get; set; }
 
         public string GetHtml()
         {

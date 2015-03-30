@@ -1,25 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VisaCheckout.VisaHelper.Options
 {
     public abstract class OptionsBase
     {
-        protected string WriteOptionalQueryStringValue(string parameterName, object parameterValue)
-        {
-            string data = string.Empty;
-
-            if (IsValueNotNull(parameterValue))
-            {
-                data = string.Format("{0}={1}&", parameterName, GetValue(parameterValue, false));
-            }
-
-            return data;
-        }
-
         protected string WriteOptionalJavascriptValue(string parameterName, object parameterValue, bool surroundValueInQuotes = true)
         {
             string data = string.Empty;
@@ -39,20 +25,16 @@ namespace VisaCheckout.VisaHelper.Options
             return data;
         }
 
-        private bool IsValueNotNull(object parameterValue)
+        protected string WriteOptionalQueryStringValue(string parameterName, object parameterValue)
         {
-            bool notNull;
+            string data = string.Empty;
 
-            if (parameterValue is string)
+            if (IsValueNotNull(parameterValue))
             {
-                notNull = !string.IsNullOrEmpty((string)parameterValue);
-            }
-            else
-            {
-                notNull = parameterValue != null;
+                data = string.Format("{0}={1}&", parameterName, GetValue(parameterValue, false));
             }
 
-            return notNull;
+            return data;
         }
 
         private object GetValue(object parameterValue, bool surroundInQuotes)
@@ -103,6 +85,22 @@ namespace VisaCheckout.VisaHelper.Options
             }
 
             return value;
+        }
+
+        private bool IsValueNotNull(object parameterValue)
+        {
+            bool notNull;
+
+            if (parameterValue is string)
+            {
+                notNull = !string.IsNullOrEmpty((string)parameterValue);
+            }
+            else
+            {
+                notNull = parameterValue != null;
+            }
+
+            return notNull;
         }
     }
 }

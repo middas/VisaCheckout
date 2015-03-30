@@ -21,6 +21,16 @@ namespace VisaCheckout.VisaHelper.Options
     /// </summary>
     public class VisaOptions : IOptions
     {
+        /// <summary>
+        /// The production URL for the SDK
+        /// </summary>
+        public const string ProductionSdkUrl = "https://assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js";
+
+        /// <summary>
+        /// The sandbox URL for the SDK
+        /// </summary>
+        public const string SandboxSdkUrl = "https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js";
+
         public VisaOptions(string apiKey, decimal subTotal, CurrencyCodes currencyCode, OnOptions on)
         {
             InitOptions = new InitOptions
@@ -39,16 +49,6 @@ namespace VisaCheckout.VisaHelper.Options
         }
 
         /// <summary>
-        /// The production URL for the SDK
-        /// </summary>
-        public const string ProductionSdkUrl = "https://assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js";
-
-        /// <summary>
-        /// The sandbox URL for the SDK
-        /// </summary>
-        public const string SandboxSdkUrl = "https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js";
-
-        /// <summary>
         /// (Required) Defines how the button will be displayed.
         /// </summary>
         public ButtonOptions ButtonOptions { get; set; }
@@ -59,11 +59,6 @@ namespace VisaCheckout.VisaHelper.Options
         public InitOptions InitOptions { get; set; }
 
         /// <summary>
-        /// (Optional) Defines how the "Tell Me More" link will be displayed.
-        /// </summary>
-        public TellMeMoreLinkOptions TellMeMoreLinkOptions { get; set; }
-
-        /// <summary>
         /// Whether the environment is the sandbox or production
         /// </summary>
         public bool IsSandbox { get; set; }
@@ -72,6 +67,11 @@ namespace VisaCheckout.VisaHelper.Options
         /// V.on event handler options
         /// </summary>
         public OnOptions On { get; set; }
+
+        /// <summary>
+        /// (Optional) Defines how the "Tell Me More" link will be displayed.
+        /// </summary>
+        public TellMeMoreLinkOptions TellMeMoreLinkOptions { get; set; }
 
         /// <summary>
         /// Gets the options HTML.

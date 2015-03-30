@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace VisaCheckout.VisaHelper.Options
@@ -31,7 +30,7 @@ namespace VisaCheckout.VisaHelper.Options
 
         /// <summary>
         /// (Optional) Visa Checkout transaction ID. The referenceCallID can be used with the Preselected Checkout Feature.
-        /// 
+        ///
         /// Format: Alphanumeric; maximum 48 characters
         /// </summary>
         public string ReferenceCallID { get; set; }

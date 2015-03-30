@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace VisaCheckout.VisaHelper.Options
 {
@@ -23,67 +22,69 @@ namespace VisaCheckout.VisaHelper.Options
         /// <summary>
         /// Australian dollars
         /// </summary>
-        
+
         AUD,
         /// <summary>
         /// Argentine Peso
         /// </summary>
-        
+
         ARS,
         /// <summary>
         /// Brazilian Real
         /// </summary>
-        
+
         BRL,
         /// <summary>
         /// Yuan Renminbi
         /// </summary>
-       
+
         CNY,
         /// <summary>
         /// Chilean Peso
         /// </summary>
-       
+
         CLP,
         /// <summary>
         /// Colombian Peso
         /// </summary>
-        
+
         COP,
         /// <summary>
         /// Hong Kong Dollar
         /// </summary>
-        
+
         HKD,
         /// <summary>
         /// Malaysian Ringgit
         /// </summary>
-       
+
         MYR,
         /// <summary>
         /// Mexican Peso
         /// </summary>
-        
+
         MXN,
         /// <summary>
         /// New Zealand Dollar
         /// </summary>
-        
+
         NZD,
         /// <summary>
         /// Nuevo Sol - Peru
         /// </summary>
-        
+
         PEN,
         /// <summary>
         /// Singapore Dollar
         /// </summary>
-        
+
         SGD,
+
         /// <summary>
         /// Rand
         /// </summary>
         ZAR,
+
         /// <summary>
         /// UAE Dirham
         /// </summary>
@@ -110,11 +111,11 @@ namespace VisaCheckout.VisaHelper.Options
         ///
         /// Format: Alphanumeric; maximum 1024 characters
         /// </summary>
-        public Dictionary<string,string> CustomData { get; set; }
+        public Dictionary<string, string> CustomData { get; set; }
 
         /// <summary>
         /// (Optional) Description associated with the payment.
-        /// 
+        ///
         /// Format: Alphanumeric; maximum 100 characters
         /// </summary>
         public string Description { get; set; }
@@ -150,7 +151,7 @@ namespace VisaCheckout.VisaHelper.Options
 
         /// <summary>
         /// (Optional) Promotion codes associated with the payment.
-        /// 
+        ///
         /// The total length cannot be more than 100 characters
         /// </summary>
         public string PromoCodes { get; set; }
