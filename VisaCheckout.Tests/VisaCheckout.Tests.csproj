@@ -88,9 +88,25 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ButtonOptionsTests.cs" />
+    <Compile Include="InitOptionsTests.cs" />
+    <Compile Include="SettingsTests.cs" />
+    <Compile Include="PaymentOptionsTests.cs" />
+    <Compile Include="PaymentRequestOptionsTests.cs" />
+    <Compile Include="ReviewOptionsTests.cs" />
+    <Compile Include="ShippingOptionsTests.cs" />
+    <Compile Include="TellMeMoreLinkOptionsTests.cs" />
+    <Compile Include="ThreeDSSetupOptionsTests.cs" />
+    <Compile Include="VisaOptionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VisaCheckout\VisaCheckout.csproj">
+      <Project>{9725d61f-fd2e-4f03-b439-f7d196827626}</Project>
+      <Name>VisaCheckout</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

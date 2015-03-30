@@ -38,7 +38,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <summary>
         /// (Optional) One or more name-value pairs, each of which specifies a configuration attribute.
         /// </summary>
-        public InitSettings Settings { get; set; }
+        public Settings Settings { get; set; }
 
         /// <summary>
         /// (Optional) Your merchant reference ID.
@@ -54,6 +54,11 @@ namespace VisaCheckout.VisaHelper.Options
             if (PaymentRequest == null)
             {
                 throw new ArgumentNullException("PaymentRequest cannot be null");
+            }
+
+            if (string.IsNullOrEmpty(ApiKey))
+            {
+                throw new ArgumentNullException("ApiKey cannot be null");
             }
 
             StringBuilder sb = new StringBuilder("V.init({");

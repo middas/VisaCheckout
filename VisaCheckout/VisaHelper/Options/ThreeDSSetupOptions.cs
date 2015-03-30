@@ -20,7 +20,7 @@ namespace VisaCheckout.VisaHelper.Options
         {
             StringBuilder sb = new StringBuilder("threeDSSetup:{");
 
-            sb.Append(WriteOptionalJavascriptValue("threeDSActive", ThreeDSActive));
+            sb.Append(WriteOptionalJavascriptValue("threeDSActive", ThreeDSActive.ToString().ToLower()));
 
             if (sb[sb.Length - 1] == ',')
             {

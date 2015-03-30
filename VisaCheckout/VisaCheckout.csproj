@@ -74,7 +74,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VisaHelper\Options\ButtonOptions.cs" />
     <Compile Include="VisaHelper\Options\InitOptions.cs" />
-    <Compile Include="VisaHelper\Options\InitSettings.cs" />
+    <Compile Include="VisaHelper\Options\Settings.cs" />
     <Compile Include="VisaHelper\Options\IOptions.cs" />
     <Compile Include="VisaHelper\Options\OnOptions.cs" />
     <Compile Include="VisaHelper\Options\OptionsBase.cs" />

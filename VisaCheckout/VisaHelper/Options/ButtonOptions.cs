@@ -53,12 +53,12 @@ namespace VisaCheckout.VisaHelper.Options
         /// <summary>
         /// The production URL for the button image
         /// </summary>
-        protected const string ProductionButtonUrl = "https://secure.checkout.visa.com/wallet-services-web/xo/button.png";
+        public const string ProductionButtonUrl = "https://secure.checkout.visa.com/wallet-services-web/xo/button.png";
 
         /// <summary>
         /// The sandbox URL for the button image
         /// </summary>
-        protected const string SandboxButtonUrl = "https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png";
+        public const string SandboxButtonUrl = "https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png";
 
         /// <summary>
         /// Whether a Canadian merchant accepts Visa Canada debit cards; required for Canadian merchants, otherwise, ignored.
