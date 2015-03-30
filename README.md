@@ -18,4 +18,4 @@ This is a simple way to integrate Visa Checkout into your ASP.NET MVC website.  
 @Html.WriteVisaCheckoutLink(minOptions)
 ```
 
-If you wish to contribute to the project, please submit your pull request to the development branch.
+If you wish to contribute to the project, please submit your pull request to the development branch.  All unit tests must pass and any new functionality must have passing unit tests.
