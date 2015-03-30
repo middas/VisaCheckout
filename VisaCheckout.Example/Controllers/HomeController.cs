@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using VisaCheckout.VisaHelper;
 
 namespace VisaCheckout.Example.Controllers
 {
@@ -21,7 +22,15 @@ namespace VisaCheckout.Example.Controllers
         {
             ViewBag.Message = "Visa Checkout - Success result.";
 
-            return View();
+            dynamic result = JsonConvert.DeserializeObject(response);
+            ViewBag.Result = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+            ResponseHandler handler = new ResponseHandler();
+            string unencrypted = handler.DecryptPaymentData("", result.encKey, result.encPaymentData);
+            dynamic eData = JsonConvert.DeserializeObject(unencrypted);
+            unencrypted = JsonConvert.SerializeObject(eData, Formatting.Indented);
+
+            return View(unencrypted);
         }
 
         [HttpPost]
