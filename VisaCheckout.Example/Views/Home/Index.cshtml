@@ -15,7 +15,7 @@
 @{
     VisaCheckout.VisaHelper.Options.OnOptions onOptions = new VisaCheckout.VisaHelper.Options.OnOptions
     {
-        PaymentSuccess = "alert(JSON.stringify(payment));",
+        PaymentSuccess = string.Format("postResults(JSON.stringify(payment), '{0}');", Url.Action("Success")),
         PaymentCancel = string.Format("postResults(JSON.stringify(payment), '{0}');", Url.Action("Cancel")),
         PaymentError = string.Format("postResults(JSON.stringify(payment), '{0}');", Url.Action("Error"))
     };
