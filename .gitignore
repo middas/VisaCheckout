@@ -42,3 +42,8 @@ Thumbs.db
 */obj/*
 *.user
 */bin/*
+
+# NuGet #
+#########
+*.nuspec
+*.nupkg
