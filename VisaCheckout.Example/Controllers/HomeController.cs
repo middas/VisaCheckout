@@ -26,7 +26,7 @@ namespace VisaCheckout.Example.Controllers
             ViewBag.Result = JsonConvert.SerializeObject(result, Formatting.Indented);
 
             ResponseHandler handler = new ResponseHandler();
-            string unencrypted = handler.DecryptPaymentData("", result.encKey, result.encPaymentData);
+            string unencrypted = handler.DecryptPaymentData("TA0@pG+k9S1OK0{5+1ENOTZ3Mj4ydjWf3FF/oC$c", result.encKey, result.encPaymentData);
             dynamic eData = JsonConvert.DeserializeObject(unencrypted);
             unencrypted = JsonConvert.SerializeObject(eData, Formatting.Indented);
 
