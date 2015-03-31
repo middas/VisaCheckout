@@ -55,8 +55,6 @@ namespace VisaCheckout.VisaHelper.Options
                         }
                     }
 
-                    value = string.Format("[{0}]", string.Join(",", values.Select(v => string.Format("\"{0}\"", v))));
-
                     if (surroundInQuotes)
                     {
                         value = string.Format("[{0}]", string.Join(",", values.Select(v => string.Format("\"{0}\"", v))));
