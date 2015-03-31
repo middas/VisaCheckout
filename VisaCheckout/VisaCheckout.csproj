@@ -86,11 +86,17 @@
     <Compile Include="VisaHelper\Options\ThreeDSSetupOptions.cs" />
     <Compile Include="VisaHelper\Options\VisaOptions.cs" />
     <Compile Include="VisaHelper\ResponseHandler.cs" />
+    <Compile Include="VisaHelper\REST\ApiKeyManagement.cs" />
+    <Compile Include="VisaHelper\REST\GetPaymentData.cs" />
+    <Compile Include="VisaHelper\REST\ProfileManagement.cs" />
+    <Compile Include="VisaHelper\REST\UpdatePaymentInfo.cs" />
+    <Compile Include="VisaHelper\REST\UserManagement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
