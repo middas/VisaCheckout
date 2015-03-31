@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>VisaCheckout</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Justin Sommercorn</authors>
+    <owners>Justin Sommercorn</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/middas/VisaCheckout</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <copyright>$copyright$</copyright>
+    <tags>Visa Checkout ASP.NET MVC payment processing</tags>
+	<summary>$description$</summary>
+	<dependencies>
+		<dependency id="Microsoft.AspNet.Mvc" version="4.0.40804.0" />
+	</dependencies>
+  </metadata>
+	<files>
+        <file src="bin\Release\VisaCheckout.dll" target="lib\net40" />
+		<file src="..\License.md" target="content\Properties" />
+    </files>
+</package>

@@ -45,6 +45,5 @@ Thumbs.db
 
 # NuGet #
 #########
-*.nuspec
 *.nupkg
 packages/*
