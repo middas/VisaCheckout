@@ -36,6 +36,13 @@ namespace VisaCheckout.VisaHelper.Options
         /// <param name="currencyCode">The currency code value</param>
         public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, string apiKey, decimal subtotal, decimal total, CurrencyCodes currencyCode)
         {
+            SharedKey = sharedKey;
+            CallID = callId;
+            EventType = eventType;
+            ApiKey = apiKey;
+            Subtotal = subtotal;
+            Total = total;
+            CurrencyCode = currencyCode;
         }
 
         /// <summary>
@@ -47,6 +54,30 @@ namespace VisaCheckout.VisaHelper.Options
         /// <param name="paymentRequestOptions">The <see cref="PaymentRequestOptions"/> to populate the properties from</param>
         public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, PaymentRequestOptions paymentRequestOptions)
         {
+            if (paymentRequestOptions == null)
+            {
+                throw new ArgumentNullException("paymentRequestOptions", "value cannot be null");
+            }
+
+            if (!paymentRequestOptions.Total.HasValue)
+            {
+                throw new ArgumentNullException("Total cannot be null");
+            }
+
+            SharedKey = sharedKey;
+            CallID = callId;
+            EventType = eventType;
+
+            CurrencyCode = paymentRequestOptions.CurrencyCode;
+            Discount = paymentRequestOptions.Discount;
+            GiftWrap = paymentRequestOptions.GiftWrap;
+            Misc = paymentRequestOptions.Misc;
+            OrderID = paymentRequestOptions.OrderID;
+            PromoCode = paymentRequestOptions.PromoCodes;
+            ShippingHandling = paymentRequestOptions.ShippingHandling;
+            Subtotal = paymentRequestOptions.Subtotal;
+            Tax = paymentRequestOptions.Tax;
+            Total = paymentRequestOptions.Total.Value;
         }
 
         /// <summary>
