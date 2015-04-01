@@ -91,6 +91,7 @@
     <Compile Include="VisaHelper\REST\ProfileManagement.cs" />
     <Compile Include="VisaHelper\REST\UpdatePaymentInfo.cs" />
     <Compile Include="VisaHelper\REST\UserManagement.cs" />
+    <Compile Include="VisaHelper\Options\VisaUpdateImageOptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
