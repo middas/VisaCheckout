@@ -86,11 +86,6 @@ namespace VisaCheckout.VisaHelper.Options
         public int? Height { get; set; }
 
         /// <summary>
-        /// Whether the environment is the sandbox or production
-        /// </summary>
-        public bool IsSandbox { get; set; }
-
-        /// <summary>
         /// (Optional) The locale, which controls how text displays in a Visa Checkout button and the Visa Checkout lightbox. If not specified, the Accepted-Language value in HTTPS header is used, or if not present, en_US is used.
         /// </summary>
         public string Locale { get; set; }
@@ -143,7 +138,7 @@ namespace VisaCheckout.VisaHelper.Options
         private string BuildUrl()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(IsSandbox ? SandboxButtonUrl : ProductionButtonUrl).Append("?");
+            sb.Append(Environment.IsSandbox ? SandboxButtonUrl : ProductionButtonUrl).Append("?");
 
             if (Size == ButtonSizes.Custom)
             {

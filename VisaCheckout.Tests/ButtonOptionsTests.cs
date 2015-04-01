@@ -61,10 +61,8 @@ namespace VisaCheckout.Tests
         [TestMethod]
         public void BuildUrlIsSandboxTest()
         {
-            IOptions options = new ButtonOptions
-            {
-                IsSandbox = true
-            };
+            VisaCheckout.VisaHelper.Environment.IsSandbox = true;
+            IOptions options = new ButtonOptions();
 
             string result = options.GetHtml();
 

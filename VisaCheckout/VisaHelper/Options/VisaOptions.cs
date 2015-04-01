@@ -59,11 +59,6 @@ namespace VisaCheckout.VisaHelper.Options
         public InitOptions InitOptions { get; set; }
 
         /// <summary>
-        /// Whether the environment is the sandbox or production
-        /// </summary>
-        public bool IsSandbox { get; set; }
-
-        /// <summary>
         /// V.on event handler options
         /// </summary>
         public OnOptions On { get; set; }
@@ -109,7 +104,7 @@ namespace VisaCheckout.VisaHelper.Options
 
             tag = new TagBuilder("script");
             tag.Attributes.Add("type", "text/javascript");
-            tag.Attributes.Add("src", IsSandbox ? SandboxSdkUrl : ProductionSdkUrl);
+            tag.Attributes.Add("src", Environment.IsSandbox ? SandboxSdkUrl : ProductionSdkUrl);
 
             sb.Append(tag.ToString());
 

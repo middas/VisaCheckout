@@ -7,6 +7,12 @@ namespace VisaCheckout.Tests
     [TestClass]
     public class ShippingOptionsTests
     {
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
+        }
+
         [TestMethod]
         public void GetHtmlTest()
         {

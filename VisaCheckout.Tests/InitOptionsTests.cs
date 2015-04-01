@@ -7,6 +7,12 @@ namespace VisaCheckout.Tests
     [TestClass]
     public class InitOptionsTests
     {
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
+        }
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void GetHtmlNoPaymentOptionsTest()

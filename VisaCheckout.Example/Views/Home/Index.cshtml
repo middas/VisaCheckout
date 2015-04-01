@@ -13,6 +13,7 @@
     </section>
 }
 @{
+    VisaCheckout.VisaHelper.Environment.IsSandbox = true;
     VisaCheckout.VisaHelper.Options.OnOptions onOptions = new VisaCheckout.VisaHelper.Options.OnOptions
     {
         PaymentSuccess = string.Format("postResults(JSON.stringify(payment), '{0}');", Url.Action("Success")),
@@ -84,10 +85,8 @@
             Color = VisaCheckout.VisaHelper.Options.ButtonColors.Neutral,
             Locale = "en_US",
             Size = VisaCheckout.VisaHelper.Options.ButtonSizes.Medium,
-            TabIndex = 1,
-            IsSandbox = true
+            TabIndex = 1
         },
-        IsSandbox = true,
         TellMeMoreLinkOptions = new VisaCheckout.VisaHelper.Options.TellMeMoreLinkOptions
         {
             DataLocale = "en_US"

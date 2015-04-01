@@ -20,6 +20,12 @@ namespace VisaCheckout.Tests
             };
         }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
+        }
+
         [TestMethod]
         public void GetHtmlTest()
         {
@@ -81,10 +87,8 @@ namespace VisaCheckout.Tests
         [TestMethod]
         public void GetHtmlIsSandboxTest()
         {
-            IOptions options = new VisaOptions("apiKey", 21.21M, CurrencyCodes.USD, OnOptions)
-            {
-                IsSandbox = true
-            };
+            VisaCheckout.VisaHelper.Environment.IsSandbox = true;
+            IOptions options = new VisaOptions("apiKey", 21.21M, CurrencyCodes.USD, OnOptions);
 
             string result = options.GetHtml();
 
