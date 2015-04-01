@@ -2,6 +2,9 @@
 
 namespace VisaCheckout.VisaHelper.Options
 {
+    /// <summary>
+    /// Transaction event types
+    /// </summary>
     public enum EventTypes
     {
         Create,
@@ -11,10 +14,40 @@ namespace VisaCheckout.VisaHelper.Options
         Other
     }
 
+    /// <summary>
+    /// Visa Update Image options.
+    /// </summary>
     public class VisaUpdateImageOptions : IOptions
     {
         public const string ProductionUrl = "https://secure.checkout.visa.com/wallet-services-web/payment/updatepaymentinfo.gif";
         public const string SandboxUrl = "https://sandbox.secure.checkout.visa.com/wallet-services-web/payment/updatepaymentinfo.gif";
+
+        private string SharedKey;
+
+        /// <summary>
+        /// The constructor
+        /// </summary>
+        /// <param name="sharedKey">The private shared key from Visa</param>
+        /// <param name="callId">The CallID value from VisaResponse.success</param>
+        /// <param name="eventType">The event type of this transaction</param>
+        /// <param name="apiKey">The public API Key from Visa</param>
+        /// <param name="subtotal">The subtotal of the transaction</param>
+        /// <param name="total">The total of the transaction</param>
+        /// <param name="currencyCode">The currency code value</param>
+        public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, string apiKey, decimal subtotal, decimal total, CurrencyCodes currencyCode)
+        {
+        }
+
+        /// <summary>
+        /// The constructor
+        /// </summary>
+        /// <param name="sharedKey">The private shared key from Visa</param>
+        /// <param name="callId">The CallID value from VisaResponse.success</param>
+        /// <param name="eventType">The event type of this transaction</param>
+        /// <param name="paymentRequestOptions">The <see cref="PaymentRequestOptions"/> to populate the properties from</param>
+        public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, PaymentRequestOptions paymentRequestOptions)
+        {
+        }
 
         /// <summary>
         /// (Required) Your public API key, which is different than your shared secret.
@@ -91,6 +124,11 @@ namespace VisaCheckout.VisaHelper.Options
         /// </summary>
         /// <returns></returns>
         public string GetHtml()
+        {
+            throw new NotImplementedException();
+        }
+
+        private string GenerateToken()
         {
             throw new NotImplementedException();
         }
