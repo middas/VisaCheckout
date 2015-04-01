@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using System.Web.Mvc;
 
 namespace VisaCheckout.VisaHelper.Options
 {
@@ -23,6 +25,7 @@ namespace VisaCheckout.VisaHelper.Options
         public const string SandboxUrl = "https://sandbox.secure.checkout.visa.com/wallet-services-web/payment/updatepaymentinfo.gif";
 
         private string SharedKey;
+        private int TimeStamp;
 
         /// <summary>
         /// The constructor
@@ -34,11 +37,12 @@ namespace VisaCheckout.VisaHelper.Options
         /// <param name="subtotal">The subtotal of the transaction</param>
         /// <param name="total">The total of the transaction</param>
         /// <param name="currencyCode">The currency code value</param>
-        public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, string apiKey, decimal subtotal, decimal total, CurrencyCodes currencyCode)
+        public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, int timestamp, string apiKey, decimal subtotal, decimal total, CurrencyCodes currencyCode)
         {
             SharedKey = sharedKey;
             CallID = callId;
             EventType = eventType;
+            TimeStamp = timestamp;
             ApiKey = apiKey;
             Subtotal = subtotal;
             Total = total;
@@ -52,7 +56,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <param name="callId">The CallID value from VisaResponse.success</param>
         /// <param name="eventType">The event type of this transaction</param>
         /// <param name="paymentRequestOptions">The <see cref="PaymentRequestOptions"/> to populate the properties from</param>
-        public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, PaymentRequestOptions paymentRequestOptions)
+        public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, int timestamp, PaymentRequestOptions paymentRequestOptions)
         {
             if (paymentRequestOptions == null)
             {
@@ -67,6 +71,7 @@ namespace VisaCheckout.VisaHelper.Options
             SharedKey = sharedKey;
             CallID = callId;
             EventType = eventType;
+            TimeStamp = timestamp;
 
             CurrencyCode = paymentRequestOptions.CurrencyCode;
             Discount = paymentRequestOptions.Discount;
@@ -156,12 +161,32 @@ namespace VisaCheckout.VisaHelper.Options
         /// <returns></returns>
         public string GetHtml()
         {
-            throw new NotImplementedException();
+            TagBuilder tag = new TagBuilder("img");
+            StringBuilder sb = new StringBuilder(ProductionUrl).Append("?");
+            sb.Append(WriteOptionalQueryStringValue("token", GenerateToken()));
+            sb.Append(WriteOptionalQueryStringValue("apikey", ApiKey));
+            sb.Append(WriteOptionalQueryStringValue("callId", CallID));
+            sb.Append(WriteOptionalQueryStringValue("total", Total));
+            sb.Append(WriteOptionalQueryStringValue("currencyCode", CurrencyCode));
+            sb.Append(WriteOptionalQueryStringValue("orderId", OrderID));
+            sb.Append(WriteOptionalQueryStringValue("promoCode", PromoCode));
+            sb.Append(WriteOptionalQueryStringValue("reason", Reason));
+            sb.Append(WriteOptionalQueryStringValue("subtotal", Subtotal));
+            sb.Append(WriteOptionalQueryStringValue("shippingHandling", ShippingHandling));
+            sb.Append(WriteOptionalQueryStringValue("tax", Tax));
+            sb.Append(WriteOptionalQueryStringValue("discount", Discount));
+            sb.Append(WriteOptionalQueryStringValue("giftWrap", GiftWrap));
+            sb.Append(WriteOptionalQueryStringValue("misc", Misc));
+
+
+            tag.Attributes.Add("src", string.Format("{0}{1}", ProductionUrl, sb.ToString()));
+
+            return tag.ToString();
         }
 
         private string GenerateToken()
         {
-            throw new NotImplementedException();
+            return string.Format("x:{0}:{1}", TimeStamp, "hash");
         }
     }
 }
