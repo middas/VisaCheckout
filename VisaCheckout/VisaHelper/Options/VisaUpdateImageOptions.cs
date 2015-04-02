@@ -61,7 +61,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <param name="callId">The CallID value from VisaResponse.success</param>
         /// <param name="eventType">The event type of this transaction</param>
         /// <param name="paymentRequestOptions">The <see cref="PaymentRequestOptions"/> to populate the properties from</param>
-        public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, int timestamp, PaymentRequestOptions paymentRequestOptions)
+        public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, int timestamp, string apiKey, PaymentRequestOptions paymentRequestOptions)
         {
             if (paymentRequestOptions == null)
             {
@@ -77,6 +77,7 @@ namespace VisaCheckout.VisaHelper.Options
             CallID = callId;
             EventType = eventType;
             TimeStamp = timestamp;
+            ApiKey = apiKey;
 
             CurrencyCode = paymentRequestOptions.CurrencyCode;
             Discount = paymentRequestOptions.Discount;
