@@ -182,7 +182,9 @@ namespace VisaCheckout.VisaHelper.Options
             sb.Append(WriteOptionalQueryStringValue("discount", Discount));
             sb.Append(WriteOptionalQueryStringValue("giftWrap", GiftWrap));
             sb.Append(WriteOptionalQueryStringValue("misc", Misc));
+            sb.Append(WriteOptionalQueryStringValue("eventType", EventType));
 
+            sb.Length = sb.Length - 1;
 
             tag.Attributes.Add("src", sb.ToString());
 

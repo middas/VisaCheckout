@@ -76,6 +76,10 @@ namespace VisaCheckout.VisaHelper.Options
             {
                 value = ((Uri)parameterValue).AbsoluteUri;
             }
+            if (parameterValue is decimal)
+            {
+                value = ((decimal)parameterValue).ToString("F2");
+            }
 
             if (surroundInQuotes)
             {
