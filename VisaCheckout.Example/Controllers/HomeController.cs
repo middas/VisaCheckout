@@ -1,8 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using VisaCheckout.VisaHelper;
 
@@ -10,6 +6,28 @@ namespace VisaCheckout.Example.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpPost]
+        public ActionResult Cancel(string response)
+        {
+            ViewBag.Message = "Visa Checkout - Cancel result.";
+
+            dynamic result = JsonConvert.DeserializeObject(response);
+            ViewBag.Result = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Error(string response)
+        {
+            ViewBag.Message = "Visa Checkout - Error result.";
+
+            dynamic result = JsonConvert.DeserializeObject(response);
+            ViewBag.Result = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+            return View();
+        }
+
         public ActionResult Index()
         {
             ViewBag.Message = "Visa Checkout example.";
@@ -31,28 +49,6 @@ namespace VisaCheckout.Example.Controllers
             unencrypted = JsonConvert.SerializeObject(eData, Formatting.Indented);
 
             return View(unencrypted);
-        }
-
-        [HttpPost]
-        public ActionResult Cancel(string response)
-        {
-            ViewBag.Message = "Visa Checkout - Cancel result.";
-
-            dynamic result = JsonConvert.DeserializeObject(response);
-            ViewBag.Result = JsonConvert.SerializeObject(result, Formatting.Indented);
-
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Error(string response)
-        {
-            ViewBag.Message = "Visa Checkout - Error result.";
-
-            dynamic result = JsonConvert.DeserializeObject(response);
-            ViewBag.Result = JsonConvert.SerializeObject(result, Formatting.Indented);
-
-            return View();
         }
     }
 }

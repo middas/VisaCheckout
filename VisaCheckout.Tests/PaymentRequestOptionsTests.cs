@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisaCheckout.VisaHelper.Options;
 
 namespace VisaCheckout.Tests
@@ -7,12 +6,6 @@ namespace VisaCheckout.Tests
     [TestClass]
     public class PaymentRequestOptionsTests
     {
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
-        }
-
         [TestMethod]
         public void GetHtmlTest()
         {
@@ -22,6 +15,20 @@ namespace VisaCheckout.Tests
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("paymentRequest:{"));
+        }
+
+        [TestMethod]
+        public void GetHtmlWithCustomDataTest()
+        {
+            IOptions options = new PaymentRequestOptions();
+            ((PaymentRequestOptions)options).CustomData.Add("test1", "value1");
+            ((PaymentRequestOptions)options).CustomData.Add("test2", "value2");
+
+            string result = options.GetHtml();
+
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Contains("paymentRequest:{"));
+            Assert.IsTrue(result.Contains("customData:{\"nvPair\":[{\"name\":\"test1\",\"value\":\"value1\"},{\"name\":\"test2\",\"value\":\"value2\"}]"));
         }
 
         [TestMethod]
@@ -41,18 +48,10 @@ namespace VisaCheckout.Tests
             Assert.IsTrue(result.Contains("subtotal:\"21.21\""));
         }
 
-        [TestMethod]
-        public void GetHtmlWithCustomDataTest()
+        [TestInitialize]
+        public void TestInitialize()
         {
-            IOptions options = new PaymentRequestOptions();
-            ((PaymentRequestOptions)options).CustomData.Add("test1", "value1");
-            ((PaymentRequestOptions)options).CustomData.Add("test2", "value2");
-
-            string result = options.GetHtml();
-
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("paymentRequest:{"));
-            Assert.IsTrue(result.Contains("customData:{\"nvPair\":[{\"name\":\"test1\",\"value\":\"value1\"},{\"name\":\"test2\",\"value\":\"value2\"}]"));
+            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
         }
     }
 }

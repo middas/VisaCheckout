@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
-using System.Web.Mvc;
 using System.Linq;
-using System.Web;
+using System.Reflection;
 using System.Security.Cryptography;
+using System.Text;
+using System.Web;
+using System.Web.Mvc;
 
 namespace VisaCheckout.VisaHelper.Options
 {
@@ -193,19 +193,19 @@ namespace VisaCheckout.VisaHelper.Options
         }
 
         /// <summary>
-        /// Format: Alphanumeric; maximum 100 characters in the form of token: x:UNIX_UTC_Timestamp:SHA256_hash, where 
-        ///     • UNIX_UTC_Timestamp is a UNIX Epoch timestamp 
-        ///     • SHA256_hash is an SHA256 hash of the following unseparated items: 
-        ///         1. Your shared secret 
-        ///         2. Timestamp from the transaction; exactly the same as UNIX_UTC_Timestamp 
-        ///         3. Resource path (API name) 
-        ///         4. This HTTPS request's query string Note: –The query string includes one or more parameters 
-        ///         in name-value pair format, whose names are separated from values by equal signs (=); 
-        ///         an empty value may be omitted but the name and equal sign must be present. The initial 
-        ///         question mark (?) is not included. All parameters must be present. 
-        ///         The parameters must be in lexicographic sort order (UTF-8, uppercase hex characters) with 
-        ///         parameters separated from each other by an ampersand (&). The query string must be URL 
-        ///         encoded (excepting the following characters, per RFC 3986: hyphen, period, underscore. and tilde). 
+        /// Format: Alphanumeric; maximum 100 characters in the form of token: x:UNIX_UTC_Timestamp:SHA256_hash, where
+        ///     • UNIX_UTC_Timestamp is a UNIX Epoch timestamp
+        ///     • SHA256_hash is an SHA256 hash of the following unseparated items:
+        ///         1. Your shared secret
+        ///         2. Timestamp from the transaction; exactly the same as UNIX_UTC_Timestamp
+        ///         3. Resource path (API name)
+        ///         4. This HTTPS request's query string Note: –The query string includes one or more parameters
+        ///         in name-value pair format, whose names are separated from values by equal signs (=);
+        ///         an empty value may be omitted but the name and equal sign must be present. The initial
+        ///         question mark (?) is not included. All parameters must be present.
+        ///         The parameters must be in lexicographic sort order (UTF-8, uppercase hex characters) with
+        ///         parameters separated from each other by an ampersand (&). The query string must be URL
+        ///         encoded (excepting the following characters, per RFC 3986: hyphen, period, underscore. and tilde).
         /// </summary>
         /// <returns></returns>
         private string GenerateToken()

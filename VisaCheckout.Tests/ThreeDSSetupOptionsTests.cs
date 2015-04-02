@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisaCheckout.VisaHelper.Options;
 
 namespace VisaCheckout.Tests
@@ -7,12 +6,6 @@ namespace VisaCheckout.Tests
     [TestClass]
     public class ThreeDSSetupOptionsTests
     {
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
-        }
-
         [TestMethod]
         public void GetHtmlTest()
         {
@@ -37,6 +30,12 @@ namespace VisaCheckout.Tests
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("threeDSSetup:{"));
             Assert.IsTrue(result.Contains("threeDSActive:\"true\""));
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
         }
     }
 }

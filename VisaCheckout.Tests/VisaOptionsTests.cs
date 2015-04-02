@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using VisaCheckout.VisaHelper.Options;
 
 namespace VisaCheckout.Tests
@@ -20,15 +20,10 @@ namespace VisaCheckout.Tests
             };
         }
 
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
-        }
-
         [TestMethod]
-        public void GetHtmlTest()
+        public void GetHtmlIsSandboxTest()
         {
+            VisaCheckout.VisaHelper.Environment.IsSandbox = true;
             IOptions options = new VisaOptions("apiKey", 21.21M, CurrencyCodes.USD, OnOptions);
 
             string result = options.GetHtml();
@@ -41,7 +36,7 @@ namespace VisaCheckout.Tests
             Assert.IsTrue(result.Contains("subtotal:\"21.21\""));
             Assert.IsTrue(result.Contains("currencyCode:\"USD\""));
             Assert.IsTrue(result.Contains("V.on"));
-            Assert.IsTrue(result.Contains(VisaOptions.ProductionSdkUrl));
+            Assert.IsTrue(result.Contains(VisaOptions.SandboxSdkUrl));
         }
 
         [TestMethod]
@@ -85,9 +80,8 @@ namespace VisaCheckout.Tests
         }
 
         [TestMethod]
-        public void GetHtmlIsSandboxTest()
+        public void GetHtmlTest()
         {
-            VisaCheckout.VisaHelper.Environment.IsSandbox = true;
             IOptions options = new VisaOptions("apiKey", 21.21M, CurrencyCodes.USD, OnOptions);
 
             string result = options.GetHtml();
@@ -100,7 +94,13 @@ namespace VisaCheckout.Tests
             Assert.IsTrue(result.Contains("subtotal:\"21.21\""));
             Assert.IsTrue(result.Contains("currencyCode:\"USD\""));
             Assert.IsTrue(result.Contains("V.on"));
-            Assert.IsTrue(result.Contains(VisaOptions.SandboxSdkUrl));
+            Assert.IsTrue(result.Contains(VisaOptions.ProductionSdkUrl));
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
         }
     }
 }

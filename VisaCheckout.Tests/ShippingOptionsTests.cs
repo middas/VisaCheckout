@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisaCheckout.VisaHelper.Options;
 
 namespace VisaCheckout.Tests
@@ -7,12 +6,6 @@ namespace VisaCheckout.Tests
     [TestClass]
     public class ShippingOptionsTests
     {
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
-        }
-
         [TestMethod]
         public void GetHtmlTest()
         {
@@ -39,6 +32,12 @@ namespace VisaCheckout.Tests
             Assert.IsTrue(result.Contains("shipping:{"));
             Assert.IsTrue(result.Contains("acceptedRegions:\"US\""));
             Assert.IsTrue(result.Contains("collectShipping:\"true\""));
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
         }
     }
 }

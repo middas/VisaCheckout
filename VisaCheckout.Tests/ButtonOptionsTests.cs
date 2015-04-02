@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisaCheckout.VisaHelper.Options;
 
 namespace VisaCheckout.Tests
@@ -7,6 +6,20 @@ namespace VisaCheckout.Tests
     [TestClass]
     public class ButtonOptionsTests
     {
+        [TestMethod]
+        public void BuildUrlIsSandboxTest()
+        {
+            VisaCheckout.VisaHelper.Environment.IsSandbox = true;
+            IOptions options = new ButtonOptions();
+
+            string result = options.GetHtml();
+
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Contains("<image"));
+            Assert.IsTrue(result.Contains("class=\"v-button\""));
+            Assert.IsTrue(result.Contains(ButtonOptions.SandboxButtonUrl));
+        }
+
         [TestMethod]
         public void BuildUrlTest()
         {
@@ -18,23 +31,6 @@ namespace VisaCheckout.Tests
             Assert.IsTrue(result.Contains("<image"));
             Assert.IsTrue(result.Contains("class=\"v-button\""));
             Assert.IsTrue(result.Contains(ButtonOptions.ProductionButtonUrl));
-        }
-
-        [TestMethod]
-        public void BuildUrlWithTabIndexTest()
-        {
-            IOptions options = new ButtonOptions
-            {
-                TabIndex = 1
-            };
-
-            string result = options.GetHtml();
-
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("<image"));
-            Assert.IsTrue(result.Contains("class=\"v-button\""));
-            Assert.IsTrue(result.Contains(ButtonOptions.ProductionButtonUrl));
-            Assert.IsTrue(result.Contains("tabindex=\"1\""));
         }
 
         [TestMethod]
@@ -59,17 +55,20 @@ namespace VisaCheckout.Tests
         }
 
         [TestMethod]
-        public void BuildUrlIsSandboxTest()
+        public void BuildUrlWithTabIndexTest()
         {
-            VisaCheckout.VisaHelper.Environment.IsSandbox = true;
-            IOptions options = new ButtonOptions();
+            IOptions options = new ButtonOptions
+            {
+                TabIndex = 1
+            };
 
             string result = options.GetHtml();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("<image"));
             Assert.IsTrue(result.Contains("class=\"v-button\""));
-            Assert.IsTrue(result.Contains(ButtonOptions.SandboxButtonUrl));
+            Assert.IsTrue(result.Contains(ButtonOptions.ProductionButtonUrl));
+            Assert.IsTrue(result.Contains("tabindex=\"1\""));
         }
     }
 }

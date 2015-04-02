@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using VisaCheckout.VisaHelper.Options;
 
 namespace VisaCheckout.Tests
@@ -7,23 +7,6 @@ namespace VisaCheckout.Tests
     [TestClass]
     public class InitOptionsTests
     {
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void GetHtmlNoPaymentOptionsTest()
-        {
-            IOptions options = new InitOptions();
-
-            string result = options.GetHtml();
-
-            Assert.IsNull(result);
-        }
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void GetHtmlNoApiKeyTest()
@@ -32,6 +15,17 @@ namespace VisaCheckout.Tests
             {
                 PaymentRequest = new PaymentRequestOptions()
             };
+
+            string result = options.GetHtml();
+
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetHtmlNoPaymentOptionsTest()
+        {
+            IOptions options = new InitOptions();
 
             string result = options.GetHtml();
 
@@ -55,6 +49,12 @@ namespace VisaCheckout.Tests
             Assert.IsTrue(result.Contains("paymentRequest:{"));
             Assert.IsTrue(result.Contains("apikey:\"apiKey\""));
             Assert.IsTrue(result.Contains("settings:{"));
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
         }
     }
 }

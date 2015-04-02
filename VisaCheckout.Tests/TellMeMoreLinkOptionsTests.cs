@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisaCheckout.VisaHelper.Options;
 
 namespace VisaCheckout.Tests
@@ -7,12 +6,6 @@ namespace VisaCheckout.Tests
     [TestClass]
     public class TellMeMoreLinkOptionsTests
     {
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
-        }
-
         [TestMethod]
         public void GetHtmlTest()
         {
@@ -42,6 +35,12 @@ namespace VisaCheckout.Tests
             Assert.IsTrue(result.Contains("v-learn"));
             Assert.IsTrue(result.Contains(string.Format(">{0}</a>", ((TellMeMoreLinkOptions)options).LinkText)));
             Assert.IsTrue(result.Contains("data-locale=\"en-US\""));
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisaCheckout.VisaHelper.Options;
 
 namespace VisaCheckout.Tests
@@ -7,12 +6,6 @@ namespace VisaCheckout.Tests
     [TestClass]
     public class OnOptionsTest
     {
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
-        }
-
         [TestMethod]
         public void GetHtmlTest()
         {
@@ -39,6 +32,12 @@ namespace VisaCheckout.Tests
             Assert.IsTrue(result.Contains("V.on(\"payment.success\", function(payment){success});"));
             Assert.IsTrue(result.Contains("V.on(\"payment.error\", function(payment){error});"));
             Assert.IsTrue(result.Contains("V.on(\"payment.cancel\", function(payment){cancel});"));
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            VisaCheckout.VisaHelper.Environment.IsSandbox = false;
         }
     }
 }
