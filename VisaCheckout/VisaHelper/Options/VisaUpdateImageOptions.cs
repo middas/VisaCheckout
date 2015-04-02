@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using System.Web.Mvc;
+using System.Linq;
+using System.Web;
+using System.Security.Cryptography;
 
 namespace VisaCheckout.VisaHelper.Options
 {
@@ -184,9 +189,60 @@ namespace VisaCheckout.VisaHelper.Options
             return tag.ToString();
         }
 
+        /// <summary>
+        /// Format: Alphanumeric; maximum 100 characters in the form of token: x:UNIX_UTC_Timestamp:SHA256_hash, where 
+        ///     • UNIX_UTC_Timestamp is a UNIX Epoch timestamp 
+        ///     • SHA256_hash is an SHA256 hash of the following unseparated items: 
+        ///         1. Your shared secret 
+        ///         2. Timestamp from the transaction; exactly the same as UNIX_UTC_Timestamp 
+        ///         3. Resource path (API name) 
+        ///         4. This HTTPS request's query string Note: –The query string includes one or more parameters 
+        ///         in name-value pair format, whose names are separated from values by equal signs (=); 
+        ///         an empty value may be omitted but the name and equal sign must be present. The initial 
+        ///         question mark (?) is not included. All parameters must be present. 
+        ///         The parameters must be in lexicographic sort order (UTF-8, uppercase hex characters) with 
+        ///         parameters separated from each other by an ampersand (&). The query string must be URL 
+        ///         encoded (excepting the following characters, per RFC 3986: hyphen, period, underscore. and tilde). 
+        /// </summary>
+        /// <returns></returns>
         private string GenerateToken()
         {
-            return string.Format("x:{0}:{1}", TimeStamp, "hash");
+            StringBuilder sb = new StringBuilder(SharedKey).Append("payment/info");
+
+            List<PropertyInfo> properties = new List<PropertyInfo>();
+            properties.AddRange(typeof(VisaUpdateImageOptions).GetProperties());
+
+            foreach (var property in properties.OrderBy(p => p.Name))
+            {
+                string name = property.Name;
+                name = Char.ToLower(name[0]) + name.Substring(1);
+                name = name.Replace("Key", "key");
+
+                string value = WriteOptionalQueryStringValue(name, property.GetValue(this, null));
+                if (string.IsNullOrEmpty(value))
+                {
+                    value = string.Format("{0}=&", name);
+                }
+
+                value = HttpUtility.UrlEncode(value);
+                sb.Append(value);
+            }
+
+            return string.Format("x:{0}:{1}", TimeStamp, Sha256Hash(sb.ToString()));
+        }
+
+        private string Sha256Hash(string s)
+        {
+            SHA256Managed sha = new SHA256Managed();
+            byte[] hash = sha.ComputeHash(Encoding.UTF8.GetBytes(s));
+            string hashString = "";
+
+            foreach (byte b in hash)
+            {
+                hashString += string.Format("{0:x2}", b);
+            }
+
+            return hashString;
         }
     }
 }
