@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using VisaCheckout.VisaHelper.Attributes;
 
 namespace VisaCheckout.VisaHelper.Options
 {
@@ -28,11 +29,13 @@ namespace VisaCheckout.VisaHelper.Options
         /// <summary>
         /// (Optional) The button label in the Visa Checkout lightbox.
         /// </summary>
+        [Option("buttonAction")]
         public ButtonActions? ButtonAction { get; set; }
 
         /// <summary>
         /// (Optional) Your message to display on the Review page. You are responsible for translating the message.
         /// </summary>
+        [Option("message")]
         public string Message { get; set; }
 
         /// <summary>
@@ -43,8 +46,8 @@ namespace VisaCheckout.VisaHelper.Options
         {
             StringBuilder sb = new StringBuilder("review:{");
 
-            sb.Append(WriteOptionalJavascriptValue("message", Message));
-            sb.Append(WriteOptionalJavascriptValue("buttonAction", ButtonAction));
+            sb.Append(WriteOptionalJavascriptValue((ReviewOptions o) => o.Message));
+            sb.Append(WriteOptionalJavascriptValue((ReviewOptions o) => o.ButtonAction));
 
             if (sb[sb.Length - 1] == ',')
             {

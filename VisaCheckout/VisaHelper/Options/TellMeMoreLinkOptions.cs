@@ -1,11 +1,12 @@
 ﻿using System.Web.Mvc;
+using VisaCheckout.VisaHelper.Attributes;
 
 namespace VisaCheckout.VisaHelper.Options
 {
     /// <summary>
     /// Options for displaying the "Tell Me More" link
     /// </summary>
-    public class TellMeMoreLinkOptions : IOptions
+    public class TellMeMoreLinkOptions : OptionsBase, IOptions
     {
         public TellMeMoreLinkOptions()
         {
@@ -15,6 +16,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <summary>
         /// (Optional) The locale, which controls how the pop up text displays in a Tell Me More link.
         /// </summary>
+        [Option("data-locale")]
         public string DataLocale { get; set; }
 
         /// <summary>
@@ -35,7 +37,7 @@ namespace VisaCheckout.VisaHelper.Options
 
             if (!string.IsNullOrEmpty(DataLocale))
             {
-                tag.Attributes.Add("data-locale", DataLocale);
+                tag.Attributes.Add(GetApiName(this.GetType().GetProperty("DataLocale")), DataLocale);
             }
 
             return tag.ToString();

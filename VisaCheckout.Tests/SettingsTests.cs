@@ -10,7 +10,7 @@ namespace VisaCheckout.Tests
         [TestMethod]
         public void GetHtmlTest()
         {
-            IOptions options = new Settings();
+            IOptions options = new SettingOptions();
 
             string result = options.GetHtml();
 
@@ -21,7 +21,7 @@ namespace VisaCheckout.Tests
         [TestMethod]
         public void GetHtmlWithOptionsTest()
         {
-            IOptions options = new Settings
+            IOptions options = new SettingOptions
             {
                 DataLevel = DataLevel.FULL,
                 DisplayName = "name",
@@ -40,7 +40,7 @@ namespace VisaCheckout.Tests
         [TestMethod]
         public void GetHtmlWithPaymentTest()
         {
-            IOptions options = new Settings
+            IOptions options = new SettingOptions
             {
                 Payment = new PaymentOptions()
             };
@@ -55,7 +55,7 @@ namespace VisaCheckout.Tests
         [TestMethod]
         public void GetHtmlWithReviewTest()
         {
-            IOptions options = new Settings
+            IOptions options = new SettingOptions
             {
                 Review = new ReviewOptions()
             };
@@ -70,7 +70,7 @@ namespace VisaCheckout.Tests
         [TestMethod]
         public void GetHtmlWithShippingTest()
         {
-            IOptions options = new Settings
+            IOptions options = new SettingOptions
             {
                 Shipping = new ShippingOptions()
             };
@@ -85,7 +85,7 @@ namespace VisaCheckout.Tests
         [TestMethod]
         public void GetHtmlWithThreeDSSetupTest()
         {
-            IOptions options = new Settings
+            IOptions options = new SettingOptions
             {
                 ThreeDSSetup = new ThreeDSSetupOptions()
             };
@@ -100,7 +100,7 @@ namespace VisaCheckout.Tests
         [TestMethod]
         public void GetHtmlWithUrlTest()
         {
-            IOptions options = new Settings
+            IOptions options = new SettingOptions
             {
                 WebsiteUrl = new Uri("http://www.test.com")
             };

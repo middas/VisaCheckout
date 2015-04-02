@@ -1,11 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using VisaCheckout.VisaHelper.Attributes;
 
 namespace VisaCheckout.VisaHelper.Options
 {
     public abstract class OptionsBase
     {
+        protected string WriteOptionalJavascriptValue<T, P>(Expression<Func<T, P>> expression, bool surroundValueInQuotes = true) where T : class
+        {
+            PropertyInfo property = (PropertyInfo)((MemberExpression)expression.Body).Member;
+
+            return WriteOptionalJavascriptValue(GetApiName(property), property.GetValue(this, null), surroundValueInQuotes);
+        }
+
+        protected string WriteOptionalQueryStringValue<T, P>(Expression<Func<T, P>> expression) where T : class
+        {
+            PropertyInfo property = (PropertyInfo)((MemberExpression)expression.Body).Member;
+
+            return WriteOptionalQueryStringValue(GetApiName(property), property.GetValue(this, null));
+        }
+
+        protected string GetApiName(PropertyInfo property)
+        {
+            var attributes = property.GetCustomAttributes(typeof(OptionAttribute), false);
+            string name;
+
+            if (attributes != null && attributes.Length > 0)
+            {
+                name = ((OptionAttribute)attributes[0]).ApiName;
+            }
+            else
+            {
+                name = property.Name;
+                name = Char.ToLower(name[0]) + name.Substring(1);
+            }
+
+            return name;
+        }
+
         protected string WriteOptionalJavascriptValue(string parameterName, object parameterValue, bool surroundValueInQuotes = true)
         {
             string data = string.Empty;
@@ -79,6 +114,10 @@ namespace VisaCheckout.VisaHelper.Options
             if (parameterValue is decimal)
             {
                 value = ((decimal)parameterValue).ToString("F2");
+            }
+            if (parameterValue is bool)
+            {
+                value = parameterValue.ToString().ToLower();
             }
 
             if (surroundInQuotes)

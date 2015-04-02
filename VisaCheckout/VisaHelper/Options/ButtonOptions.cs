@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Web.Mvc;
+using VisaCheckout.VisaHelper.Attributes;
 
 namespace VisaCheckout.VisaHelper.Options
 {
@@ -63,6 +64,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <summary>
         /// Whether a Canadian merchant accepts Visa Canada debit cards; required for Canadian merchants, otherwise, ignored.
         /// </summary>
+        [Option("acceptCanadianVisaDebit")]
         public bool AcceptCanadianVisaDebit { get; set; }
 
         /// <summary>
@@ -71,6 +73,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <remarks>
         /// This property supports flags
         /// </remarks>
+        [Option("cardBrands")]
         public SupportedCards? CardBrands { get; set; }
 
         /// <summary>
@@ -83,11 +86,13 @@ namespace VisaCheckout.VisaHelper.Options
         ///
         /// You must specify the height if you specify a value for width. The value you choose determines the range of allowable values for width.
         /// </summary>
+        [Option("height")]
         public int? Height { get; set; }
 
         /// <summary>
         /// (Optional) The locale, which controls how text displays in a Visa Checkout button and the Visa Checkout lightbox. If not specified, the Accepted-Language value in HTTPS header is used, or if not present, en_US is used.
         /// </summary>
+        [Option("locale")]
         public string Locale { get; set; }
 
         /// <summary>
@@ -95,6 +100,7 @@ namespace VisaCheckout.VisaHelper.Options
         ///
         /// You can either specify size to display a standard size button, or you can specify height and width to specify a custom size. If you do not specify size or both height and width, the button size is 213 pixels. If you specify height or width, the value of size is ignored.
         /// </summary>
+        [Option("size")]
         public ButtonSizes? Size { get; set; }
 
         /// <summary>
@@ -113,6 +119,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// greater than 658 and less than 1317 if height is 94; default value is 425
         /// The default value is used if the value for width is invalid for the specified height.
         /// </remarks>
+        [Option("width")]
         public int? Width { get; set; }
 
         /// <summary>
@@ -142,21 +149,21 @@ namespace VisaCheckout.VisaHelper.Options
 
             if (Size == ButtonSizes.Custom)
             {
-                sb.Append(WriteOptionalQueryStringValue("height", Height));
-                sb.Append(WriteOptionalQueryStringValue("width", Width));
+                sb.Append(WriteOptionalQueryStringValue((ButtonOptions o) => o.Height));
+                sb.Append(WriteOptionalQueryStringValue((ButtonOptions o) => o.Width));
             }
             else
             {
                 if (Size != null)
                 {
-                    sb.Append(WriteOptionalQueryStringValue("size", (int)Size));
+                    sb.Append(WriteOptionalQueryStringValue(GetApiName(this.GetType().GetProperty("Size")), (int)Size));
                 }
             }
 
-            sb.Append(WriteOptionalQueryStringValue("locale", Locale));
-            sb.Append(WriteOptionalQueryStringValue("color", Color).ToLower());
-            sb.Append(WriteOptionalQueryStringValue("cardBrands", CardBrands).Replace("[", "").Replace("]", ""));
-            sb.Append(WriteOptionalQueryStringValue("acceptCanadianVisaDebit", AcceptCanadianVisaDebit.ToString().ToLower()));
+            sb.Append(WriteOptionalQueryStringValue((ButtonOptions o) => o.Locale));
+            sb.Append(WriteOptionalQueryStringValue((ButtonOptions o) => o.Color).ToLower());
+            sb.Append(WriteOptionalQueryStringValue((ButtonOptions o) => o.CardBrands).Replace("[", "").Replace("]", ""));
+            sb.Append(WriteOptionalQueryStringValue((ButtonOptions o) => o.AcceptCanadianVisaDebit));
 
             if (sb[sb.Length - 1] == '&')
             {

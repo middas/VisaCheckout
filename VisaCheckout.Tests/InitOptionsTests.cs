@@ -39,7 +39,7 @@ namespace VisaCheckout.Tests
             {
                 PaymentRequest = new PaymentRequestOptions(),
                 ApiKey = "apiKey",
-                Settings = new Settings()
+                Settings = new SettingOptions()
             };
 
             string result = options.GetHtml();
