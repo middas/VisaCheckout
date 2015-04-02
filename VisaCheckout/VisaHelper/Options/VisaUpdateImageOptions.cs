@@ -171,8 +171,6 @@ namespace VisaCheckout.VisaHelper.Options
             sb.Append(WriteOptionalQueryStringValue("token", GenerateToken(out queryString)));
             sb.Append(queryString);
 
-            sb.Length = sb.Length - 1;
-
             tag.Attributes.Add("src", sb.ToString());
 
             return tag.ToString(TagRenderMode.SelfClosing);
