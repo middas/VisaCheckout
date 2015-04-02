@@ -61,7 +61,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <param name="callId">The CallID value from VisaResponse.success</param>
         /// <param name="eventType">The event type of this transaction</param>
         /// <param name="paymentRequestOptions">The <see cref="PaymentRequestOptions"/> to populate the properties from</param>
-        public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, int timestamp, PaymentRequestOptions paymentRequestOptions)
+        public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, int timestamp, string apiKey, PaymentRequestOptions paymentRequestOptions)
         {
             if (paymentRequestOptions == null)
             {
@@ -77,6 +77,7 @@ namespace VisaCheckout.VisaHelper.Options
             CallID = callId;
             EventType = eventType;
             TimeStamp = timestamp;
+            ApiKey = apiKey;
 
             CurrencyCode = paymentRequestOptions.CurrencyCode;
             Discount = paymentRequestOptions.Discount;
@@ -182,11 +183,13 @@ namespace VisaCheckout.VisaHelper.Options
             sb.Append(WriteOptionalQueryStringValue("discount", Discount));
             sb.Append(WriteOptionalQueryStringValue("giftWrap", GiftWrap));
             sb.Append(WriteOptionalQueryStringValue("misc", Misc));
+            sb.Append(WriteOptionalQueryStringValue("eventType", EventType));
 
+            sb.Length = sb.Length - 1;
 
-            tag.Attributes.Add("src", string.Format("{0}{1}", ProductionUrl, sb.ToString()));
+            tag.Attributes.Add("src", sb.ToString());
 
-            return tag.ToString();
+            return tag.ToString(TagRenderMode.SelfClosing);
         }
 
         /// <summary>
