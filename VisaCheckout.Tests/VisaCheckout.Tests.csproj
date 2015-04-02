@@ -99,6 +99,7 @@
     <Compile Include="ThreeDSSetupOptionsTests.cs" />
     <Compile Include="OnOptionsTest.cs" />
     <Compile Include="VisaOptionsTests.cs" />
+    <Compile Include="VisaUpdateImageOptionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

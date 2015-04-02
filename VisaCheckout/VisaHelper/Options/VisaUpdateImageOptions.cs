@@ -184,9 +184,9 @@ namespace VisaCheckout.VisaHelper.Options
             sb.Append(WriteOptionalQueryStringValue("misc", Misc));
 
 
-            tag.Attributes.Add("src", string.Format("{0}{1}", ProductionUrl, sb.ToString()));
+            tag.Attributes.Add("src", sb.ToString());
 
-            return tag.ToString();
+            return tag.ToString(TagRenderMode.SelfClosing);
         }
 
         /// <summary>
