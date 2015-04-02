@@ -18,5 +18,16 @@ namespace VisaCheckout
         {
             return new MvcHtmlString(options.GetHtml());
         }
+
+        /// <summary>
+        /// Write the Visa Checkout update image
+        /// </summary>
+        /// <param name="helper">The <see cref="HtmlHelper"/></param>
+        /// <param name="options">The options for the Visa Checkout update image <see cref="VisaUpdateImageOptions"/></param>
+        /// <returns></returns>
+        public static MvcHtmlString WriteVisaUpdateImage(this HtmlHelper helper, VisaUpdateImageOptions options)
+        {
+            return new MvcHtmlString(options.GetHtml());
+        }
     }
 }
