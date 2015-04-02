@@ -6,10 +6,15 @@ namespace VisaCheckout.Tests
     [TestClass]
     public class ButtonOptionsTests
     {
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            VisaHelper.Environment.IsSandbox = true;
+        }
+
         [TestMethod]
         public void BuildUrlIsSandboxTest()
         {
-            VisaCheckout.VisaHelper.Environment.IsSandbox = true;
             IOptions options = new ButtonOptions();
 
             string result = options.GetHtml();
@@ -23,6 +28,7 @@ namespace VisaCheckout.Tests
         [TestMethod]
         public void BuildUrlTest()
         {
+            VisaHelper.Environment.IsSandbox = false;
             IOptions options = new ButtonOptions();
 
             string result = options.GetHtml();
@@ -36,6 +42,7 @@ namespace VisaCheckout.Tests
         [TestMethod]
         public void BuildUrlWithOptionsTest()
         {
+            VisaHelper.Environment.IsSandbox = false;
             IOptions options = new ButtonOptions
             {
                 CardBrands = SupportedCards.AMEX | SupportedCards.VISA,
@@ -57,6 +64,7 @@ namespace VisaCheckout.Tests
         [TestMethod]
         public void BuildUrlWithTabIndexTest()
         {
+            VisaHelper.Environment.IsSandbox = false;
             IOptions options = new ButtonOptions
             {
                 TabIndex = 1
