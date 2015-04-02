@@ -168,7 +168,7 @@ namespace VisaCheckout.VisaHelper.Options
         public string GetHtml()
         {
             TagBuilder tag = new TagBuilder("img");
-            StringBuilder sb = new StringBuilder(ProductionUrl).Append("?");
+            StringBuilder sb = new StringBuilder(Environment.IsSandbox ? SandboxUrl : ProductionUrl).Append("?");
             sb.Append(WriteOptionalQueryStringValue("token", GenerateToken()));
             sb.Append(WriteOptionalQueryStringValue("apikey", ApiKey));
             sb.Append(WriteOptionalQueryStringValue("callId", CallID));
