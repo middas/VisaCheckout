@@ -22,8 +22,6 @@
     };
 
     VisaCheckout.VisaHelper.Options.VisaOptions minOptions = new VisaCheckout.VisaHelper.Options.VisaOptions("6L54BENENGTFB0JBDE9E139PCi16xnxbxsVKqSetpw_u_kJmc", 2.5M, VisaCheckout.VisaHelper.Options.CurrencyCodes.USD, onOptions);
-    minOptions.IsSandbox = true;
-    minOptions.ButtonOptions.IsSandbox = true;
 
     VisaCheckout.VisaHelper.Options.VisaOptions fullOptions = new VisaCheckout.VisaHelper.Options.VisaOptions("6L54BENENGTFB0JBDE9E139PCi16xnxbxsVKqSetpw_u_kJmc", 2.5M, VisaCheckout.VisaHelper.Options.CurrencyCodes.USD, onOptions)
     {
@@ -96,7 +94,7 @@
     fullOptions.InitOptions.PaymentRequest.CustomData.Add("test", "testValue");
     fullOptions.InitOptions.PaymentRequest.CustomData.Add("test1", "test1Value");
 }
-@Html.WriteVisaCheckoutLink(fullOptions)
+@Html.WriteVisaCheckoutLink(minOptions)
 <script type="text/javascript">
     function postResults(results, url) {
         var form = document.createElement('form');

@@ -26,11 +26,11 @@ namespace VisaCheckout.VisaHelper.Options
     /// </summary>
     public class VisaUpdateImageOptions : OptionsBase, IOptions
     {
+        private const string Resource = "payment/updatepaymentinfo.gif";
         public const string ProductionUrl = "https://secure.checkout.visa.com/wallet-services-web/payment/updatepaymentinfo.gif";
         public const string SandboxUrl = "https://sandbox.secure.checkout.visa.com/wallet-services-web/payment/updatepaymentinfo.gif";
 
         private string SharedKey;
-        private int TimeStamp;
 
         /// <summary>
         /// The constructor
@@ -42,12 +42,11 @@ namespace VisaCheckout.VisaHelper.Options
         /// <param name="subtotal">The subtotal of the transaction</param>
         /// <param name="total">The total of the transaction</param>
         /// <param name="currencyCode">The currency code value</param>
-        public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, int timestamp, string apiKey, decimal subtotal, decimal total, CurrencyCodes currencyCode)
+        public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, string apiKey, decimal subtotal, decimal total, CurrencyCodes currencyCode)
         {
             SharedKey = sharedKey;
             CallID = callId;
             EventType = eventType;
-            TimeStamp = timestamp;
             ApiKey = apiKey;
             Subtotal = subtotal;
             Total = total;
@@ -61,7 +60,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <param name="callId">The CallID value from VisaResponse.success</param>
         /// <param name="eventType">The event type of this transaction</param>
         /// <param name="paymentRequestOptions">The <see cref="PaymentRequestOptions"/> to populate the properties from</param>
-        public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, int timestamp, string apiKey, PaymentRequestOptions paymentRequestOptions)
+        public VisaUpdateImageOptions(string sharedKey, string callId, EventTypes eventType, string apiKey, PaymentRequestOptions paymentRequestOptions)
         {
             if (paymentRequestOptions == null)
             {
@@ -76,7 +75,6 @@ namespace VisaCheckout.VisaHelper.Options
             SharedKey = sharedKey;
             CallID = callId;
             EventType = eventType;
-            TimeStamp = timestamp;
             ApiKey = apiKey;
 
             CurrencyCode = paymentRequestOptions.CurrencyCode;
@@ -169,21 +167,9 @@ namespace VisaCheckout.VisaHelper.Options
         {
             TagBuilder tag = new TagBuilder("img");
             StringBuilder sb = new StringBuilder(Environment.IsSandbox ? SandboxUrl : ProductionUrl).Append("?");
-            sb.Append(WriteOptionalQueryStringValue("token", GenerateToken()));
-            sb.Append(WriteOptionalQueryStringValue("apikey", ApiKey));
-            sb.Append(WriteOptionalQueryStringValue("callId", CallID));
-            sb.Append(WriteOptionalQueryStringValue("total", Total));
-            sb.Append(WriteOptionalQueryStringValue("currencyCode", CurrencyCode));
-            sb.Append(WriteOptionalQueryStringValue("orderId", OrderID));
-            sb.Append(WriteOptionalQueryStringValue("promoCode", PromoCode));
-            sb.Append(WriteOptionalQueryStringValue("reason", Reason));
-            sb.Append(WriteOptionalQueryStringValue("subtotal", Subtotal));
-            sb.Append(WriteOptionalQueryStringValue("shippingHandling", ShippingHandling));
-            sb.Append(WriteOptionalQueryStringValue("tax", Tax));
-            sb.Append(WriteOptionalQueryStringValue("discount", Discount));
-            sb.Append(WriteOptionalQueryStringValue("giftWrap", GiftWrap));
-            sb.Append(WriteOptionalQueryStringValue("misc", Misc));
-            sb.Append(WriteOptionalQueryStringValue("eventType", EventType));
+            string queryString;
+            sb.Append(WriteOptionalQueryStringValue("token", GenerateToken(out queryString)));
+            sb.Append(queryString);
 
             sb.Length = sb.Length - 1;
 
@@ -208,30 +194,46 @@ namespace VisaCheckout.VisaHelper.Options
         ///         encoded (excepting the following characters, per RFC 3986: hyphen, period, underscore. and tilde).
         /// </summary>
         /// <returns></returns>
-        private string GenerateToken()
+        private string GenerateToken(out string queryString)
         {
-            StringBuilder sb = new StringBuilder(SharedKey).Append("payment/info");
-
+            long timestamp = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
+            // Steps 1, 2, and 3
+            StringBuilder sb = new StringBuilder(SharedKey).Append(timestamp).Append(Resource);
+            
+            // Step 4
             List<PropertyInfo> properties = new List<PropertyInfo>();
             properties.AddRange(typeof(VisaUpdateImageOptions).GetProperties());
 
+            StringBuilder querySb = new StringBuilder();
+
+            // lexicographic sort
             foreach (var property in properties.OrderBy(p => p.Name))
             {
                 string name = property.Name;
                 name = Char.ToLower(name[0]) + name.Substring(1);
                 name = name.Replace("Key", "key");
 
+                // name value pair whose names are separated from values by equal signs
+                // separated from each other by an ampersand
                 string value = WriteOptionalQueryStringValue(name, property.GetValue(this, null));
                 if (string.IsNullOrEmpty(value))
                 {
+                    // an empty value may be omitted but the name and equal sign must be present
+                    // separated from each other by an ampersand
                     value = string.Format("{0}=&", name);
                 }
 
-                value = HttpUtility.UrlEncode(value);
-                sb.Append(value);
+                // The query string must be URL encoded
+                value = HttpUtility.UrlEncode(value).Replace("%26", "&").Replace("%3d", "=");
+                querySb.Append(value);
             }
+            
+            // remove final ampersand
+            querySb.Length = querySb.Length - 1;
+            queryString = querySb.ToString();
+            sb.Append(querySb.ToString());
 
-            return string.Format("x:{0}:{1}", TimeStamp, Sha256Hash(sb.ToString()));
+            return string.Format("x:{0}:{1}", timestamp, Sha256Hash(sb.ToString()));
         }
 
         private string Sha256Hash(string s)

@@ -10,12 +10,11 @@ namespace VisaCheckout.Tests
         public void GetHtmlProductionTest()
         {
             VisaHelper.Environment.IsSandbox = false;
-            IOptions options = new VisaUpdateImageOptions("shared_Key", "abc123", EventTypes.Confirm, 12345678, "apiKey", 21M, 22M, CurrencyCodes.USD);
+            IOptions options = new VisaUpdateImageOptions("shared_Key", "abc123", EventTypes.Confirm, "apiKey", 21M, 22M, CurrencyCodes.USD);
 
             string result = options.GetHtml();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("x:12345678:"));
             Assert.IsTrue(result.Contains(VisaUpdateImageOptions.ProductionUrl));
             Assert.IsTrue(result.Contains("eventType=Confirm"));
             Assert.IsTrue(result.Contains("apikey=apiKey"));
@@ -27,12 +26,11 @@ namespace VisaCheckout.Tests
         [TestMethod]
         public void GetHtmlTest()
         {
-            IOptions options = new VisaUpdateImageOptions("shared_Key", "abc123", EventTypes.Confirm, 12345678, "apiKey", 21M, 22M, CurrencyCodes.USD);
+            IOptions options = new VisaUpdateImageOptions("shared_Key", "abc123", EventTypes.Confirm, "apiKey", 21M, 22M, CurrencyCodes.USD);
 
             string result = options.GetHtml();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("x:12345678:"));
             Assert.IsTrue(result.Contains(VisaUpdateImageOptions.SandboxUrl));
             Assert.IsTrue(result.Contains("eventType=Confirm"));
             Assert.IsTrue(result.Contains("apikey=apiKey"));
@@ -44,7 +42,7 @@ namespace VisaCheckout.Tests
         [TestMethod]
         public void GetHtmlTestWithPaymentRequestTest()
         {
-            IOptions options = new VisaUpdateImageOptions("shared_Key", "abc123", EventTypes.Confirm, 12345678, "apiKey", new PaymentRequestOptions
+            IOptions options = new VisaUpdateImageOptions("shared_Key", "abc123", EventTypes.Confirm, "apiKey", new PaymentRequestOptions
             {
                 CurrencyCode = CurrencyCodes.USD,
                 Subtotal = 21M,
@@ -54,7 +52,6 @@ namespace VisaCheckout.Tests
             string result = options.GetHtml();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("x:12345678:"));
             Assert.IsTrue(result.Contains(VisaUpdateImageOptions.SandboxUrl));
             Assert.IsTrue(result.Contains("eventType=Confirm"));
             Assert.IsTrue(result.Contains("apikey=apiKey"));

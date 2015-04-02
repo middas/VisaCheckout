@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Web.Mvc;
+using VisaCheckout.Example.Models;
 using VisaCheckout.VisaHelper;
 
 namespace VisaCheckout.Example.Controllers
@@ -38,17 +39,18 @@ namespace VisaCheckout.Example.Controllers
         [HttpPost]
         public ActionResult Success(string response)
         {
+            SuccessModel model = new SuccessModel();
             ViewBag.Message = "Visa Checkout - Success result.";
 
             dynamic result = JsonConvert.DeserializeObject(response);
-            ViewBag.Result = JsonConvert.SerializeObject(result, Formatting.Indented);
+            model.EncryptedData = JsonConvert.SerializeObject(result, Formatting.Indented);
 
             ResponseHandler handler = new ResponseHandler();
-            string unencrypted = handler.DecryptPaymentData("TA0@pG+k9S1OK0{5+1ENOTZ3Mj4ydjWf3FF/oC$c", result.encKey, result.encPaymentData);
+            string unencrypted = handler.DecryptPaymentData("TA0@pG+k9S1OK0{5+1ENOTZ3Mj4ydjWf3FF/oC$c", result.encKey.ToString(), result.encPaymentData.ToString());
             dynamic eData = JsonConvert.DeserializeObject(unencrypted);
-            unencrypted = JsonConvert.SerializeObject(eData, Formatting.Indented);
+            model.UnencryptedData = JsonConvert.SerializeObject(eData, Formatting.Indented);
 
-            return View(unencrypted);
+            return View(model);
         }
     }
 }
