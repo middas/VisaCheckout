@@ -88,11 +88,6 @@
     <Compile Include="VisaHelper\Options\ThreeDSSetupOptions.cs" />
     <Compile Include="VisaHelper\Options\VisaOptions.cs" />
     <Compile Include="VisaHelper\ResponseHandler.cs" />
-    <Compile Include="VisaHelper\REST\ApiKeyManagement.cs" />
-    <Compile Include="VisaHelper\REST\GetPaymentData.cs" />
-    <Compile Include="VisaHelper\REST\ProfileManagement.cs" />
-    <Compile Include="VisaHelper\REST\UpdatePaymentInfo.cs" />
-    <Compile Include="VisaHelper\REST\UserManagement.cs" />
     <Compile Include="VisaHelper\Options\VisaUpdateImageOptions.cs" />
   </ItemGroup>
   <ItemGroup>
