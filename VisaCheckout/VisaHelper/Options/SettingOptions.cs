@@ -5,9 +5,9 @@ using VisaCheckout.VisaHelper.Attributes;
 namespace VisaCheckout.VisaHelper.Options
 {
     /// <summary>
-    /// The response data level.
+    /// The response data level values.
     /// </summary>
-    public enum DataLevel
+    public enum DataLevels
     {
         /// <summary>
         /// Summary information (default)
@@ -53,7 +53,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// (Optional) Whether the payment.success event response should include summary information or full information. Permission to receive full information must be configured in Visa Checkout; otherwise, you will always receive only summary information, regardless of the data value you specify.
         /// </summary>
         [Option("dataLevel")]
-        public DataLevel? DataLevel { get; set; }
+        public DataLevels? DataLevel { get; set; }
 
         /// <summary>
         /// (Optional) The merchant's name as it appears on the Review panel of the lightbox; typically, it is the name of your company.

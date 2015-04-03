@@ -23,7 +23,7 @@ namespace VisaCheckout.Tests
         {
             IOptions options = new SettingOptions
             {
-                DataLevel = DataLevel.FULL,
+                DataLevel = DataLevels.FULL,
                 DisplayName = "name",
                 Locale = "en-US"
             };

@@ -263,6 +263,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
+    <Content Include="Views\Home\GetPaymentData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

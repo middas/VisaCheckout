@@ -52,5 +52,28 @@ namespace VisaCheckout.Example.Controllers
 
             return View(model);
         }
+
+        public ActionResult GetPaymentData(string callId)
+        {
+            ViewBag.Message = "Visa Checkout - GetPaymentData result.";
+
+            VisaCheckout.VisaHelper.REST.GetPaymentData request = new VisaHelper.REST.GetPaymentData(callId, "6L54BENENGTFB0JBDE9E139PCi16xnxbxsVKqSetpw_u_kJmc")
+            {
+                DataLevel = VisaHelper.Options.DataLevels.FULL
+            };
+
+            string response = request.SendRequest();
+            SuccessModel model = new SuccessModel();
+
+            dynamic result = JsonConvert.DeserializeObject(response);
+            model.EncryptedData = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+            ResponseHandler handler = new ResponseHandler();
+            string unencrypted = handler.DecryptPaymentData("TA0@pG+k9S1OK0{5+1ENOTZ3Mj4ydjWf3FF/oC$c", result.encKey.ToString(), result.encPaymentData.ToString());
+            dynamic eData = JsonConvert.DeserializeObject(unencrypted);
+            model.UnencryptedData = JsonConvert.SerializeObject(eData, Formatting.Indented);
+
+            return View(model);
+        }
     }
 }
