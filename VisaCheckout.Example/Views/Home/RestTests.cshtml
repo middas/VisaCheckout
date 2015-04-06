@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Visa Checkout REST";
+}
+@using VisaCheckout;
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Message</h1>
+            </hgroup>
+        </div>
+    </section>
+}
+@{
+    VisaCheckout.VisaHelper.Environment.IsSandbox = true;
+    VisaCheckout.VisaHelper.Options.OnOptions onOptions = new VisaCheckout.VisaHelper.Options.OnOptions
+    {
+        PaymentSuccess = string.Format("postResults(JSON.stringify(payment), '{0}');", Url.Action("SuccessREST")),
+        PaymentCancel = string.Format("postResults(JSON.stringify(payment), '{0}');", Url.Action("Cancel")),
+        PaymentError = string.Format("postResults(JSON.stringify(payment), '{0}');", Url.Action("Error"))
+    };
+
+    VisaCheckout.VisaHelper.Options.VisaOptions minOptions = new VisaCheckout.VisaHelper.Options.VisaOptions("6L54BENENGTFB0JBDE9E139PCi16xnxbxsVKqSetpw_u_kJmc", 2.5M, VisaCheckout.VisaHelper.Options.CurrencyCodes.USD, onOptions);
+}
+@Html.WriteVisaCheckoutLink(minOptions)
+<script type="text/javascript">
+    function postResults(results, url) {
+        var form = document.createElement('form');
+        form.name = 'form';
+        form.method = 'POST';
+        form.action = url;
+
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'response';
+        input.value = results;
+        form.appendChild(input);
+
+        document.body.appendChild(form);
+
+        form.submit();
+    }
+</script>

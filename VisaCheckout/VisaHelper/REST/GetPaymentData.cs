@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Text;
 using VisaCheckout.VisaHelper.Attributes;
@@ -23,6 +24,7 @@ namespace VisaCheckout.VisaHelper.REST
         /// <param name="callId"></param>
         /// <param name="apiKey"></param>
         public GetPaymentData(string callId, string apiKey)
+            : base(string.Format("payment/data/{0}", callId))
         {
             ApiKey = apiKey;
             CallID = callId;
@@ -49,27 +51,43 @@ namespace VisaCheckout.VisaHelper.REST
         /// Sends the web request
         /// </summary>
         /// <returns>A JSON string result</returns>
-        public string SendRequest()
+        public bool SendRequest(string sharedKey, out string responseString)
         {
+            bool success = true;
             StringBuilder sb = new StringBuilder(string.Format("{0}{1}?", Environment.IsSandbox ? SandboxUrl : ProductionUrl, CallID));
             sb.Append(WriteOptionalQueryStringValue((GetPaymentData o) => o.ApiKey));
             sb.Append(WriteOptionalQueryStringValue((GetPaymentData o) => o.DataLevel));
 
             sb.Length = sb.Length - 1;
 
-            WebRequest request = HttpWebRequest.Create(sb.ToString());
-            request.Headers.Add("Content-Type", ContentType);
-            request.Headers.Add("Accept", Accept);
-            request.Headers.Add("x-pay-token", GenerateToken());
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(sb.ToString());
+            request.ContentType = ContentType;
+            request.Accept = Accept;
+            request.Headers.Add("x-pay-token", GenerateToken(sharedKey, request.RequestUri.Query.Substring(1), null));
 
-            string responseString;
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+            try
             {
-                responseString = sr.ReadToEnd();
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+                {
+                    responseString = sr.ReadToEnd();
+                }
+            }
+            catch (WebException ex)
+            {
+                success = false;
+                using (StreamReader sr = new StreamReader(ex.Response.GetResponseStream()))
+                {
+                    responseString = string.Format("{0} - {1}", ex.Status.ToString(), sr.ReadToEnd());
+                }
+            }
+            catch (Exception ex)
+            {
+                success = false;
+                responseString = "A critical error occurred";
             }
 
-            return responseString;
+            return success;
         }
     }
 }

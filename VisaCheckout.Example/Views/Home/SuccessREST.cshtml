@@ -1,7 +1,7 @@
 ﻿@model VisaCheckout.Example.Models.SuccessModel
 @using VisaCheckout;
 @{
-    ViewBag.Title = "Visa Checkout - GetPaymentData";
+    ViewBag.Title = "Visa Checkout - Success";
 }
 @section featured {
     <section class="featured">
@@ -13,11 +13,7 @@
         </div>
     </section>
 }
-@if (TempData.ContainsKey("error"))
-{
-    <div class="error">@TempData["error"]</div>
-}
-else { 
 <h1>Success Result Data:</h1>
 <code>@Model.EncryptedData</code>
-}
+<h1>Unencypted Data:</h1>
+<code>@Model.UnencryptedData</code>

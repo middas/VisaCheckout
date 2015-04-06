@@ -244,21 +244,7 @@ namespace VisaCheckout.VisaHelper.Options
             queryString = querySb.ToString();
             sb.Append(querySb.ToString());
 
-            return string.Format("x:{0}:{1}", timestamp, Sha256Hash(sb.ToString()));
-        }
-
-        private string Sha256Hash(string s)
-        {
-            SHA256Managed sha = new SHA256Managed();
-            byte[] hash = sha.ComputeHash(Encoding.UTF8.GetBytes(s));
-            string hashString = "";
-
-            foreach (byte b in hash)
-            {
-                hashString += string.Format("{0:x2}", b);
-            }
-
-            return hashString;
+            return string.Format("x:{0}:{1}", timestamp, Utilities.Sha256Hash(sb.ToString()));
         }
     }
 }

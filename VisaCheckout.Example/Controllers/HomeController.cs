@@ -7,6 +7,8 @@ namespace VisaCheckout.Example.Controllers
 {
     public class HomeController : Controller
     {
+        private const string SharedKey = "TA0@pG+k9S1OK0{5+1ENOTZ3Mj4ydjWf3FF/oC$c";
+
         [HttpPost]
         public ActionResult Cancel(string response)
         {
@@ -46,9 +48,35 @@ namespace VisaCheckout.Example.Controllers
             model.EncryptedData = JsonConvert.SerializeObject(result, Formatting.Indented);
 
             ResponseHandler handler = new ResponseHandler();
-            string unencrypted = handler.DecryptPaymentData("TA0@pG+k9S1OK0{5+1ENOTZ3Mj4ydjWf3FF/oC$c", result.encKey.ToString(), result.encPaymentData.ToString());
+            string unencrypted = handler.DecryptPaymentData(SharedKey, result.encKey.ToString(), result.encPaymentData.ToString());
             dynamic eData = JsonConvert.DeserializeObject(unencrypted);
             model.UnencryptedData = JsonConvert.SerializeObject(eData, Formatting.Indented);
+
+            return View(model);
+        }
+
+        public ActionResult RestTests()
+        {
+            ViewBag.Message = "Visa Checkout REST tests.";
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SuccessREST(string response)
+        {
+            SuccessModel model = new SuccessModel();
+            ViewBag.Message = "Visa Checkout - Success result.";
+
+            dynamic result = JsonConvert.DeserializeObject(response);
+            model.EncryptedData = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+            ResponseHandler handler = new ResponseHandler();
+            string unencrypted = handler.DecryptPaymentData(SharedKey, result.encKey.ToString(), result.encPaymentData.ToString());
+            dynamic eData = JsonConvert.DeserializeObject(unencrypted);
+            model.UnencryptedData = JsonConvert.SerializeObject(eData, Formatting.Indented);
+
+            ViewBag.CallID = result.callid;
 
             return View(model);
         }
@@ -56,22 +84,26 @@ namespace VisaCheckout.Example.Controllers
         public ActionResult GetPaymentData(string callId)
         {
             ViewBag.Message = "Visa Checkout - GetPaymentData result.";
+            ViewBag.CallId = callId;
 
             VisaCheckout.VisaHelper.REST.GetPaymentData request = new VisaHelper.REST.GetPaymentData(callId, "6L54BENENGTFB0JBDE9E139PCi16xnxbxsVKqSetpw_u_kJmc")
             {
                 DataLevel = VisaHelper.Options.DataLevels.FULL
             };
 
-            string response = request.SendRequest();
+            string response;
+            bool success = request.SendRequest(SharedKey, out response);
             SuccessModel model = new SuccessModel();
 
-            dynamic result = JsonConvert.DeserializeObject(response);
-            model.EncryptedData = JsonConvert.SerializeObject(result, Formatting.Indented);
-
-            ResponseHandler handler = new ResponseHandler();
-            string unencrypted = handler.DecryptPaymentData("TA0@pG+k9S1OK0{5+1ENOTZ3Mj4ydjWf3FF/oC$c", result.encKey.ToString(), result.encPaymentData.ToString());
-            dynamic eData = JsonConvert.DeserializeObject(unencrypted);
-            model.UnencryptedData = JsonConvert.SerializeObject(eData, Formatting.Indented);
+            if (success)
+            {
+                dynamic result = JsonConvert.DeserializeObject(response);
+                model.EncryptedData = JsonConvert.SerializeObject(result, Formatting.Indented);
+            }
+            else
+            {
+                TempData.Add("error", response);
+            }
 
             return View(model);
         }

@@ -7,6 +7,6 @@ namespace VisaCheckout.VisaHelper.REST
 {
     public interface IVisaRestRequest
     {
-        string SendRequest();
+        bool SendRequest(string sharedKey, out string responseString);
     }
 }
