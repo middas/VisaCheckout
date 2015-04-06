@@ -58,13 +58,13 @@ namespace VisaCheckout.VisaHelper.REST
 
             string body = string.Format("{{{0},{1}}}", OrderInfo != null ? OrderInfo.GetOptionString() : "", PayInfo != null ? PayInfo.GetOptionString() : "");
 
-            if (body[0] == ',')
+            if (body[1] == ',')
             {
-                body = body.Substring(1);
+                body = string.Format("{{{0}", body.Substring(2));
             }
             if (body[body.Length - 2] == ',')
             {
-                body = body.Substring(0, body.Length - 2) + "}";
+                body = string.Format("{0}}}", body.Substring(0, body.Length - 2));
             }
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
