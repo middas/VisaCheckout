@@ -9,6 +9,8 @@
             <hgroup class="title">
                 <h1>@ViewBag.Message</h1>
             </hgroup>
+            @Html.ActionLink("Get Payment Data", "GetPaymentData", new { callId = ViewBag.CallId })
+            @Html.ActionLink("Update Payment Info", "UpdatePayment", new { callId = ViewBag.CallId })
         </div>
     </section>
 }

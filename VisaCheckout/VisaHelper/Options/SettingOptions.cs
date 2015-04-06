@@ -5,27 +5,6 @@ using VisaCheckout.VisaHelper.Attributes;
 namespace VisaCheckout.VisaHelper.Options
 {
     /// <summary>
-    /// The response data level values.
-    /// </summary>
-    public enum DataLevels
-    {
-        /// <summary>
-        /// Summary information (default)
-        /// </summary>
-        SUMMARY,
-
-        /// <summary>
-        /// Full information, which is only available if you are configured to receive it.
-        /// </summary>
-        FULL,
-
-        /// <summary>
-        /// Consumer and payment information is not returned in the payment.success event response, in which case the Get Payment Data API must be used to obtain the information.
-        /// </summary>
-        NONE
-    }
-
-    /// <summary>
     /// Settings specific to the Javascript init.
     /// </summary>
     public class SettingOptions : OptionsBase, IOptions

@@ -10,12 +10,14 @@
                 <h1>@ViewBag.Message</h1>
             </hgroup>
             @Html.ActionLink("Get Payment Data", "GetPaymentData", new { callId = ViewBag.CallId })
+            @Html.ActionLink("Update Payment Info", "UpdatePayment", new { callId = ViewBag.CallId })
         </div>
     </section>
 }
 @if (TempData.ContainsKey("error"))
 {
-    <div class="error">@TempData["error"]</div>
+    <div class="error">Error</div>
+    <code>@TempData["error"]</code>
 }
 else
 {

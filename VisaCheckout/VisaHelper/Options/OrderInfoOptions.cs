@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using VisaCheckout.VisaHelper.Attributes;
 
 namespace VisaCheckout.VisaHelper.Options
@@ -101,7 +102,24 @@ namespace VisaCheckout.VisaHelper.Options
         /// <returns></returns>
         public string GetOptionString()
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder("\"orderInfo\":{");
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.CurrencyCode, true, true));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Discount, true, true));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.EventType, true, true));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.GiftWrap, true, true));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Misc, true, true));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.OrderID, true, true));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.PromoCode, true, true));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Reason, true, true));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.ShippingHandling, true, true));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Subtotal, true, true));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Tax, true, true));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Total, true, true));
+
+            sb.Length = sb.Length - 1;
+            sb.Append("}");
+
+            return sb.ToString();
         }
     }
 }

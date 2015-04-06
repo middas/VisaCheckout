@@ -10,18 +10,6 @@ using VisaCheckout.VisaHelper.Attributes;
 namespace VisaCheckout.VisaHelper.Options
 {
     /// <summary>
-    /// Transaction event types
-    /// </summary>
-    public enum EventTypes
-    {
-        Create,
-        Confirm,
-        Cancel,
-        Fraud,
-        Other
-    }
-
-    /// <summary>
     /// Visa Update Image options.
     /// </summary>
     public class VisaUpdateImageOptions : OptionsBase, IOptions

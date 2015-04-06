@@ -75,6 +75,7 @@
     <Compile Include="VisaHelper\Attributes\OptionAttribute.cs" />
     <Compile Include="VisaHelper\Environment.cs" />
     <Compile Include="VisaHelper\Options\ButtonOptions.cs" />
+    <Compile Include="VisaHelper\Options\Enums.cs" />
     <Compile Include="VisaHelper\Options\InitOptions.cs" />
     <Compile Include="VisaHelper\Options\OrderInfoOptions.cs" />
     <Compile Include="VisaHelper\Options\PayInfoOptions.cs" />

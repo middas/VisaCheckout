@@ -1,7 +1,7 @@
 ﻿@model VisaCheckout.Example.Models.SuccessModel
 @using VisaCheckout;
 @{
-    ViewBag.Title = "Visa Checkout - Success";
+    ViewBag.Title = "Visa Checkout - UpdatePaymentInfo";
 }
 @section featured {
     <section class="featured">
@@ -10,10 +10,17 @@
                 <h1>@ViewBag.Message</h1>
             </hgroup>
             @Html.ActionLink("Get Payment Data", "GetPaymentData", new { callId = ViewBag.CallId })
+            @Html.ActionLink("Update Payment Info", "UpdatePayment", new { callId = ViewBag.CallId })
         </div>
     </section>
 }
-<h1>Success Result Data:</h1>
-<code>@Model.EncryptedData</code>
-<h1>Unencypted Data:</h1>
-<code>@Model.UnencryptedData</code>
+@if (TempData.ContainsKey("error"))
+{
+    <div class="error">Error</div>
+    <code>@TempData["error"]</code>
+}
+else
+{
+    <h1>Success Result Data:</h1>
+    <code>@Model.UnencryptedData</code>
+}

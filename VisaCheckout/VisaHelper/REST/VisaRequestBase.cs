@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Net;
 using System.Text;
 using VisaCheckout.VisaHelper.Options;
 
@@ -6,6 +8,9 @@ namespace VisaCheckout.VisaHelper.REST
 {
     public abstract class VisaRequestBase : OptionsBase
     {
+        public const string Accept = "application/json ";
+        public const string ContentType = "application/json ";
+
         protected VisaRequestBase(string resourcePath)
         {
             ResourcePath = resourcePath;
@@ -38,6 +43,34 @@ namespace VisaCheckout.VisaHelper.REST
             StringBuilder sb = new StringBuilder(sharedKey).Append(unixEpoch).Append(ResourcePath).Append(queryString).Append(body);
 
             return string.Format("x:{0}:{1}", unixEpoch, Utilities.Sha256Hash(sb.ToString()));
+        }
+
+        protected bool SendWebRequest(HttpWebRequest request, out string responseString)
+        {
+            bool success = true;
+            try
+            {
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+                {
+                    responseString = sr.ReadToEnd();
+                }
+            }
+            catch (WebException ex)
+            {
+                success = false;
+                using (StreamReader sr = new StreamReader(ex.Response.GetResponseStream()))
+                {
+                    responseString = sr.ReadToEnd();
+                }
+            }
+            catch
+            {
+                success = false;
+                responseString = "A critical error occurred";
+            }
+
+            return success;
         }
     }
 }

@@ -5,48 +5,6 @@ using VisaCheckout.VisaHelper.Attributes;
 namespace VisaCheckout.VisaHelper.Options
 {
     /// <summary>
-    /// Preset colors of the button.
-    /// </summary>
-    public enum ButtonColors
-    {
-        /// <summary>
-        /// The standard colors (default)
-        /// </summary>
-        Standard,
-
-        /// <summary>
-        /// Neutral colors
-        /// </summary>
-        Neutral
-    }
-
-    /// <summary>
-    /// Preset widths of the button.
-    /// </summary>
-    public enum ButtonSizes
-    {
-        /// <summary>
-        /// 154 pixels
-        /// </summary>
-        Small = 154,
-
-        /// <summary>
-        /// 213 pixels (default)
-        /// </summary>
-        Medium = 213,
-
-        /// <summary>
-        /// 425 pixels
-        /// </summary>
-        Large = 425,
-
-        /// <summary>
-        /// Custom size defined by Width and Height properties.
-        /// </summary>
-        Custom
-    }
-
-    /// <summary>
     /// Options specific to how the button is displayed.
     /// </summary>
     public class ButtonOptions : OptionsBase, IOptions

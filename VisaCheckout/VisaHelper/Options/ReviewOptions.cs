@@ -4,24 +4,6 @@ using VisaCheckout.VisaHelper.Attributes;
 namespace VisaCheckout.VisaHelper.Options
 {
     /// <summary>
-    /// Possible button actions on the Review page
-    /// </summary>
-    public enum ButtonActions
-    {
-        /// <summary>
-        /// Display Continue on the lightbox button (default)
-        /// </summary>
-        Continue,
-
-        /// <summary>
-        /// Pay - Display Pay on the lightbox button
-        ///
-        /// Note: A value for total must be specified; otherwise Continue will be displayed.
-        /// </summary>
-        Pay
-    }
-
-    /// <summary>
     /// Review options.
     /// </summary>
     public class ReviewOptions : OptionsBase, IOptions

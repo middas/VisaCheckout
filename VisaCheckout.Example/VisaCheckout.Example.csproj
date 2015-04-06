@@ -264,8 +264,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
     <Content Include="Views\Home\GetPaymentData.cshtml" />
-    <Content Include="Views\Home\RestTests.cshtml" />
-    <Content Include="Views\Home\SuccessREST.cshtml" />
+    <Content Include="Views\Home\UpdatePayment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

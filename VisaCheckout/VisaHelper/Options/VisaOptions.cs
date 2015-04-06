@@ -5,18 +5,6 @@ using System.Web.Mvc;
 namespace VisaCheckout.VisaHelper.Options
 {
     /// <summary>
-    /// The cards that you support charging.
-    /// </summary>
-    [Flags]
-    public enum SupportedCards
-    {
-        VISA = 1,
-        AMEX = 2,
-        MASTERCARD = 4,
-        DISCOVER = 8
-    }
-
-    /// <summary>
     /// Options to define how the Visa controls are displayed.
     /// </summary>
     public class VisaOptions : IOptions
