@@ -6,12 +6,6 @@ namespace VisaCheckout.Tests
     [TestClass]
     public class ButtonOptionsTests
     {
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            VisaHelper.Environment.IsSandbox = true;
-        }
-
         [TestMethod]
         public void BuildUrlIsSandboxTest()
         {
@@ -77,6 +71,12 @@ namespace VisaCheckout.Tests
             Assert.IsTrue(result.Contains("class=\"v-button\""));
             Assert.IsTrue(result.Contains(ButtonOptions.ProductionButtonUrl));
             Assert.IsTrue(result.Contains("tabindex=\"1\""));
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            VisaHelper.Environment.IsSandbox = true;
         }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -27,10 +26,9 @@ namespace VisaCheckout.VisaHelper.Options
     /// </summary>
     public class VisaUpdateImageOptions : OptionsBase, IOptions
     {
-        private const string Resource = "payment/updatepaymentinfo.gif";
         public const string ProductionUrl = "https://secure.checkout.visa.com/wallet-services-web/payment/updatepaymentinfo.gif";
         public const string SandboxUrl = "https://sandbox.secure.checkout.visa.com/wallet-services-web/payment/updatepaymentinfo.gif";
-
+        private const string Resource = "payment/updatepaymentinfo.gif";
         private string SharedKey;
 
         /// <summary>
@@ -212,7 +210,7 @@ namespace VisaCheckout.VisaHelper.Options
             long timestamp = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
             // Steps 1, 2, and 3
             StringBuilder sb = new StringBuilder(SharedKey).Append(timestamp).Append(Resource);
-            
+
             // Step 4
             List<PropertyInfo> properties = new List<PropertyInfo>();
             properties.AddRange(typeof(VisaUpdateImageOptions).GetProperties());
@@ -238,7 +236,7 @@ namespace VisaCheckout.VisaHelper.Options
                 value = HttpUtility.UrlEncode(value).Replace("%26", "&").Replace("%3d", "=");
                 querySb.Append(value);
             }
-            
+
             // remove final ampersand
             querySb.Length = querySb.Length - 1;
             queryString = querySb.ToString();

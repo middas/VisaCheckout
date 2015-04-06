@@ -17,7 +17,7 @@
     dynamic encrypted = Newtonsoft.Json.JsonConvert.DeserializeObject(Model.EncryptedData);
     string callId = encrypted.callid.Value;
     string apiKey = encrypted.vInitRequest.apikey.Value;
-    
+
     VisaCheckout.VisaHelper.Options.VisaUpdateImageOptions options = new VisaCheckout.VisaHelper.Options.VisaUpdateImageOptions("TA0@pG+k9S1OK0{5+1ENOTZ3Mj4ydjWf3FF/oC$c", callId, VisaCheckout.VisaHelper.Options.EventTypes.Confirm, apiKey, 2.5M, 2.5M, VisaCheckout.VisaHelper.Options.CurrencyCodes.USD);
 }
 @Html.WriteVisaUpdateImage(options)

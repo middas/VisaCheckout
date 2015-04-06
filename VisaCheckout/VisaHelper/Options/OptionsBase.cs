@@ -9,20 +9,6 @@ namespace VisaCheckout.VisaHelper.Options
 {
     public abstract class OptionsBase
     {
-        protected string WriteOptionalJavascriptValue<T, P>(Expression<Func<T, P>> expression, bool surroundValueInQuotes = true) where T : class
-        {
-            PropertyInfo property = (PropertyInfo)((MemberExpression)expression.Body).Member;
-
-            return WriteOptionalJavascriptValue(GetApiName(property), property.GetValue(this, null), surroundValueInQuotes);
-        }
-
-        protected string WriteOptionalQueryStringValue<T, P>(Expression<Func<T, P>> expression) where T : class
-        {
-            PropertyInfo property = (PropertyInfo)((MemberExpression)expression.Body).Member;
-
-            return WriteOptionalQueryStringValue(GetApiName(property), property.GetValue(this, null));
-        }
-
         protected string GetApiName(PropertyInfo property)
         {
             var attributes = property.GetCustomAttributes(typeof(OptionAttribute), false);
@@ -39,6 +25,13 @@ namespace VisaCheckout.VisaHelper.Options
             }
 
             return name;
+        }
+
+        protected string WriteOptionalJavascriptValue<T, P>(Expression<Func<T, P>> expression, bool surroundValueInQuotes = true) where T : class
+        {
+            PropertyInfo property = (PropertyInfo)((MemberExpression)expression.Body).Member;
+
+            return WriteOptionalJavascriptValue(GetApiName(property), property.GetValue(this, null), surroundValueInQuotes);
         }
 
         protected string WriteOptionalJavascriptValue(string parameterName, object parameterValue, bool surroundValueInQuotes = true)
@@ -58,6 +51,13 @@ namespace VisaCheckout.VisaHelper.Options
             }
 
             return data;
+        }
+
+        protected string WriteOptionalQueryStringValue<T, P>(Expression<Func<T, P>> expression) where T : class
+        {
+            PropertyInfo property = (PropertyInfo)((MemberExpression)expression.Body).Member;
+
+            return WriteOptionalQueryStringValue(GetApiName(property), property.GetValue(this, null));
         }
 
         protected string WriteOptionalQueryStringValue(string parameterName, object parameterValue)

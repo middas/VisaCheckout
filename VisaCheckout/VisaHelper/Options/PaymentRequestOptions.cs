@@ -222,7 +222,7 @@ namespace VisaCheckout.VisaHelper.Options
             }
             sb.Append("}");
 
-            if(sb[sb.Length - 1] == '&')
+            if (sb[sb.Length - 1] == '&')
             {
                 sb.Length = sb.Length - 1;
             }
