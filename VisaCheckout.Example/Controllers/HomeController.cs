@@ -48,7 +48,7 @@ namespace VisaCheckout.Example.Controllers
             if (success)
             {
                 dynamic result = JsonConvert.DeserializeObject(response);
-                model.EncryptedData = JsonConvert.SerializeObject(result, Formatting.Indented);
+                model.UnencryptedData = JsonConvert.SerializeObject(result, Formatting.Indented);
             }
             else
             {
