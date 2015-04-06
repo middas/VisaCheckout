@@ -11,7 +11,7 @@ namespace VisaCheckout.Tests
         {
             IOptions options = new PaymentOptions();
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("payment:{"));
@@ -27,7 +27,7 @@ namespace VisaCheckout.Tests
                 CardBrands = SupportedCards.VISA | SupportedCards.AMEX
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("payment:{"));

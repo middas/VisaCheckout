@@ -12,7 +12,7 @@ namespace VisaCheckout.Tests
         {
             IOptions options = new SettingOptions();
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("settings:{"));
@@ -28,7 +28,7 @@ namespace VisaCheckout.Tests
                 Locale = "en-US"
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("settings:{"));
@@ -45,7 +45,7 @@ namespace VisaCheckout.Tests
                 Payment = new PaymentOptions()
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("settings:{"));
@@ -60,7 +60,7 @@ namespace VisaCheckout.Tests
                 Review = new ReviewOptions()
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("settings:{"));
@@ -75,7 +75,7 @@ namespace VisaCheckout.Tests
                 Shipping = new ShippingOptions()
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("settings:{"));
@@ -90,7 +90,7 @@ namespace VisaCheckout.Tests
                 ThreeDSSetup = new ThreeDSSetupOptions()
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("settings:{"));
@@ -105,7 +105,7 @@ namespace VisaCheckout.Tests
                 WebsiteUrl = new Uri("http://www.test.com")
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("websiteUrl:\"http://www.test.com/\""));

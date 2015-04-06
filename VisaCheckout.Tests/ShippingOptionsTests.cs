@@ -11,7 +11,7 @@ namespace VisaCheckout.Tests
         {
             IOptions options = new ShippingOptions();
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("shipping:{"));
@@ -26,7 +26,7 @@ namespace VisaCheckout.Tests
                 CollectShipping = true
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("shipping:{"));

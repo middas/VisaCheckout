@@ -11,7 +11,7 @@ namespace VisaCheckout.Tests
         {
             IOptions options = new TellMeMoreLinkOptions();
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("<a "));
@@ -28,7 +28,7 @@ namespace VisaCheckout.Tests
                 LinkText = "test"
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("<a "));

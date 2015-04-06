@@ -11,7 +11,7 @@ namespace VisaCheckout.Tests
         {
             IOptions options = new ButtonOptions();
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("<image"));
@@ -25,7 +25,7 @@ namespace VisaCheckout.Tests
             VisaHelper.Environment.IsSandbox = false;
             IOptions options = new ButtonOptions();
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("<image"));
@@ -44,7 +44,7 @@ namespace VisaCheckout.Tests
                 Size = ButtonSizes.Large
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("<image"));
@@ -64,7 +64,7 @@ namespace VisaCheckout.Tests
                 TabIndex = 1
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("<image"));

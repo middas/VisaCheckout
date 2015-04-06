@@ -11,7 +11,7 @@ namespace VisaCheckout.Tests
         {
             IOptions options = new OnOptions();
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
         }
@@ -26,7 +26,7 @@ namespace VisaCheckout.Tests
                 PaymentSuccess = "success"
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("V.on(\"payment.success\", function(payment){success});"));

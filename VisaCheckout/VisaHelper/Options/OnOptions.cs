@@ -28,7 +28,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// </summary>
         public string PaymentSuccess { get; set; }
 
-        public string GetHtml()
+        public string GetOptionString()
         {
             StringBuilder sb = new StringBuilder();
 

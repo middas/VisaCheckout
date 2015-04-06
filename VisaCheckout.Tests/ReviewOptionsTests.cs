@@ -11,7 +11,7 @@ namespace VisaCheckout.Tests
         {
             IOptions options = new ReviewOptions();
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("review:{"));
@@ -26,7 +26,7 @@ namespace VisaCheckout.Tests
                 Message = "message"
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("review:{"));

@@ -12,7 +12,7 @@ namespace VisaCheckout.Tests
             VisaHelper.Environment.IsSandbox = false;
             IOptions options = new VisaUpdateImageOptions("shared_Key", "abc123", EventTypes.Confirm, "apiKey", 21M, 22M, CurrencyCodes.USD);
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains(VisaUpdateImageOptions.ProductionUrl));
@@ -28,7 +28,7 @@ namespace VisaCheckout.Tests
         {
             IOptions options = new VisaUpdateImageOptions("shared_Key", "abc123", EventTypes.Confirm, "apiKey", 21M, 22M, CurrencyCodes.USD);
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains(VisaUpdateImageOptions.SandboxUrl));
@@ -49,7 +49,7 @@ namespace VisaCheckout.Tests
                 Total = 22M
             });
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains(VisaUpdateImageOptions.SandboxUrl));

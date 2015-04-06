@@ -176,7 +176,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// Gets the options HTML.
         /// </summary>
         /// <returns></returns>
-        public string GetHtml()
+        public string GetOptionString()
         {
             TagBuilder tag = new TagBuilder("img");
             StringBuilder sb = new StringBuilder(Environment.IsSandbox ? SandboxUrl : ProductionUrl).Append("?");

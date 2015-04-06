@@ -72,7 +72,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// Gets the options HTML.
         /// </summary>
         /// <returns></returns>
-        public string GetHtml()
+        public string GetOptionString()
         {
             if (InitOptions == null)
             {
@@ -92,13 +92,13 @@ namespace VisaCheckout.VisaHelper.Options
             StringBuilder sb = new StringBuilder();
             TagBuilder tag = new TagBuilder("script");
             tag.Attributes.Add("type", "text/javascript");
-            tag.InnerHtml = string.Format("function onVisaCheckoutReady(){{{0}{1}}}", InitOptions.GetHtml(), On.GetHtml());
+            tag.InnerHtml = string.Format("function onVisaCheckoutReady(){{{0}{1}}}", InitOptions.GetOptionString(), On.GetOptionString());
 
             sb.Append(tag.ToString()).Append("\r\n");
 
             tag = new TagBuilder("div");
             tag.Attributes.Add("class", "v-checkout-wrapper");
-            tag.InnerHtml = string.Format("{0}\r\n{1}", ButtonOptions.GetHtml(), TellMeMoreLinkOptions == null ? "" : TellMeMoreLinkOptions.GetHtml());
+            tag.InnerHtml = string.Format("{0}\r\n{1}", ButtonOptions.GetOptionString(), TellMeMoreLinkOptions == null ? "" : TellMeMoreLinkOptions.GetOptionString());
 
             sb.Append(tag.ToString());
 

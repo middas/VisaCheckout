@@ -2,6 +2,6 @@
 {
     public interface IOptions
     {
-        string GetHtml();
+        string GetOptionString();
     }
 }

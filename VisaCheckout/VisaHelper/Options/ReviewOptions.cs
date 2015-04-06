@@ -42,7 +42,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// Gets the options HTML.
         /// </summary>
         /// <returns></returns>
-        public string GetHtml()
+        public string GetOptionString()
         {
             StringBuilder sb = new StringBuilder("review:{");
 

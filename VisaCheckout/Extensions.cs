@@ -16,7 +16,7 @@ namespace VisaCheckout
         /// <exception cref="ArgumentNullException">Thrown when a required parameter is missing</exception>
         public static MvcHtmlString WriteVisaCheckoutLink(this HtmlHelper helper, VisaOptions options)
         {
-            return new MvcHtmlString(options.GetHtml());
+            return new MvcHtmlString(options.GetOptionString());
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace VisaCheckout
         /// <returns></returns>
         public static MvcHtmlString WriteVisaUpdateImage(this HtmlHelper helper, VisaUpdateImageOptions options)
         {
-            return new MvcHtmlString(options.GetHtml());
+            return new MvcHtmlString(options.GetOptionString());
         }
     }
 }

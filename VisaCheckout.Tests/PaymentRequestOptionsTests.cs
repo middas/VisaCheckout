@@ -11,7 +11,7 @@ namespace VisaCheckout.Tests
         {
             IOptions options = new PaymentRequestOptions();
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("paymentRequest:{"));
@@ -24,7 +24,7 @@ namespace VisaCheckout.Tests
             ((PaymentRequestOptions)options).CustomData.Add("test1", "value1");
             ((PaymentRequestOptions)options).CustomData.Add("test2", "value2");
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("paymentRequest:{"));
@@ -40,7 +40,7 @@ namespace VisaCheckout.Tests
                 Subtotal = 21.21M
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("paymentRequest:{"));

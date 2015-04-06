@@ -26,7 +26,7 @@ namespace VisaCheckout.Tests
             VisaCheckout.VisaHelper.Environment.IsSandbox = true;
             IOptions options = new VisaOptions("apiKey", 21.21M, CurrencyCodes.USD, OnOptions);
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("onVisaCheckoutReady(){"));
@@ -45,7 +45,7 @@ namespace VisaCheckout.Tests
         {
             IOptions options = new VisaOptions(null, 21.21M, CurrencyCodes.USD, OnOptions);
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNull(result);
         }
@@ -56,7 +56,7 @@ namespace VisaCheckout.Tests
         {
             IOptions options = new VisaOptions("apiKey", 21.21M, CurrencyCodes.USD, null);
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNull(result);
         }
@@ -74,7 +74,7 @@ namespace VisaCheckout.Tests
                 }
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNull(result);
         }
@@ -84,7 +84,7 @@ namespace VisaCheckout.Tests
         {
             IOptions options = new VisaOptions("apiKey", 21.21M, CurrencyCodes.USD, OnOptions);
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("onVisaCheckoutReady(){"));

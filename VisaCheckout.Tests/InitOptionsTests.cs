@@ -16,7 +16,7 @@ namespace VisaCheckout.Tests
                 PaymentRequest = new PaymentRequestOptions()
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNull(result);
         }
@@ -27,7 +27,7 @@ namespace VisaCheckout.Tests
         {
             IOptions options = new InitOptions();
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNull(result);
         }
@@ -42,7 +42,7 @@ namespace VisaCheckout.Tests
                 Settings = new SettingOptions()
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("V.init({"));

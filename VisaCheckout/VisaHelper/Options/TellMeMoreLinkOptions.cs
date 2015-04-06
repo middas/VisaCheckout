@@ -28,7 +28,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// Gets the options HTML.
         /// </summary>
         /// <returns></returns>
-        public string GetHtml()
+        public string GetOptionString()
         {
             TagBuilder tag = new TagBuilder("a");
             tag.Attributes.Add("class", "v-learn v-learn-default");

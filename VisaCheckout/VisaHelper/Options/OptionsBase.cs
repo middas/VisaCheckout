@@ -42,7 +42,7 @@ namespace VisaCheckout.VisaHelper.Options
             {
                 if (parameterValue is IOptions)
                 {
-                    data = string.Format("{0},", ((IOptions)parameterValue).GetHtml());
+                    data = string.Format("{0},", ((IOptions)parameterValue).GetOptionString());
                 }
                 else
                 {

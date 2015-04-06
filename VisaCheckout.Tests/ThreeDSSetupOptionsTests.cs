@@ -11,7 +11,7 @@ namespace VisaCheckout.Tests
         {
             IOptions options = new ThreeDSSetupOptions();
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("threeDSSetup:{"));
@@ -25,7 +25,7 @@ namespace VisaCheckout.Tests
                 ThreeDSActive = true
             };
 
-            string result = options.GetHtml();
+            string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("threeDSSetup:{"));
