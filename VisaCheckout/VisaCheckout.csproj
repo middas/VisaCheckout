@@ -76,6 +76,8 @@
     <Compile Include="VisaHelper\Environment.cs" />
     <Compile Include="VisaHelper\Options\ButtonOptions.cs" />
     <Compile Include="VisaHelper\Options\InitOptions.cs" />
+    <Compile Include="VisaHelper\Options\OrderInfoOptions.cs" />
+    <Compile Include="VisaHelper\Options\PayInfoOptions.cs" />
     <Compile Include="VisaHelper\Options\SettingOptions.cs" />
     <Compile Include="VisaHelper\Options\IOptions.cs" />
     <Compile Include="VisaHelper\Options\OnOptions.cs" />
