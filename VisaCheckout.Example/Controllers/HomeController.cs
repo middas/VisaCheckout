@@ -9,8 +9,8 @@ namespace VisaCheckout.Example.Controllers
 {
     public class HomeController : Controller
     {
-        private const string SharedKey = "TA0@pG+k9S1OK0{5+1ENOTZ3Mj4ydjWf3FF/oC$c";
         private const string ApiKey = "6L54BENENGTFB0JBDE9E139PCi16xnxbxsVKqSetpw_u_kJmc";
+        private const string SharedKey = "TA0@pG+k9S1OK0{5+1ENOTZ3Mj4ydjWf3FF/oC$c";
 
         [HttpPost]
         public ActionResult Cancel(string response)
