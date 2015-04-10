@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 using VisaCheckout.VisaHelper.Attributes;
 
 namespace VisaCheckout.VisaHelper.Options
@@ -118,6 +119,24 @@ namespace VisaCheckout.VisaHelper.Options
             if (parameterValue is bool)
             {
                 value = parameterValue.ToString().ToLower();
+            }
+            if (parameterValue is List<string>)
+            {
+                List<string> list = (List<string>)parameterValue;
+
+                if (list != null && list.Count > 0)
+                {
+                    StringBuilder sb = new StringBuilder("[");
+
+                    foreach (string s in list)
+                    {
+                        sb.Append("\"s\",");
+                    }
+
+                    sb.Length = sb.Length - 1;
+                    sb.Append("]");
+                    value = sb.ToString();
+                }
             }
 
             if (surroundInQuotes)

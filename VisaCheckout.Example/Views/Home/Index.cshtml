@@ -64,7 +64,7 @@
                 },
                 Shipping = new VisaCheckout.VisaHelper.Options.ShippingOptions
                 {
-                    AcceptedRegions = "US",
+                    AcceptedRegions = new List<string>() { "US" },
                     CollectShipping = true
                 },
                 ThreeDSSetup = new VisaCheckout.VisaHelper.Options.ThreeDSSetupOptions
@@ -73,7 +73,6 @@
                 },
                 WebsiteUrl = new Uri("http://www.test.com")
             },
-            ReferenceCallID = "some reference",
             SourceID = "some source"
         },
         ButtonOptions = new VisaCheckout.VisaHelper.Options.ButtonOptions
@@ -94,7 +93,7 @@
     fullOptions.InitOptions.PaymentRequest.CustomData.Add("test", "testValue");
     fullOptions.InitOptions.PaymentRequest.CustomData.Add("test1", "test1Value");
 }
-@Html.WriteVisaCheckoutLink(minOptions)
+@Html.WriteVisaCheckoutLink(fullOptions)
 <script type="text/javascript">
     function postResults(results, url) {
         var form = document.createElement('form');

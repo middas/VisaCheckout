@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using VisaCheckout.VisaHelper.Attributes;
 
 namespace VisaCheckout.VisaHelper.Options
@@ -9,10 +10,18 @@ namespace VisaCheckout.VisaHelper.Options
     public class ShippingOptions : OptionsBase, IOptions
     {
         /// <summary>
+        /// The constructor
+        /// </summary>
+        public ShippingOptions()
+        {
+            AcceptedRegions = new List<string>();
+        }
+
+        /// <summary>
         /// (Optional) Override value for shipping region country codes in the merchant's external profile, which limits selection of eligible addresses in the consumer's account.
         /// </summary>
         [Option("acceptedRegions")]
-        public string AcceptedRegions { get; set; }
+        public List<string> AcceptedRegions { get; set; }
 
         /// <summary>
         /// (Optional) Whether to obtain a shipping address from the consumer. (default true)
