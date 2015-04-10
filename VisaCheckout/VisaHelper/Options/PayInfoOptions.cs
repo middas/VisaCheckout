@@ -74,14 +74,14 @@ namespace VisaCheckout.VisaHelper.Options
         public string GetOptionString()
         {
             StringBuilder sb = new StringBuilder("\"payInfo\":{");
-            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.AuthCode, true, true));
-            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.AvsResponseCode, true, true));
-            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.CurrencyCode, true, true));
-            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.EventStatus, true, true));
-            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.EventType, true, true));
-            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.PayTransID, true, true));
-            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.Reason, true, true));
-            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.Total, true, true));
+            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.AuthCode));
+            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.AvsResponseCode));
+            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.CurrencyCode));
+            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.EventStatus));
+            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.EventType));
+            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.PayTransID));
+            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.Reason));
+            sb.Append(WriteOptionalJavascriptValue((PayInfoOptions o) => o.Total));
 
             sb.Length = sb.Length - 1;
             sb.Append("}");

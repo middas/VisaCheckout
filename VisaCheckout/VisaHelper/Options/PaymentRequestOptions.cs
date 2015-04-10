@@ -109,7 +109,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <returns></returns>
         public string GetOptionString()
         {
-            StringBuilder sb = new StringBuilder("paymentRequest:{");
+            StringBuilder sb = new StringBuilder("\"paymentRequest\":{");
 
             sb.Append(WriteOptionalJavascriptValue((PaymentRequestOptions o) => o.MerchantRequestID));
             sb.Append(WriteOptionalJavascriptValue((PaymentRequestOptions o) => o.CurrencyCode));
@@ -126,7 +126,7 @@ namespace VisaCheckout.VisaHelper.Options
 
             if (CustomData.Count > 0)
             {
-                sb.Append(string.Format("{0}:{{\"nvPair\":[{1}]}}", GetApiName(this.GetType().GetProperty("CustomData")), string.Join(",", CustomData.Select(c => string.Format("{{\"name\":\"{0}\",\"value\":\"{1}\"}}", c.Key.ToString(), c.Value.ToString())))));
+                sb.Append(string.Format("\"{0}\":{{\"nvPair\":[{1}]}}", GetApiName(this.GetType().GetProperty("CustomData")), string.Join(",", CustomData.Select(c => string.Format("{{\"name\":\"{0}\",\"value\":\"{1}\"}}", c.Key.ToString(), c.Value.ToString())))));
             }
 
             if (sb[sb.Length - 1] == ',')

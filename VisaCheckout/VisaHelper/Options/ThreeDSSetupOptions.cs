@@ -20,7 +20,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <returns></returns>
         public string GetOptionString()
         {
-            StringBuilder sb = new StringBuilder("threeDSSetup:{");
+            StringBuilder sb = new StringBuilder("\"threeDSSetup\":{");
 
             sb.Append(WriteOptionalJavascriptValue((ThreeDSSetupOptions o) => o.ThreeDSActive));
 

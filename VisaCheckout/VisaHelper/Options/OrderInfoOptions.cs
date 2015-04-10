@@ -103,18 +103,18 @@ namespace VisaCheckout.VisaHelper.Options
         public string GetOptionString()
         {
             StringBuilder sb = new StringBuilder("\"orderInfo\":{");
-            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.CurrencyCode, true, true));
-            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Discount, true, true));
-            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.EventType, true, true));
-            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.GiftWrap, true, true));
-            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Misc, true, true));
-            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.OrderID, true, true));
-            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.PromoCode, true, true));
-            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Reason, true, true));
-            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.ShippingHandling, true, true));
-            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Subtotal, true, true));
-            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Tax, true, true));
-            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Total, true, true));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.CurrencyCode));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Discount));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.EventType));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.GiftWrap));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Misc));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.OrderID));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.PromoCode));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Reason));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.ShippingHandling));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Subtotal));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Tax));
+            sb.Append(WriteOptionalJavascriptValue((OrderInfoOptions o) => o.Total));
 
             sb.Length = sb.Length - 1;
             sb.Append("}");

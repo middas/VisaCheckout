@@ -26,7 +26,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <returns></returns>
         public string GetOptionString()
         {
-            StringBuilder sb = new StringBuilder("shipping:{");
+            StringBuilder sb = new StringBuilder("\"shipping\":{");
 
             sb.Append(WriteOptionalJavascriptValue((ShippingOptions o) => o.AcceptedRegions));
             sb.Append(WriteOptionalJavascriptValue((ShippingOptions o) => o.CollectShipping));

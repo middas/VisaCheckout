@@ -33,7 +33,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <returns></returns>
         public string GetOptionString()
         {
-            StringBuilder sb = new StringBuilder("payment:{");
+            StringBuilder sb = new StringBuilder("\"payment\":{");
 
             sb.Append(WriteOptionalJavascriptValue((PaymentOptions o) => o.CardBrands));
             sb.Append(WriteOptionalJavascriptValue((PaymentOptions o) => o.AcceptCanadianVisaDebit));

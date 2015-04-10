@@ -86,7 +86,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <returns></returns>
         public string GetOptionString()
         {
-            StringBuilder sb = new StringBuilder("settings:{");
+            StringBuilder sb = new StringBuilder("\"settings\":{");
 
             sb.Append(WriteOptionalJavascriptValue((SettingOptions o) => o.Locale));
             sb.Append(WriteOptionalJavascriptValue((SettingOptions o) => o.CountryCode));

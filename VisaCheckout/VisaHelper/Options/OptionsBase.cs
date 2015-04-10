@@ -27,14 +27,14 @@ namespace VisaCheckout.VisaHelper.Options
             return name;
         }
 
-        protected string WriteOptionalJavascriptValue<T, P>(Expression<Func<T, P>> expression, bool surroundValueInQuotes = true, bool surroundNameInQuotes = false) where T : class
+        protected string WriteOptionalJavascriptValue<T, P>(Expression<Func<T, P>> expression, bool surroundValueInQuotes = true) where T : class
         {
             PropertyInfo property = (PropertyInfo)((MemberExpression)expression.Body).Member;
 
-            return WriteOptionalJavascriptValue(GetApiName(property), property.GetValue(this, null), surroundValueInQuotes, surroundNameInQuotes);
+            return WriteOptionalJavascriptValue(GetApiName(property), property.GetValue(this, null), surroundValueInQuotes);
         }
 
-        protected string WriteOptionalJavascriptValue(string parameterName, object parameterValue, bool surroundValueInQuotes = true, bool surroundNameInQuotes = false)
+        protected string WriteOptionalJavascriptValue(string parameterName, object parameterValue, bool surroundValueInQuotes = true)
         {
             string data = string.Empty;
 
@@ -42,11 +42,11 @@ namespace VisaCheckout.VisaHelper.Options
             {
                 if (parameterValue is IOptions)
                 {
-                    data = string.Format("{1}{0}{1},", ((IOptions)parameterValue).GetOptionString(), surroundNameInQuotes ? "\"" : "");
+                    data = string.Format("{0},", ((IOptions)parameterValue).GetOptionString());
                 }
                 else
                 {
-                    data = string.Format("{2}{0}{2}:{1},", parameterName, GetValue(parameterValue, surroundValueInQuotes), surroundNameInQuotes ? "\"" : "");
+                    data = string.Format("\"{0}\":{1},", parameterName, GetValue(parameterValue, surroundValueInQuotes));
                 }
             }
 

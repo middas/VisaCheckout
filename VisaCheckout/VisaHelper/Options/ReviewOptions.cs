@@ -26,7 +26,7 @@ namespace VisaCheckout.VisaHelper.Options
         /// <returns></returns>
         public string GetOptionString()
         {
-            StringBuilder sb = new StringBuilder("review:{");
+            StringBuilder sb = new StringBuilder("\"review\":{");
 
             sb.Append(WriteOptionalJavascriptValue((ReviewOptions o) => o.Message));
             sb.Append(WriteOptionalJavascriptValue((ReviewOptions o) => o.ButtonAction));
