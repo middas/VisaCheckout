@@ -1,79 +1,89 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace VisaCheckout.VisaHelper.Options
 {
-    /// <summary>
-    /// Event status types
-    /// </summary>
-    public enum EventStatuses
-    {
-        Success,
-        Failure,
-        Fraud,
-        Chargeback,
-        Other
-    }
-
-    /// <summary>
-    /// Event types specific for Payments
-    /// </summary>
-    public enum PayEventTypes
-    {
-        Authorize,
-        Capture,
-        Refund,
-        Cancel,
-        Fraud,
-        Chargeback,
-        Other
-    }
-
-    /// <summary>
-    /// Transaction event types
-    /// </summary>
-    public enum EventTypes
-    {
-        Create,
-        Confirm,
-        Cancel,
-        Fraud,
-        Other
-    }
-
-    /// <summary>
-    /// The cards that you support charging.
-    /// </summary>
     [Flags]
-    public enum SupportedCards
-    {
-        VISA = 1,
-        AMEX = 2,
-        MASTERCARD = 4,
-        DISCOVER = 8
-    }
-
-    /// <summary>
-    /// The response data level values.
-    /// </summary>
-    public enum DataLevels
+    public enum BillingCountries
     {
         /// <summary>
-        /// Summary information (default)
+        /// Argentina
         /// </summary>
-        SUMMARY,
+        AR = 1,
 
         /// <summary>
-        /// Full information, which is only available if you are configured to receive it.
+        /// Australia
         /// </summary>
-        FULL,
+        AU = 2,
 
         /// <summary>
-        /// Consumer and payment information is not returned in the payment.success event response, in which case the Get Payment Data API must be used to obtain the information.
+        /// Brazil
         /// </summary>
-        NONE
+        BR = 4,
+
+        /// <summary>
+        /// Canada
+        /// </summary>
+        CA = 8,
+
+        /// <summary>
+        /// China
+        /// </summary>
+        CN = 16,
+
+        /// <summary>
+        /// Chile
+        /// </summary>
+        CL = 32,
+
+        /// <summary>
+        /// Colombia
+        /// </summary>
+        CO = 64,
+
+        /// <summary>
+        /// Hong Kong
+        /// </summary>
+        HK = 128,
+
+        /// <summary>
+        /// Malaysia
+        /// </summary>
+        MY = 256,
+
+        /// <summary>
+        /// Mexico
+        /// </summary>
+        MX = 512,
+
+        /// <summary>
+        /// New Zealand
+        /// </summary>
+        NZ = 1024,
+
+        /// <summary>
+        /// Peru
+        /// </summary>
+        PE = 2048,
+
+        /// <summary>
+        /// Singapore
+        /// </summary>
+        SG = 4096,
+
+        /// <summary>
+        /// South Africa
+        /// </summary>
+        ZA = 8192,
+
+        /// <summary>
+        /// United Arab Emirates
+        /// </summary>
+        AE = 16384,
+
+        /// <summary>
+        /// United States
+        /// </summary>
+        US = 32768
     }
 
     /// <summary>
@@ -92,6 +102,48 @@ namespace VisaCheckout.VisaHelper.Options
         /// Note: A value for total must be specified; otherwise Continue will be displayed.
         /// </summary>
         Pay
+    }
+
+    /// <summary>
+    /// Preset colors of the button.
+    /// </summary>
+    public enum ButtonColors
+    {
+        /// <summary>
+        /// The standard colors (default)
+        /// </summary>
+        Standard,
+
+        /// <summary>
+        /// Neutral colors
+        /// </summary>
+        Neutral
+    }
+
+    /// <summary>
+    /// Preset widths of the button.
+    /// </summary>
+    public enum ButtonSizes
+    {
+        /// <summary>
+        /// 154 pixels
+        /// </summary>
+        Small = 154,
+
+        /// <summary>
+        /// 213 pixels (default)
+        /// </summary>
+        Medium = 213,
+
+        /// <summary>
+        /// 425 pixels
+        /// </summary>
+        Large = 425,
+
+        /// <summary>
+        /// Custom size defined by Width and Height properties.
+        /// </summary>
+        Custom
     }
 
     /// <summary>
@@ -180,129 +232,75 @@ namespace VisaCheckout.VisaHelper.Options
         /// </summary>
         AED
     }
+
+    /// <summary>
+    /// The response data level values.
+    /// </summary>
+    public enum DataLevels
+    {
+        /// <summary>
+        /// Summary information (default)
+        /// </summary>
+        SUMMARY,
+
+        /// <summary>
+        /// Full information, which is only available if you are configured to receive it.
+        /// </summary>
+        FULL,
+
+        /// <summary>
+        /// Consumer and payment information is not returned in the payment.success event response, in which case the Get Payment Data API must be used to obtain the information.
+        /// </summary>
+        NONE
+    }
+
+    /// <summary>
+    /// Event status types
+    /// </summary>
+    public enum EventStatuses
+    {
+        Success,
+        Failure,
+        Fraud,
+        Chargeback,
+        Other
+    }
+
+    /// <summary>
+    /// Transaction event types
+    /// </summary>
+    public enum EventTypes
+    {
+        Create,
+        Confirm,
+        Cancel,
+        Fraud,
+        Other
+    }
+
+    /// <summary>
+    /// Event types specific for Payments
+    /// </summary>
+    public enum PayEventTypes
+    {
+        Authorize,
+        Capture,
+        Refund,
+        Cancel,
+        Fraud,
+        Chargeback,
+        Other
+    }
+
+    /// <summary>
+    /// The cards that you support charging.
+    /// </summary>
     [Flags]
-    public enum BillingCountries
+    public enum SupportedCards
     {
-        /// <summary>
-        /// Argentina
-        /// </summary>
-        AR = 1,
-
-        /// <summary>
-        /// Australia
-        /// </summary>
-        AU = 2,
-
-        /// <summary>
-        /// Brazil
-        /// </summary>
-        BR = 4,
-
-        /// <summary>
-        /// Canada
-        /// </summary>
-        CA = 8,
-
-        /// <summary>
-        /// China
-        /// </summary>
-        CN = 16,
-
-        /// <summary>
-        /// Chile
-        /// </summary>
-        CL = 32,
-
-        /// <summary>
-        /// Colombia
-        /// </summary>
-        CO = 64,
-
-        /// <summary>
-        /// Hong Kong
-        /// </summary>
-        HK = 128,
-
-        /// <summary>
-        /// Malaysia
-        /// </summary>
-        MY = 256,
-
-        /// <summary>
-        /// Mexico
-        /// </summary>
-        MX = 512,
-
-        /// <summary>
-        /// New Zealand
-        /// </summary>
-        NZ = 1024,
-
-        /// <summary>
-        /// Peru
-        /// </summary>
-        PE = 2048,
-
-        /// <summary>
-        /// Singapore
-        /// </summary>
-        SG = 4096,
-
-        /// <summary>
-        /// South Africa
-        /// </summary>
-        ZA = 8192,
-
-        /// <summary>
-        /// United Arab Emirates
-        /// </summary>
-        AE = 16384,
-
-        /// <summary>
-        /// United States
-        /// </summary>
-        US = 32768
-    }
-
-    /// <summary>
-    /// Preset colors of the button.
-    /// </summary>
-    public enum ButtonColors
-    {
-        /// <summary>
-        /// The standard colors (default)
-        /// </summary>
-        Standard,
-
-        /// <summary>
-        /// Neutral colors
-        /// </summary>
-        Neutral
-    }
-
-    /// <summary>
-    /// Preset widths of the button.
-    /// </summary>
-    public enum ButtonSizes
-    {
-        /// <summary>
-        /// 154 pixels
-        /// </summary>
-        Small = 154,
-
-        /// <summary>
-        /// 213 pixels (default)
-        /// </summary>
-        Medium = 213,
-
-        /// <summary>
-        /// 425 pixels
-        /// </summary>
-        Large = 425,
-
-        /// <summary>
-        /// Custom size defined by Width and Height properties.
-        /// </summary>
-        Custom
+        VISA = 1,
+        AMEX = 2,
+        MASTERCARD = 4,
+        DISCOVER = 8
     }
 }

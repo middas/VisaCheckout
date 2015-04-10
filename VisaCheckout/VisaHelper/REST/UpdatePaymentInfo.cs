@@ -11,8 +11,8 @@ namespace VisaCheckout.VisaHelper.REST
     public class UpdatePaymentInfo : VisaRequestBase, IVisaRestRequest
     {
         public const string ProductionUrl = "https://secure.checkout.visa.com/wallet-services-web/payment/info/";
-        public const string SandboxUrl = "https://sandbox.secure.checkout.visa.com/wallet-services-web/payment/info/";
         public const string ResourceName = "payment/info";
+        public const string SandboxUrl = "https://sandbox.secure.checkout.visa.com/wallet-services-web/payment/info/";
 
         /// <summary>
         /// The constructor
