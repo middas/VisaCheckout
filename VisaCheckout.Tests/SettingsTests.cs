@@ -15,7 +15,7 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("settings:{"));
+            Assert.IsTrue(result.Contains("\"settings\":{"));
         }
 
         [TestMethod]
@@ -31,10 +31,10 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("settings:{"));
-            Assert.IsTrue(result.Contains("dataLevel:\"FULL\""));
-            Assert.IsTrue(result.Contains("displayName:\"name\""));
-            Assert.IsTrue(result.Contains("locale:\"en-US\""));
+            Assert.IsTrue(result.Contains("\"settings\":{"));
+            Assert.IsTrue(result.Contains("\"dataLevel\":\"FULL\""));
+            Assert.IsTrue(result.Contains("\"displayName\":\"name\""));
+            Assert.IsTrue(result.Contains("\"locale\":\"en-US\""));
         }
 
         [TestMethod]
@@ -48,8 +48,8 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("settings:{"));
-            Assert.IsTrue(result.Contains("payment:{"));
+            Assert.IsTrue(result.Contains("\"settings\":{"));
+            Assert.IsTrue(result.Contains("\"payment\":{"));
         }
 
         [TestMethod]
@@ -63,8 +63,8 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("settings:{"));
-            Assert.IsTrue(result.Contains("review:{"));
+            Assert.IsTrue(result.Contains("\"settings\":{"));
+            Assert.IsTrue(result.Contains("\"review\":{"));
         }
 
         [TestMethod]
@@ -78,8 +78,8 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("settings:{"));
-            Assert.IsTrue(result.Contains("shipping:{"));
+            Assert.IsTrue(result.Contains("\"settings\":{"));
+            Assert.IsTrue(result.Contains("\"shipping\":{"));
         }
 
         [TestMethod]
@@ -93,8 +93,8 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("settings:{"));
-            Assert.IsTrue(result.Contains("threeDSSetup:{"));
+            Assert.IsTrue(result.Contains("\"settings\":{"));
+            Assert.IsTrue(result.Contains("\"threeDSSetup\":{"));
         }
 
         [TestMethod]
@@ -108,7 +108,7 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("websiteUrl:\"http://www.test.com/\""));
+            Assert.IsTrue(result.Contains("\"websiteUrl\":\"http://www.test.com/\""));
         }
 
         [TestInitialize]

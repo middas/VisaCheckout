@@ -14,7 +14,7 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("threeDSSetup:{"));
+            Assert.IsTrue(result.Contains("\"threeDSSetup\":{"));
         }
 
         [TestMethod]
@@ -28,8 +28,8 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("threeDSSetup:{"));
-            Assert.IsTrue(result.Contains("threeDSActive:\"true\""));
+            Assert.IsTrue(result.Contains("\"threeDSSetup\":{"));
+            Assert.IsTrue(result.Contains("\"threeDSActive\":\"true\""));
         }
 
         [TestInitialize]

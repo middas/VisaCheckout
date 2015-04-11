@@ -130,12 +130,13 @@ namespace VisaCheckout.VisaHelper.Options
 
                     foreach (string s in list)
                     {
-                        sb.Append("\"s\",");
+                        sb.Append("\"").Append(s).Append("\",");
                     }
 
                     sb.Length = sb.Length - 1;
                     sb.Append("]");
                     value = sb.ToString();
+                    surroundInQuotes = false;
                 }
             }
 

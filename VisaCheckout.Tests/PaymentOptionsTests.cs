@@ -14,7 +14,7 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("payment:{"));
+            Assert.IsTrue(result.Contains("\"payment\":{"));
         }
 
         [TestMethod]
@@ -30,10 +30,10 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("payment:{"));
-            Assert.IsTrue(result.Contains("acceptCanadianVisaDebit:\"true\""));
-            Assert.IsTrue(result.Contains("billingCountries:[\"CA\",\"US\"]"));
-            Assert.IsTrue(result.Contains("cardBrands:[\"VISA\",\"AMEX\"]"));
+            Assert.IsTrue(result.Contains("\"payment\":{"));
+            Assert.IsTrue(result.Contains("\"acceptCanadianVisaDebit\":\"true\""));
+            Assert.IsTrue(result.Contains("\"billingCountries\":[\"CA\",\"US\"]"));
+            Assert.IsTrue(result.Contains("\"cardBrands\":[\"VISA\",\"AMEX\"]"));
         }
 
         [TestInitialize]

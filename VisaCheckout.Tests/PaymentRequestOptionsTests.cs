@@ -14,7 +14,7 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("paymentRequest:{"));
+            Assert.IsTrue(result.Contains("\"paymentRequest\":{"));
         }
 
         [TestMethod]
@@ -27,8 +27,8 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("paymentRequest:{"));
-            Assert.IsTrue(result.Contains("customData:{\"nvPair\":[{\"name\":\"test1\",\"value\":\"value1\"},{\"name\":\"test2\",\"value\":\"value2\"}]"));
+            Assert.IsTrue(result.Contains("\"paymentRequest\":{"));
+            Assert.IsTrue(result.Contains("\"customData\":{\"nvPair\":[{\"name\":\"test1\",\"value\":\"value1\"},{\"name\":\"test2\",\"value\":\"value2\"}]"));
         }
 
         [TestMethod]
@@ -43,9 +43,9 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("paymentRequest:{"));
-            Assert.IsTrue(result.Contains("currencyCode:\"USD\""));
-            Assert.IsTrue(result.Contains("subtotal:\"21.21\""));
+            Assert.IsTrue(result.Contains("\"paymentRequest\":{"));
+            Assert.IsTrue(result.Contains("\"currencyCode\":\"USD\""));
+            Assert.IsTrue(result.Contains("\"subtotal\":\"21.21\""));
         }
 
         [TestInitialize]

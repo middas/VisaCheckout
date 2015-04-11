@@ -32,9 +32,9 @@ namespace VisaCheckout.Tests
             Assert.IsTrue(result.Contains("onVisaCheckoutReady(){"));
             Assert.IsTrue(result.Contains("<div class=\"v-checkout-wrapper\""));
             Assert.IsTrue(result.Contains("V.init({"));
-            Assert.IsTrue(result.Contains("apikey:\"apiKey\""));
-            Assert.IsTrue(result.Contains("subtotal:\"21.21\""));
-            Assert.IsTrue(result.Contains("currencyCode:\"USD\""));
+            Assert.IsTrue(result.Contains("\"apikey\":\"apiKey\""));
+            Assert.IsTrue(result.Contains("\"subtotal\":\"21.21\""));
+            Assert.IsTrue(result.Contains("\"currencyCode\":\"USD\""));
             Assert.IsTrue(result.Contains("V.on"));
             Assert.IsTrue(result.Contains(VisaOptions.SandboxSdkUrl));
         }
@@ -90,9 +90,9 @@ namespace VisaCheckout.Tests
             Assert.IsTrue(result.Contains("onVisaCheckoutReady(){"));
             Assert.IsTrue(result.Contains("<div class=\"v-checkout-wrapper\""));
             Assert.IsTrue(result.Contains("V.init({"));
-            Assert.IsTrue(result.Contains("apikey:\"apiKey\""));
-            Assert.IsTrue(result.Contains("subtotal:\"21.21\""));
-            Assert.IsTrue(result.Contains("currencyCode:\"USD\""));
+            Assert.IsTrue(result.Contains("\"apikey\":\"apiKey\""));
+            Assert.IsTrue(result.Contains("\"subtotal\":\"21.21\""));
+            Assert.IsTrue(result.Contains("\"currencyCode\":\"USD\""));
             Assert.IsTrue(result.Contains("V.on"));
             Assert.IsTrue(result.Contains(VisaOptions.ProductionSdkUrl));
         }

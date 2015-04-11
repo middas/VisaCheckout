@@ -46,9 +46,9 @@ namespace VisaCheckout.Tests
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Contains("V.init({"));
-            Assert.IsTrue(result.Contains("paymentRequest:{"));
-            Assert.IsTrue(result.Contains("apikey:\"apiKey\""));
-            Assert.IsTrue(result.Contains("settings:{"));
+            Assert.IsTrue(result.Contains("\"paymentRequest\":{"));
+            Assert.IsTrue(result.Contains("\"apikey\":\"apiKey\""));
+            Assert.IsTrue(result.Contains("\"settings\":{"));
         }
 
         [TestInitialize]

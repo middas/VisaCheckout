@@ -14,7 +14,7 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("review:{"));
+            Assert.IsTrue(result.Contains("\"review\":{"));
         }
 
         [TestMethod]
@@ -29,9 +29,9 @@ namespace VisaCheckout.Tests
             string result = options.GetOptionString();
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Contains("review:{"));
-            Assert.IsTrue(result.Contains("buttonAction:\"Pay\""));
-            Assert.IsTrue(result.Contains("message:\"message\""));
+            Assert.IsTrue(result.Contains("\"review\":{"));
+            Assert.IsTrue(result.Contains("\"buttonAction\":\"Pay\""));
+            Assert.IsTrue(result.Contains("\"message\":\"message\""));
         }
 
         [TestInitialize]
