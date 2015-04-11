@@ -21,6 +21,11 @@ namespace VisaCheckout.VisaHelper.REST
             throw new NotImplementedException();
         }
 
+        public string Select()
+        {
+            throw new NotImplementedException();
+        }
+
         public bool SendRequest(string sharedKey, out string responseString)
         {
             throw new NotImplementedException();

@@ -6,6 +6,8 @@
 
         string Delete();
 
+        string Select();
+
         string Update();
     }
 }
