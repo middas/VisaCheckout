@@ -94,6 +94,7 @@
     <Compile Include="VisaHelper\Options\VisaUpdateImageOptions.cs" />
     <Compile Include="VisaHelper\REST\ApiKeyManagement.cs" />
     <Compile Include="VisaHelper\REST\GetPaymentData.cs" />
+    <Compile Include="VisaHelper\REST\IAdminRestRequest.cs" />
     <Compile Include="VisaHelper\REST\IVisaRestRequest.cs" />
     <Compile Include="VisaHelper\REST\ProfileManagement.cs" />
     <Compile Include="VisaHelper\REST\UpdatePaymentInfo.cs" />
