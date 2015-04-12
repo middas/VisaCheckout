@@ -6,7 +6,7 @@
 
         string Delete();
 
-        string Select();
+        string Select(byte limit, int page);
 
         string Update();
     }
