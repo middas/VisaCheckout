@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using VisaCheckout.VisaHelper.Attributes;
 using VisaCheckout.VisaHelper.Options;
 
@@ -13,6 +14,9 @@ namespace VisaCheckout.VisaHelper.REST
         public const string ProductionUrl = "https://secure.checkout.visa.com/merchant-api/client/profiles/";
         public const string ResourceName = "client/profiles/";
         public const string SandboxUrl = "https://sandbox.secure.checkout.visa.com/merchant-api-ic/client/profiles/";
+
+        private string ContentString = null;
+        private string QueryParameters = null;
 
         /// <summary>
         /// The constructor
@@ -121,12 +125,12 @@ namespace VisaCheckout.VisaHelper.REST
         /// Prepares a request to create a profile
         /// </summary>
         /// <returns></returns>
-        public string PrepareCreateRequest()
+        public void PrepareCreateRequest()
         {
             throw new NotImplementedException();
         }
 
-        public string PrepareDeleteRequest()
+        public void PrepareDeleteRequest()
         {
             throw new NotImplementedException();
         }
@@ -137,18 +141,43 @@ namespace VisaCheckout.VisaHelper.REST
         /// <param name="limit">(Optional) The number of results per page; default is 100 clients.</param>
         /// <param name="page">(Optional) The page number; default is the next page, starting from 1.</param>
         /// <returns></returns>
-        public string PrepareSelectRequest(byte limit = 100, int page = 1)
+        public void PrepareSelectRequest(byte limit = 100, int page = 1)
         {
-            throw new NotImplementedException();
+            Method = "GET";
+
+            if (string.IsNullOrEmpty(ApiKey))
+            {
+                throw new ArgumentNullException("ApiKey cannot be null");
+            }
+
+            StringBuilder sb = new StringBuilder(WriteOptionalQueryStringValue((ProfileManagement o) => o.ApiKey));
+
+            if (limit != 100)
+            {
+                sb.Append("limit=").Append(limit).Append("&");
+            }
+
+            if (page != 1)
+            {
+                sb.Append("page=").Append(page).Append("&");
+            }
+
+            sb.Length = sb.Length - 1;
+            QueryParameters = sb.ToString();
         }
 
-        public string PrepareUpdateRequest()
+        public void PrepareUpdateRequest()
         {
             throw new NotImplementedException();
         }
 
         public bool SendRequest(string sharedKey, out string responseString)
         {
+            if (string.IsNullOrEmpty(ContentString) && string.IsNullOrEmpty(QueryParameters))
+            {
+                throw new Exception("Web request was not prepared");
+            }
+
             throw new NotImplementedException();
         }
     }

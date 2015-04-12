@@ -4,12 +4,12 @@
     {
         string Method { get; }
 
-        string PrepareCreateRequest();
+        void PrepareCreateRequest();
 
-        string PrepareDeleteRequest();
+        void PrepareDeleteRequest();
 
-        string PrepareSelectRequest(byte limit, int page);
+        void PrepareSelectRequest(byte limit, int page);
 
-        string PrepareUpdateRequest();
+        void PrepareUpdateRequest();
     }
 }

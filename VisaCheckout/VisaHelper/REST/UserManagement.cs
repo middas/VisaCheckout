@@ -16,22 +16,22 @@ namespace VisaCheckout.VisaHelper.REST
             get { throw new NotImplementedException(); }
         }
 
-        public string PrepareCreateRequest()
+        public void PrepareCreateRequest()
         {
             throw new NotImplementedException();
         }
 
-        public string PrepareDeleteRequest()
+        public void PrepareDeleteRequest()
         {
             throw new NotImplementedException();
         }
 
-        public string PrepareSelectRequest(byte limit = 100, int page = 1)
+        public void PrepareSelectRequest(byte limit = 100, int page = 1)
         {
             throw new NotImplementedException();
         }
 
-        public string PrepareUpdateRequest()
+        public void PrepareUpdateRequest()
         {
             throw new NotImplementedException();
         }
