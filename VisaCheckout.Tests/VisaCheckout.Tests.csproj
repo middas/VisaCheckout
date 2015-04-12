@@ -96,6 +96,7 @@
     <Compile Include="ReviewOptionsTests.cs" />
     <Compile Include="ShippingOptionsTests.cs" />
     <Compile Include="TellMeMoreLinkOptionsTests.cs" />
+    <Compile Include="ThreeDSEligibleBrandsOptionsTests.cs" />
     <Compile Include="ThreeDSSetupOptionsTests.cs" />
     <Compile Include="OnOptionsTest.cs" />
     <Compile Include="VisaOptionsTests.cs" />

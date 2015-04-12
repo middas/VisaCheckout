@@ -88,6 +88,7 @@
     <Compile Include="VisaHelper\Options\ReviewOptions.cs" />
     <Compile Include="VisaHelper\Options\ShippingOptions.cs" />
     <Compile Include="VisaHelper\Options\TellMeMoreLinkOptions.cs" />
+    <Compile Include="VisaHelper\Options\ThreeDSEligibleBrandsOptions.cs" />
     <Compile Include="VisaHelper\Options\ThreeDSSetupOptions.cs" />
     <Compile Include="VisaHelper\Options\VisaOptions.cs" />
     <Compile Include="VisaHelper\ResponseHandler.cs" />
