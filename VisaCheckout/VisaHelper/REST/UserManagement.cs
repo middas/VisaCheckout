@@ -21,7 +21,7 @@ namespace VisaCheckout.VisaHelper.REST
             throw new NotImplementedException();
         }
 
-        public string Select()
+        public string Select(byte limit = 100, int page = 1)
         {
             throw new NotImplementedException();
         }
