@@ -11,27 +11,32 @@ namespace VisaCheckout.VisaHelper.REST
         {
         }
 
-        public string Create()
+        public string Method
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string PrepareCreateRequest()
         {
             throw new NotImplementedException();
         }
 
-        public string Delete()
+        public string PrepareDeleteRequest()
         {
             throw new NotImplementedException();
         }
 
-        public string Select(byte limit = 100, int page = 1)
+        public string PrepareSelectRequest(byte limit = 100, int page = 1)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string PrepareUpdateRequest()
         {
             throw new NotImplementedException();
         }
 
         public bool SendRequest(string sharedKey, out string responseString)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string Update()
         {
             throw new NotImplementedException();
         }

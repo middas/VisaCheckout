@@ -2,12 +2,14 @@
 {
     public interface IAdminRestRequest : IVisaRestRequest
     {
-        string Create();
+        string Method { get; }
 
-        string Delete();
+        string PrepareCreateRequest();
 
-        string Select(byte limit, int page);
+        string PrepareDeleteRequest();
 
-        string Update();
+        string PrepareSelectRequest(byte limit, int page);
+
+        string PrepareUpdateRequest();
     }
 }

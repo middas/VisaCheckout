@@ -89,6 +89,11 @@ namespace VisaCheckout.VisaHelper.REST
         public Uri LogoUrl { get; set; }
 
         /// <summary>
+        /// The request method
+        /// </summary>
+        public string Method { get; private set; }
+
+        /// <summary>
         /// (Optional) Whether Verified by Visa is active.
         /// </summary>
         [Option("threeDSActive")]
@@ -113,36 +118,36 @@ namespace VisaCheckout.VisaHelper.REST
         public Uri WebsiteUrl { get; set; }
 
         /// <summary>
-        /// Creates a new profile
+        /// Prepares a request to create a profile
         /// </summary>
         /// <returns></returns>
-        public string Create()
+        public string PrepareCreateRequest()
         {
             throw new NotImplementedException();
         }
 
-        public string Delete()
+        public string PrepareDeleteRequest()
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Queries existing profiles
+        /// Prepares a request to query existing profiles
         /// </summary>
         /// <param name="limit">(Optional) The number of results per page; default is 100 clients.</param>
         /// <param name="page">(Optional) The page number; default is the next page, starting from 1.</param>
         /// <returns></returns>
-        public string Select(byte limit = 100, int page = 1)
+        public string PrepareSelectRequest(byte limit = 100, int page = 1)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string PrepareUpdateRequest()
         {
             throw new NotImplementedException();
         }
 
         public bool SendRequest(string sharedKey, out string responseString)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string Update()
         {
             throw new NotImplementedException();
         }
