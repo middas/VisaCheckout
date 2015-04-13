@@ -53,9 +53,6 @@ namespace VisaCheckout.VisaHelper.REST
         /// <returns>A JSON string result</returns>
         public bool SendRequest(string sharedKey, out string responseString)
         {
-            string url = string.Format("{0}{1}?{2}", Environment.IsSandbox ? SandboxUrl : ProductionUrl, CallID, WriteOptionalQueryStringValue((UpdatePaymentInfo o) => o.ApiKey));
-            url = url.Substring(0, url.Length - 1);
-
             string body = string.Format("{{{0},{1}}}", OrderInfo != null ? OrderInfo.GetOptionString() : "", PayInfo != null ? PayInfo.GetOptionString() : "");
 
             if (body[1] == ',')
@@ -67,18 +64,10 @@ namespace VisaCheckout.VisaHelper.REST
                 body = string.Format("{0}}}", body.Substring(0, body.Length - 2));
             }
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Accept = Accept;
-            request.ContentType = ContentType;
-            request.Method = "PUT";
-            request.Headers.Add("x-pay-token", GenerateToken(sharedKey, request.RequestUri.Query.Substring(1), body));
+            string queryString = WriteOptionalQueryStringValue((UpdatePaymentInfo o) => o.ApiKey);
+            queryString = queryString.Substring(0, queryString.Length - 1);
 
-            using (StreamWriter sw = new StreamWriter(request.GetRequestStream()))
-            {
-                sw.Write(body);
-            }
-
-            return SendWebRequest(request, out responseString);
+            return SendWebRequest(string.Format("{0}{1}", Environment.IsSandbox ? SandboxUrl : ProductionUrl, CallID), queryString, "PUT", body, sharedKey, out responseString);
         }
     }
 }

@@ -38,11 +38,45 @@ namespace VisaCheckout.VisaHelper.REST
         /// <returns></returns>
         protected string GenerateToken(string sharedKey, string queryString, string body)
         {
+            if (queryString[0] == '?')
+            {
+                queryString = queryString.Substring(1);
+            }
+
             long unixEpoch = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
 
             StringBuilder sb = new StringBuilder(sharedKey).Append(unixEpoch).Append(ResourcePath).Append(queryString).Append(body);
 
             return string.Format("x:{0}:{1}", unixEpoch, Utilities.Sha256Hash(sb.ToString()));
+        }
+
+        protected bool SendWebRequest(string url, string queryString, string webMethod, string contentString, string sharedKey, out string responseString)
+        {
+            if (string.IsNullOrEmpty(contentString) && string.IsNullOrEmpty(queryString))
+            {
+                throw new Exception("Web request was not prepared");
+            }
+
+            if (!string.IsNullOrEmpty(queryString) && queryString[0] == '?')
+            {
+                queryString = queryString.Substring(1);
+            }
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(string.Format("{0}{1}", url, !string.IsNullOrEmpty(queryString) ? "?" + queryString : ""));
+            request.Accept = Accept;
+            request.ContentType = ContentType;
+            request.Method = webMethod;
+            request.Headers.Add("x-pay-token", GenerateToken(sharedKey, queryString, contentString));
+
+            if (!string.IsNullOrEmpty(contentString))
+            {
+                using (StreamWriter sw = new StreamWriter(request.GetRequestStream()))
+                {
+                    sw.Write(contentString);
+                }
+            }
+
+            return SendWebRequest(request, out responseString);
         }
 
         protected bool SendWebRequest(HttpWebRequest request, out string responseString)

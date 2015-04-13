@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Text;
 using VisaCheckout.VisaHelper.Attributes;
 using VisaCheckout.VisaHelper.Options;
@@ -150,7 +152,8 @@ namespace VisaCheckout.VisaHelper.REST
                 throw new ArgumentNullException("ApiKey cannot be null");
             }
 
-            StringBuilder sb = new StringBuilder(WriteOptionalQueryStringValue((ProfileManagement o) => o.ApiKey));
+            StringBuilder sb = new StringBuilder("?");
+            sb.Append(WriteOptionalQueryStringValue((ProfileManagement o) => o.ApiKey));
 
             if (limit != 100)
             {
@@ -173,12 +176,12 @@ namespace VisaCheckout.VisaHelper.REST
 
         public bool SendRequest(string sharedKey, out string responseString)
         {
-            if (string.IsNullOrEmpty(ContentString) && string.IsNullOrEmpty(QueryParameters))
+            if (!string.IsNullOrEmpty(Method))
             {
                 throw new Exception("Web request was not prepared");
             }
 
-            throw new NotImplementedException();
+            return SendWebRequest(Environment.IsSandbox ? SandboxUrl : ProductionUrl, QueryParameters, Method, ContentString, sharedKey, out responseString);
         }
     }
 }

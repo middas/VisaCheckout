@@ -49,18 +49,13 @@ namespace VisaCheckout.VisaHelper.REST
         /// <returns>A JSON string result</returns>
         public bool SendRequest(string sharedKey, out string responseString)
         {
-            StringBuilder sb = new StringBuilder(string.Format("{0}{1}?", Environment.IsSandbox ? SandboxUrl : ProductionUrl, CallID));
+            StringBuilder sb = new StringBuilder();
             sb.Append(WriteOptionalQueryStringValue((GetPaymentData o) => o.ApiKey));
             sb.Append(WriteOptionalQueryStringValue((GetPaymentData o) => o.DataLevel));
 
             sb.Length = sb.Length - 1;
 
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(sb.ToString());
-            request.ContentType = ContentType;
-            request.Accept = Accept;
-            request.Headers.Add("x-pay-token", GenerateToken(sharedKey, request.RequestUri.Query.Substring(1), null));
-
-            return SendWebRequest(request, out responseString);
+            return SendWebRequest(string.Format("{0}{1}", Environment.IsSandbox ? SandboxUrl : ProductionUrl, CallID), sb.ToString(), "GET", null, sharedKey, out responseString);
         }
     }
 }
