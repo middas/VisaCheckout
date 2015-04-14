@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
 using System.Text;
 using VisaCheckout.VisaHelper.Attributes;
 using VisaCheckout.VisaHelper.Options;
@@ -26,6 +24,11 @@ namespace VisaCheckout.VisaHelper.REST
         public ProfileManagement(string apikey)
             : base(ResourceName)
         {
+            if (string.IsNullOrEmpty(apikey))
+            {
+                throw new ArgumentNullException("ApiKey cannot be null");
+            }
+
             ApiKey = apikey;
         }
 
@@ -51,19 +54,19 @@ namespace VisaCheckout.VisaHelper.REST
         /// (Optional) Billing country codes, which limits selection of eligible cards in the consumer's account. If not set in the profile or overridden for a transaction, payments from all billing countries are accepted.
         /// </summary>
         [Option("billingCountries")]
-        public BillingCountries BillingCountries { get; set; }
+        public BillingCountries? BillingCountries { get; set; }
 
         /// <summary>
         /// (Optional) Initial value for brands associated with card art to be displayed or available in the lightbox. If a brand matching the consumer's preferred card is specified, the card art is displayed on the button; otherwise, a generic button is displayed.
         /// </summary>
         [Option("cardBrands")]
-        public SupportedCards CardBrands { get; set; }
+        public SupportedCards? CardBrands { get; set; }
 
         /// <summary>
         /// (Optional) Whether to obtain a shipping address from the consumer.
         /// </summary>
         [Option("collectShipping")]
-        public bool CollectShipping { get; set; }
+        public bool? CollectShipping { get; set; }
 
         /// <summary>
         /// (Optional) Complete URL to merchant's customer support page.
@@ -104,7 +107,7 @@ namespace VisaCheckout.VisaHelper.REST
         /// (Optional) Whether Verified by Visa is active.
         /// </summary>
         [Option("threeDSActive")]
-        public bool ThreeDSActive { get; set; }
+        public bool? ThreeDSActive { get; set; }
 
         /// <summary>
         /// (Optional) Brands that are eligible for Verified by Visa.
@@ -116,7 +119,7 @@ namespace VisaCheckout.VisaHelper.REST
         /// (Optional) Whether to suppress Verified by Visa challenge questions.
         /// </summary>
         [Option("threeDSSuppressChallenge")]
-        public bool ThreeDSSuppressChallenge { get; set; }
+        public bool? ThreeDSSuppressChallenge { get; set; }
 
         /// <summary>
         /// (Optional) Complete URL to merchant's website.
@@ -130,7 +133,14 @@ namespace VisaCheckout.VisaHelper.REST
         /// <returns></returns>
         public void PrepareCreateRequest()
         {
-            throw new NotImplementedException();
+            Method = "POST";
+
+            ContentString = CreateContentString();
+
+            StringBuilder sb = new StringBuilder(WriteOptionalQueryStringValue((ProfileManagement o) => o.ApiKey));
+            sb.Append(WriteOptionalQueryStringValue((ProfileManagement o) => o.ExternalProfileID));
+            sb.Length = sb.Length - 1;
+            QueryParameters = sb.ToString();
         }
 
         public void PrepareDeleteRequest()
@@ -147,11 +157,6 @@ namespace VisaCheckout.VisaHelper.REST
         public void PrepareSelectRequest(byte limit = 100, int page = 1)
         {
             Method = "GET";
-
-            if (string.IsNullOrEmpty(ApiKey))
-            {
-                throw new ArgumentNullException("ApiKey cannot be null");
-            }
 
             StringBuilder sb = new StringBuilder(WriteOptionalQueryStringValue((ProfileManagement o) => o.ApiKey));
 
@@ -182,6 +187,29 @@ namespace VisaCheckout.VisaHelper.REST
             }
 
             return SendWebRequest(Environment.IsSandbox ? SandboxUrl : ProductionUrl, QueryParameters, Method, ContentString, sharedKey, out responseString);
+        }
+
+        private string CreateContentString()
+        {
+            StringBuilder sb = new StringBuilder("{");
+            sb.Append(WriteOptionalJavascriptValue((ProfileManagement o) => o.AcceptCanadianVisaDebit));
+            sb.Append(WriteOptionalJavascriptValue((ProfileManagement o) => o.AcceptedRegions));
+            sb.Append(WriteOptionalJavascriptValue((ProfileManagement o) => o.BillingCountries));
+            sb.Append(WriteOptionalJavascriptValue((ProfileManagement o) => o.CardBrands));
+            sb.Append(WriteOptionalJavascriptValue((ProfileManagement o) => o.CollectShipping));
+            sb.Append(WriteOptionalJavascriptValue((ProfileManagement o) => o.CustomerSupportUrl));
+            sb.Append(WriteOptionalJavascriptValue((ProfileManagement o) => o.DefaultProfile));
+            sb.Append(WriteOptionalJavascriptValue((ProfileManagement o) => o.ExternalProfileID));
+            sb.Append(WriteOptionalJavascriptValue((ProfileManagement o) => o.LogoDisplayName));
+            sb.Append(WriteOptionalJavascriptValue((ProfileManagement o) => o.LogoUrl));
+            sb.Append(WriteOptionalJavascriptValue((ProfileManagement o) => o.ThreeDSActive));
+            sb.Append(WriteOptionalJavascriptValue((ProfileManagement o) => o.ThreeDSEligibleBrands));
+            sb.Append(WriteOptionalJavascriptValue((ProfileManagement o) => o.ThreeDSSuppressChallenge));
+            sb.Append(WriteOptionalJavascriptValue((ProfileManagement o) => o.WebsiteUrl));
+            sb.Length = sb.Length - 1;
+            sb.Append("}");
+
+            return sb.ToString();
         }
     }
 }
