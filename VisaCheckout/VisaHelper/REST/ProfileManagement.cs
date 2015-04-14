@@ -71,7 +71,7 @@ namespace VisaCheckout.VisaHelper.REST
         /// <summary>
         /// (Optional) Complete URL to merchant's customer support page.
         /// </summary>
-        [Option("customerSupportUrl")]
+        [Option("customerSupportURL")]
         public Uri CustomerSupportUrl { get; set; }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace VisaCheckout.VisaHelper.REST
         /// <summary>
         /// (Optional) Logo to display in the Visa Checkout lightbox; otherwise, the default Visa Checkout logo appears. Your image must not exceed 250 pixels in width and should be 36 pixels high. If the height is not 36 pixels, the height will be expanded or shrunk to fit in exactly 36 pixels.
         /// </summary>
-        [Option("logoUrl")]
+        [Option("logoURL")]
         public Uri LogoUrl { get; set; }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace VisaCheckout.VisaHelper.REST
         /// <summary>
         /// (Optional) Complete URL to merchant's website.
         /// </summary>
-        [Option("websiteUrl")]
+        [Option("websiteURL")]
         public Uri WebsiteUrl { get; set; }
 
         /// <summary>
@@ -143,9 +143,22 @@ namespace VisaCheckout.VisaHelper.REST
             QueryParameters = sb.ToString();
         }
 
+        /// <summary>
+        /// Prepares a request to delete a profile
+        /// </summary>
         public void PrepareDeleteRequest()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(ExternalProfileID))
+            {
+                throw new ArgumentNullException("ExternalProfileID cannot be null");
+            }
+
+            Method = "DELETE";
+
+            StringBuilder sb = new StringBuilder(WriteOptionalQueryStringValue((ProfileManagement o) => o.ApiKey));
+            sb.Append(WriteOptionalQueryStringValue((ProfileManagement o) => o.ExternalProfileID));
+            sb.Length = sb.Length - 1;
+            QueryParameters = sb.ToString();
         }
 
         /// <summary>
