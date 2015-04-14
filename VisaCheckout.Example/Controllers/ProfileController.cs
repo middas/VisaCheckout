@@ -24,8 +24,7 @@ namespace VisaCheckout.Example.Controllers
 
         public ActionResult Select()
         {
-            ProfileManagement request = new ProfileManagement();
-            request.ApiKey = ApiKey;
+            ProfileManagement request = new ProfileManagement(ApiKey);
             request.PrepareSelectRequest();
 
             string response;

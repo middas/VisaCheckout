@@ -14,7 +14,7 @@ namespace VisaCheckout.VisaHelper.REST
     public class ProfileManagement : VisaRequestBase, IAdminRestRequest
     {
         public const string ProductionUrl = "https://secure.checkout.visa.com/merchant-api/client/profiles/";
-        public const string ResourceName = "client/profiles/";
+        public const string ResourceName = "client/profiles";
         public const string SandboxUrl = "https://sandbox.secure.checkout.visa.com/merchant-api-ic/client/profiles/";
 
         private string ContentString = null;
@@ -23,9 +23,10 @@ namespace VisaCheckout.VisaHelper.REST
         /// <summary>
         /// The constructor
         /// </summary>
-        public ProfileManagement()
+        public ProfileManagement(string apikey)
             : base(ResourceName)
         {
+            ApiKey = apikey;
         }
 
         /// <summary>
