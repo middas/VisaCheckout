@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Text;
+﻿using System.Text;
 using VisaCheckout.VisaHelper.Attributes;
 using VisaCheckout.VisaHelper.Options;
 

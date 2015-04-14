@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Net;
-using VisaCheckout.VisaHelper.Attributes;
+﻿using VisaCheckout.VisaHelper.Attributes;
 using VisaCheckout.VisaHelper.Options;
 
 namespace VisaCheckout.VisaHelper.REST
