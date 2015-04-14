@@ -186,6 +186,9 @@ namespace VisaCheckout.VisaHelper.REST
             QueryParameters = sb.ToString();
         }
 
+        /// <summary>
+        /// Prepares a request to update a given profile
+        /// </summary>
         public void PrepareUpdateRequest()
         {
             Method = "PUT";
@@ -197,6 +200,12 @@ namespace VisaCheckout.VisaHelper.REST
             QueryParameters = sb.ToString();
         }
 
+        /// <summary>
+        /// Sends the request to Visa
+        /// </summary>
+        /// <param name="sharedKey">The private key given by Visa</param>
+        /// <param name="responseString">The response from the request</param>
+        /// <returns>Whether the request succeeded or failed</returns>
         public bool SendRequest(string sharedKey, out string responseString)
         {
             if (string.IsNullOrEmpty(Method))
