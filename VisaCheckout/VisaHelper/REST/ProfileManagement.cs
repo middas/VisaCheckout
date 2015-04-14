@@ -156,7 +156,6 @@ namespace VisaCheckout.VisaHelper.REST
             Method = "DELETE";
 
             StringBuilder sb = new StringBuilder(WriteOptionalQueryStringValue((ProfileManagement o) => o.ApiKey));
-            sb.Append(WriteOptionalQueryStringValue((ProfileManagement o) => o.ExternalProfileID));
             sb.Length = sb.Length - 1;
             QueryParameters = sb.ToString();
         }
@@ -189,7 +188,13 @@ namespace VisaCheckout.VisaHelper.REST
 
         public void PrepareUpdateRequest()
         {
-            throw new NotImplementedException();
+            Method = "PUT";
+
+            ContentString = CreateContentString();
+
+            StringBuilder sb = new StringBuilder(WriteOptionalQueryStringValue((ProfileManagement o) => o.ApiKey));
+            sb.Length = sb.Length - 1;
+            QueryParameters = sb.ToString();
         }
 
         public bool SendRequest(string sharedKey, out string responseString)
@@ -199,7 +204,19 @@ namespace VisaCheckout.VisaHelper.REST
                 throw new Exception("Web request was not prepared");
             }
 
-            return SendWebRequest(Environment.IsSandbox ? SandboxUrl : ProductionUrl, QueryParameters, Method, ContentString, sharedKey, out responseString);
+            string url = Environment.IsSandbox ? SandboxUrl : ProductionUrl;
+
+            if (!string.IsNullOrEmpty(ExternalProfileID) && Method != "POST")
+            {
+                url += ExternalProfileID;
+                ResourcePath = string.Format("{0}/{1}", ResourcePath, ExternalProfileID);
+            }
+            else
+            {
+                ResourcePath = ResourceName;
+            }
+
+            return SendWebRequest(url, QueryParameters, Method, ContentString, sharedKey, out responseString);
         }
 
         private string CreateContentString()

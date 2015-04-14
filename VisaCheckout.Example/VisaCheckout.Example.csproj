@@ -270,6 +270,8 @@
     <Content Include="Views\Profile\Select.cshtml" />
     <Content Include="Views\Profile\Create.cshtml" />
     <Content Include="Views\Profile\Delete.cshtml" />
+    <Content Include="Views\Profile\Update.cshtml" />
+    <Content Include="Views\Shared\ProfileLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

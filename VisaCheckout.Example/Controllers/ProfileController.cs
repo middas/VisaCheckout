@@ -112,5 +112,44 @@ namespace VisaCheckout.Example.Controllers
 
             return View(model);
         }
+
+        public ActionResult Update()
+        {
+            ViewBag.Message = "Profile Update";
+
+            ProfileManagement request = new ProfileManagement(ApiKey)
+            {
+                AcceptCanadianVisaDebit = true,
+                AcceptedRegions = new List<string>() { "US" },
+                BillingCountries = BillingCountries.US | BillingCountries.AU,
+                CardBrands = SupportedCards.VISA | SupportedCards.AMEX | SupportedCards.DISCOVER | SupportedCards.MASTERCARD,
+                CollectShipping = true,
+                CustomerSupportUrl = new Uri("http://www.test.com"),
+                DefaultProfile = false,
+                ExternalProfileID = "testprofile",
+                LogoDisplayName = "updated display name",
+                LogoUrl = new Uri("http://www.test.com"),
+                ThreeDSActive = false,
+                ThreeDSSuppressChallenge = false,
+                WebsiteUrl = new Uri("http://www.test.com")
+            };
+            request.PrepareUpdateRequest();
+
+            string response;
+            bool success = request.SendRequest(SharedKey, out response);
+            SuccessModel model = new SuccessModel();
+            dynamic result = JsonConvert.DeserializeObject(response);
+
+            if (success)
+            {
+                model.UnencryptedData = JsonConvert.SerializeObject(result, Formatting.Indented);
+            }
+            else
+            {
+                TempData.Add("error", JsonConvert.SerializeObject(result, Formatting.Indented));
+            }
+
+            return View(model);
+        }
     }
 }

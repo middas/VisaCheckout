@@ -2,21 +2,10 @@
 
 @{
     ViewBag.Title = "Visa Checkout Example";
+    Layout = "~/Views/Shared/ProfileLayout.cshtml";
 }
 @using VisaCheckout;
 
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Message</h1>
-            </hgroup>
-            @Html.ActionLink("Query Profiles", "Select")
-            @Html.ActionLink("Create Profile", "Create")
-            @Html.ActionLink("Delete Profile", "Delete")
-        </div>
-    </section>
-}
 @if (TempData.ContainsKey("error"))
 {
     <div class="error">Error</div>

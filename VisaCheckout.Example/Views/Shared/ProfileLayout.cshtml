@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Message</h1>
+            </hgroup>
+            @Html.ActionLink("Query Profiles", "Select")
+            @Html.ActionLink("Create Profile", "Create")
+            @Html.ActionLink("Update Profile", "Update")
+            @Html.ActionLink("Delete Profile", "Delete")
+        </div>
+    </section>
+}
+@RenderBody()
