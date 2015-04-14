@@ -152,8 +152,7 @@ namespace VisaCheckout.VisaHelper.REST
                 throw new ArgumentNullException("ApiKey cannot be null");
             }
 
-            StringBuilder sb = new StringBuilder("?");
-            sb.Append(WriteOptionalQueryStringValue((ProfileManagement o) => o.ApiKey));
+            StringBuilder sb = new StringBuilder(WriteOptionalQueryStringValue((ProfileManagement o) => o.ApiKey));
 
             if (limit != 100)
             {
@@ -176,7 +175,7 @@ namespace VisaCheckout.VisaHelper.REST
 
         public bool SendRequest(string sharedKey, out string responseString)
         {
-            if (!string.IsNullOrEmpty(Method))
+            if (string.IsNullOrEmpty(Method))
             {
                 throw new Exception("Web request was not prepared");
             }
