@@ -4,8 +4,8 @@ namespace VisaCheckout.VisaHelper.Options
 {
     public enum ApiKeyStatus
     {
-        Active,
-        Inactive
+        ACTIVE,
+        INACTIVE
     }
 
     [Flags]

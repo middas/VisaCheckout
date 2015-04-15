@@ -47,7 +47,7 @@ namespace VisaCheckout.VisaHelper.REST
         {
             Method = "POST";
 
-            ContentString = WriteOptionalJavascriptValue((ApiKeyManagement o) => o.Status).ToUpper();
+            ContentString = WriteOptionalJavascriptValue((ApiKeyManagement o) => o.Status);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace VisaCheckout.VisaHelper.REST
         {
             Method = "POST";
 
-            ContentString = WriteOptionalJavascriptValue((ApiKeyManagement o) => o.Status).ToUpper();
+            ContentString = WriteOptionalJavascriptValue((ApiKeyManagement o) => o.Status);
         }
 
         /// <summary>
