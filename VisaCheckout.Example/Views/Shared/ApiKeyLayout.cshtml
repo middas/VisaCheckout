@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Message</h1>
+            </hgroup>
+            @Html.ActionLink("Query API Keys", "Select")
+            @Html.ActionLink("Create API Key", "Create")
+            @Html.ActionLink("Update API Key", "Update")
+            @Html.ActionLink("Delete API Key", "Delete")
+        </div>
+    </section>
+}
+@RenderBody()
