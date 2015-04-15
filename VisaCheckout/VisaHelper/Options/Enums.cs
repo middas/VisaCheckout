@@ -2,6 +2,12 @@
 
 namespace VisaCheckout.VisaHelper.Options
 {
+    public enum ApiKeyStatus
+    {
+        Active,
+        Inactive
+    }
+
     [Flags]
     public enum BillingCountries
     {
