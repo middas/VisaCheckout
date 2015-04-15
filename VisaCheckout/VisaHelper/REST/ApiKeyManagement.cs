@@ -4,17 +4,16 @@ namespace VisaCheckout.VisaHelper.REST
 {
     public class ApiKeyManagement : VisaRequestBase, IAdminRestRequest
     {
-        public const string ResourceName = "";
+        public const string ResourceName = "client/apikeys";
+        public const string SandboxUrl = "https://sandbox.secure.checkout.visa.com/merchant-api-ic/client/apikeys/";
+        public const string ProductionUrl = "https://secure.checkout.visa.com/merchant-api/client/apikeys/";
 
         public ApiKeyManagement()
             : base(ResourceName)
         {
         }
 
-        public string Method
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public string Method { get; private set; }
 
         public void PrepareCreateRequest()
         {
