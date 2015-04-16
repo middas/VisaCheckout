@@ -127,7 +127,6 @@ namespace VisaCheckout.VisaHelper.REST
             {
                 QueryString += WriteOptionalQueryStringValue((ApiKeyManagement o) => o.ExternalClientID);
             }
-            QueryString = QueryString.Substring(0, QueryString.Length - 1);
 
             string url;
 
@@ -147,12 +146,12 @@ namespace VisaCheckout.VisaHelper.REST
                 url = string.Format("{0}{1}", Environment.IsSandbox ? SandboxUrl : ProductionUrl, ApiKey);
             }
 
-            if (!string.IsNullOrEmpty(ContentString) && ContentString[ContentString.Length] == '&')
+            if (!string.IsNullOrEmpty(ContentString) && ContentString[ContentString.Length - 1] == '&')
             {
                 ContentString = ContentString.Substring(0, ContentString.Length - 1);
             }
 
-            if (!string.IsNullOrEmpty(QueryString) && QueryString[QueryString.Length] == '&')
+            if (!string.IsNullOrEmpty(QueryString) && QueryString[QueryString.Length - 1] == '&')
             {
                 QueryString = QueryString.Substring(0, QueryString.Length - 1);
             }
