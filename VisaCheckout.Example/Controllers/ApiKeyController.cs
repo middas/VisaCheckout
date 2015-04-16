@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Web.Mvc;
 using VisaCheckout.Example.Models;
+using VisaCheckout.VisaHelper.Options;
 using VisaCheckout.VisaHelper.REST;
 
 namespace VisaCheckout.Example.Controllers
@@ -13,7 +14,15 @@ namespace VisaCheckout.Example.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            ViewBag.Message = "API Key Create";
+
+            ApiKeyManagement request = new ApiKeyManagement(ExternalClientID)
+            {
+                Status = ApiKeyStatus.ACTIVE
+            };
+            request.PrepareCreateRequest();
+
+            return SendRequest(request);
         }
 
         public ActionResult Delete()
@@ -33,6 +42,11 @@ namespace VisaCheckout.Example.Controllers
             ApiKeyManagement request = new ApiKeyManagement(ExternalClientID);
             request.PrepareSelectRequest();
 
+            return SendRequest(request);
+        }
+
+        private ActionResult SendRequest(ApiKeyManagement request)
+        {
             string response;
             bool success = request.SendRequest(SharedKey, out response);
             SuccessModel model = new SuccessModel();
