@@ -20,10 +20,15 @@ namespace VisaCheckout.VisaHelper.REST
         /// The constructor
         /// </summary>
         /// <param name="apikey"></param>
-        public ApiKeyManagement(string apikey)
-            : base(string.Format("{0}/{1}", ResourceName, apikey))
+        public ApiKeyManagement(string externalClientID)
+            : base(ResourceName)
         {
-            ApiKey = apikey;
+            if (string.IsNullOrEmpty(externalClientID))
+            {
+                throw new ArgumentNullException("ExternalClientID cannot be null");
+            }
+
+            ExternalClientID = externalClientID;
         }
 
         /// <summary>
@@ -31,6 +36,12 @@ namespace VisaCheckout.VisaHelper.REST
         /// </summary>
         [Option("apikey")]
         public string ApiKey { get; set; }
+
+        /// <summary>
+        /// (Required) The external client ID that identifies the merchant.
+        /// </summary>
+        [Option("externalClientId")]
+        public string ExternalClientID { get; set; }
 
         public string Method { get; private set; }
 
@@ -108,6 +119,34 @@ namespace VisaCheckout.VisaHelper.REST
                 throw new Exception("Web request was not prepared");
             }
 
+            if (string.IsNullOrEmpty(QueryString))
+            {
+                QueryString = WriteOptionalQueryStringValue((ApiKeyManagement o) => o.ExternalClientID);
+            }
+            else
+            {
+                QueryString += WriteOptionalQueryStringValue((ApiKeyManagement o) => o.ExternalClientID);
+            }
+            QueryString = QueryString.Substring(0, QueryString.Length - 1);
+
+            string url;
+
+            if (Method == "GET")
+            {
+                ResourcePath = ResourceName;
+                url = Environment.IsSandbox ? SandboxUrl : ProductionUrl;
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(ApiKey))
+                {
+                    throw new ArgumentNullException("ApiKey cannot be null");
+                }
+
+                ResourcePath = string.Format("{0}/{1}", ResourceName, ApiKey);
+                url = string.Format("{0}{1}", Environment.IsSandbox ? SandboxUrl : ProductionUrl, ApiKey);
+            }
+
             if (!string.IsNullOrEmpty(ContentString) && ContentString[ContentString.Length] == '&')
             {
                 ContentString = ContentString.Substring(0, ContentString.Length - 1);
@@ -118,7 +157,7 @@ namespace VisaCheckout.VisaHelper.REST
                 QueryString = QueryString.Substring(0, QueryString.Length - 1);
             }
 
-            return SendWebRequest(Environment.IsSandbox ? SandboxUrl : ProductionUrl, QueryString, Method, ContentString, sharedKey, out responseString);
+            return SendWebRequest(url, QueryString, Method, ContentString, sharedKey, out responseString);
         }
     }
 }

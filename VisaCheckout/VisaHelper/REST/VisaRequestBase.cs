@@ -38,7 +38,7 @@ namespace VisaCheckout.VisaHelper.REST
         /// <returns></returns>
         protected string GenerateToken(string sharedKey, string queryString, string body)
         {
-            if (queryString[0] == '?')
+            if (!string.IsNullOrEmpty(queryString) && queryString[0] == '?')
             {
                 queryString = queryString.Substring(1);
             }
@@ -52,7 +52,7 @@ namespace VisaCheckout.VisaHelper.REST
 
         protected bool SendWebRequest(string url, string queryString, string webMethod, string contentString, string sharedKey, out string responseString)
         {
-            if (string.IsNullOrEmpty(contentString) && string.IsNullOrEmpty(queryString))
+            if (string.IsNullOrEmpty(webMethod))
             {
                 throw new Exception("Web request was not prepared");
             }

@@ -274,11 +274,15 @@
     <Content Include="Views\Profile\Update.cshtml" />
     <Content Include="Views\Shared\ProfileLayout.cshtml" />
     <Content Include="Views\Shared\ApiKeyLayout.cshtml" />
+    <Content Include="Views\ApiKey\Create.cshtml" />
+    <Content Include="Views\ApiKey\Delete.cshtml" />
+    <Content Include="Views\ApiKey\Index.cshtml" />
+    <Content Include="Views\ApiKey\Select.cshtml" />
+    <Content Include="Views\ApiKey\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Filters\" />
-    <Folder Include="Views\ApiKey\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VisaCheckout\VisaCheckout.csproj">

@@ -1,0 +1,18 @@
+﻿@model VisaCheckout.Example.Models.SuccessModel
+
+@{
+    ViewBag.Title = "Visa Checkout Example";
+    Layout = "~/Views/Shared/ApiKeyLayout.cshtml";
+}
+@using VisaCheckout;
+
+@if (TempData.ContainsKey("error"))
+{
+    <div class="error">Error</div>
+    <code>@TempData["error"]</code>
+}
+else
+{
+    <h1>Success Result Data:</h1>
+    <code>@Model.UnencryptedData</code>
+}
