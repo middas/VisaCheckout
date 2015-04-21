@@ -16,10 +16,7 @@ namespace VisaCheckout.Example.Controllers
         {
             ViewBag.Message = "API Key Create";
 
-            ApiKeyManagement request = new ApiKeyManagement(ExternalClientID)
-            {
-                Status = ApiKeyStatus.ACTIVE
-            };
+            ApiKeyManagement request = new ApiKeyManagement(ExternalClientID);
             request.PrepareCreateRequest();
 
             return SendRequest(request);
@@ -39,7 +36,10 @@ namespace VisaCheckout.Example.Controllers
         {
             ViewBag.Message = "API Key Query";
 
-            ApiKeyManagement request = new ApiKeyManagement(ExternalClientID);
+            ApiKeyManagement request = new ApiKeyManagement(ExternalClientID)
+            {
+                ApiKey = ApiKey
+            };
             request.PrepareSelectRequest();
 
             return SendRequest(request);

@@ -59,6 +59,7 @@ namespace VisaCheckout.VisaHelper.REST
             Method = "POST";
 
             ContentString = WriteOptionalJavascriptValue((ApiKeyManagement o) => o.Status);
+            QueryString = null;
         }
 
         /// <summary>
@@ -66,6 +67,8 @@ namespace VisaCheckout.VisaHelper.REST
         /// </summary>
         public void PrepareDeleteRequest()
         {
+            QueryString = null;
+            ContentString = null;
             Method = "DELETE";
         }
 
@@ -76,6 +79,8 @@ namespace VisaCheckout.VisaHelper.REST
         /// <param name="page"></param>
         public void PrepareSelectRequest(byte limit = 100, int page = 1)
         {
+            QueryString = "";
+            ContentString = null;
             Method = "GET";
 
             if (limit != 100)
@@ -94,6 +99,8 @@ namespace VisaCheckout.VisaHelper.REST
                     QueryString = string.Format("page={0}", page);
                 }
             }
+
+            QueryString += WriteOptionalQueryStringValue((ApiKeyManagement o) => o.ApiKey);
         }
 
         /// <summary>
@@ -101,6 +108,7 @@ namespace VisaCheckout.VisaHelper.REST
         /// </summary>
         public void PrepareUpdateRequest()
         {
+            QueryString = null;
             Method = "POST";
 
             ContentString = WriteOptionalJavascriptValue((ApiKeyManagement o) => o.Status);
@@ -139,14 +147,17 @@ namespace VisaCheckout.VisaHelper.REST
             {
                 if (string.IsNullOrEmpty(ApiKey))
                 {
-                    throw new ArgumentNullException("ApiKey cannot be null");
+                    ResourcePath = ResourceName;
+                    url = Environment.IsSandbox ? SandboxUrl : ProductionUrl;
                 }
-
-                ResourcePath = string.Format("{0}/{1}", ResourceName, ApiKey);
-                url = string.Format("{0}{1}", Environment.IsSandbox ? SandboxUrl : ProductionUrl, ApiKey);
+                else
+                {
+                    ResourcePath = string.Format("{0}/{1}", ResourceName, ApiKey);
+                    url = string.Format("{0}{1}", Environment.IsSandbox ? SandboxUrl : ProductionUrl, ApiKey);
+                }
             }
 
-            if (!string.IsNullOrEmpty(ContentString) && ContentString[ContentString.Length - 1] == '&')
+            if (!string.IsNullOrEmpty(ContentString) && ContentString[ContentString.Length - 1] == ',')
             {
                 ContentString = ContentString.Substring(0, ContentString.Length - 1);
             }
