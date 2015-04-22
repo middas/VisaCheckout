@@ -27,10 +27,15 @@ namespace VisaCheckout.VisaHelper.REST
         }
 
         /// <summary>
-        /// (Optional) Your API key.
+        /// (Optional) The API key you wish to update
         /// </summary>
         [Option("apikey")]
-        public string ApiKey { get; set; }
+        public string ApiKeyToUpdate { get; set; }
+
+        /// <summary>
+        /// (Required) Your primary API key.
+        /// </summary>
+        public string ApiKey { get; private set; }
 
         /// <summary>
         /// (Required) The external client ID that identifies the merchant.
@@ -54,7 +59,6 @@ namespace VisaCheckout.VisaHelper.REST
             Method = "POST";
 
             ContentString = null;
-            //ContentString = WriteOptionalJavascriptValue((ApiKeyManagement o) => o.Status);
             QueryString = null;
         }
 
@@ -95,8 +99,6 @@ namespace VisaCheckout.VisaHelper.REST
                     QueryString = string.Format("page={0}", page);
                 }
             }
-
-            //QueryString += WriteOptionalQueryStringValue((ApiKeyManagement o) => o.ApiKey);
         }
 
         /// <summary>
@@ -104,9 +106,9 @@ namespace VisaCheckout.VisaHelper.REST
         /// </summary>
         public void PrepareUpdateRequest()
         {
-            QueryString = null;
             Method = "POST";
 
+            QueryString = null;
             ContentString = WriteOptionalJavascriptValue((ApiKeyManagement o) => o.Status);
         }
 
@@ -133,16 +135,15 @@ namespace VisaCheckout.VisaHelper.REST
             }
 
             string url;
-
-            if (Method == "GET")
+            if (!string.IsNullOrEmpty(ApiKeyToUpdate))
             {
-                ResourcePath = ResourceName;
-                url = Environment.IsSandbox ? SandboxUrl : ProductionUrl;
+                url = string.Format("{0}{1}", Environment.IsSandbox ? SandboxUrl : ProductionUrl, ApiKeyToUpdate);
+                ResourcePath = string.Format("{0}/{1}", ResourceName, ApiKeyToUpdate);
             }
             else
             {
-                ResourcePath = ResourceName;
                 url = Environment.IsSandbox ? SandboxUrl : ProductionUrl;
+                ResourcePath = ResourceName;
             }
 
             if (!string.IsNullOrEmpty(ContentString) && ContentString[ContentString.Length - 1] == ',')
