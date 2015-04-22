@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using VisaCheckout.VisaHelper.Attributes;
 using VisaCheckout.VisaHelper.Options;
 
@@ -19,16 +20,10 @@ namespace VisaCheckout.VisaHelper.REST
         /// <summary>
         /// The constructor
         /// </summary>
-        /// <param name="apikey"></param>
-        public ApiKeyManagement(string externalClientID)
+        public ApiKeyManagement(string apikey)
             : base(ResourceName)
         {
-            if (string.IsNullOrEmpty(externalClientID))
-            {
-                throw new ArgumentNullException("ExternalClientID cannot be null");
-            }
-
-            ExternalClientID = externalClientID;
+            ApiKey = apikey;
         }
 
         /// <summary>
@@ -58,7 +53,8 @@ namespace VisaCheckout.VisaHelper.REST
         {
             Method = "POST";
 
-            ContentString = WriteOptionalJavascriptValue((ApiKeyManagement o) => o.Status);
+            ContentString = null;
+            //ContentString = WriteOptionalJavascriptValue((ApiKeyManagement o) => o.Status);
             QueryString = null;
         }
 
@@ -100,7 +96,7 @@ namespace VisaCheckout.VisaHelper.REST
                 }
             }
 
-            QueryString += WriteOptionalQueryStringValue((ApiKeyManagement o) => o.ApiKey);
+            //QueryString += WriteOptionalQueryStringValue((ApiKeyManagement o) => o.ApiKey);
         }
 
         /// <summary>
@@ -145,16 +141,8 @@ namespace VisaCheckout.VisaHelper.REST
             }
             else
             {
-                if (string.IsNullOrEmpty(ApiKey))
-                {
-                    ResourcePath = ResourceName;
-                    url = Environment.IsSandbox ? SandboxUrl : ProductionUrl;
-                }
-                else
-                {
-                    ResourcePath = string.Format("{0}/{1}", ResourceName, ApiKey);
-                    url = string.Format("{0}{1}", Environment.IsSandbox ? SandboxUrl : ProductionUrl, ApiKey);
-                }
+                ResourcePath = ResourceName;
+                url = Environment.IsSandbox ? SandboxUrl : ProductionUrl;
             }
 
             if (!string.IsNullOrEmpty(ContentString) && ContentString[ContentString.Length - 1] == ',')
@@ -167,7 +155,10 @@ namespace VisaCheckout.VisaHelper.REST
                 QueryString = QueryString.Substring(0, QueryString.Length - 1);
             }
 
-            return SendWebRequest(url, QueryString, Method, ContentString, sharedKey, out responseString);
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+            headers.Add("x-merchant-api-key", ApiKey);
+
+            return SendWebRequest(url, QueryString, Method, ContentString, sharedKey, headers, out responseString);
         }
     }
 }

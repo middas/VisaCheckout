@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -50,7 +51,7 @@ namespace VisaCheckout.VisaHelper.REST
             return string.Format("x:{0}:{1}", unixEpoch, Utilities.Sha256Hash(sb.ToString()));
         }
 
-        protected bool SendWebRequest(string url, string queryString, string webMethod, string contentString, string sharedKey, out string responseString)
+        protected bool SendWebRequest(string url, string queryString, string webMethod, string contentString, string sharedKey, Dictionary<string, string> headers, out string responseString)
         {
             if (string.IsNullOrEmpty(webMethod))
             {
@@ -68,15 +69,35 @@ namespace VisaCheckout.VisaHelper.REST
             request.Method = webMethod;
             request.Headers.Add("x-pay-token", GenerateToken(sharedKey, queryString, contentString));
 
-            if (!string.IsNullOrEmpty(contentString))
+            if (headers != null && headers.Count > 0)
             {
-                using (StreamWriter sw = new StreamWriter(request.GetRequestStream()))
+                foreach (KeyValuePair<string, string> header in headers)
                 {
-                    sw.Write(contentString);
+                    request.Headers.Add(header.Key, header.Value);
+                }
+            }
+
+            if (webMethod == "PUT" || webMethod == "POST")
+            {
+                if (!string.IsNullOrEmpty(contentString))
+                {
+                    using (StreamWriter sw = new StreamWriter(request.GetRequestStream()))
+                    {
+                        sw.Write(contentString);
+                    }
+                }
+                else
+                {
+                    request.ContentLength = 0;
                 }
             }
 
             return SendWebRequest(request, out responseString);
+        }
+
+        protected bool SendWebRequest(string url, string queryString, string webMethod, string contentString, string sharedKey, out string responseString)
+        {
+            return SendWebRequest(url, queryString, webMethod, contentString, sharedKey, null, out responseString);   
         }
 
         protected bool SendWebRequest(HttpWebRequest request, out string responseString)
