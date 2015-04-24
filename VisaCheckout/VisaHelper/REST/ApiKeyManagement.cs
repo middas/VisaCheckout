@@ -67,6 +67,7 @@ namespace VisaCheckout.VisaHelper.REST
         /// </summary>
         public void PrepareDeleteRequest()
         {
+            throw new NotSupportedException("The API does not support this.");
             QueryString = null;
             ContentString = null;
             Method = "DELETE";
@@ -106,8 +107,8 @@ namespace VisaCheckout.VisaHelper.REST
         /// </summary>
         public void PrepareUpdateRequest()
         {
+            throw new NotSupportedException("The API does not support this.");
             Method = "POST";
-
             QueryString = null;
             ContentString = WriteOptionalJavascriptValue((ApiKeyManagement o) => o.Status);
         }
