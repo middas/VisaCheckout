@@ -4,17 +4,16 @@ namespace VisaCheckout.VisaHelper.REST
 {
     public class UserManagement : VisaRequestBase, IAdminRestRequest
     {
-        public const string ResourceName = "";
+        public const string ProductionUrl = "https://secure.checkout.visa.com/merchant-api/client/users";
+        public const string ResourceName = "client/users";
+        public const string SandboxUrl = "https://sandbox.secure.checkout.visa.com/merchant-api-ic/client/users";
 
         public UserManagement()
             : base(ResourceName)
         {
         }
 
-        public string Method
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public string Method { get; private set; }
 
         public void PrepareCreateRequest()
         {
