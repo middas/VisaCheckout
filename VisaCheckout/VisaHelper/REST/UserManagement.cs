@@ -44,13 +44,29 @@ namespace VisaCheckout.VisaHelper.REST
         public void PrepareCreateRequest()
         {
             Method = "POST";
-            throw new NotImplementedException();
+
+            StringBuilder sb = new StringBuilder(WriteOptionalJavascriptValue((UserManagement o) => o.FirstName));
+            sb.Append(WriteOptionalJavascriptValue((UserManagement o) => o.LastName));
+            sb.Append(WriteOptionalJavascriptValue((UserManagement o) => o.Email));
+            sb.Append(WriteOptionalJavascriptValue((UserManagement o) => o.Username));
+
+            ContentString = sb.ToString();
+            QueryParameters = WriteOptionalQueryStringValue((UserManagement o) => o.ApiKey);
         }
 
         public void PrepareDeleteRequest()
         {
             Method = "DELETE";
-            throw new NotImplementedException();
+
+            if (string.IsNullOrEmpty(Username))
+            {
+                throw new ArgumentNullException("Username cannot be null.");
+            }
+
+            StringBuilder sb = new StringBuilder(WriteOptionalQueryStringValue((UserManagement o) => o.ApiKey));
+            sb.Append(WriteOptionalQueryStringValue((UserManagement o) => o.Username));
+
+            QueryParameters = sb.ToString();
         }
 
         public void PrepareSelectRequest(byte limit = 100, int page = 1)
@@ -76,7 +92,19 @@ namespace VisaCheckout.VisaHelper.REST
         public void PrepareUpdateRequest()
         {
             Method = "PUT";
-            throw new NotImplementedException();
+
+            StringBuilder sb = new StringBuilder(WriteOptionalQueryStringValue((UserManagement o) => o.ApiKey));
+            sb.Append(WriteOptionalQueryStringValue((UserManagement o) => o.Username));
+
+            QueryParameters = sb.ToString();
+
+            sb.Clear();
+            sb.Append(WriteOptionalJavascriptValue((UserManagement o) => o.FirstName));
+            sb.Append(WriteOptionalJavascriptValue((UserManagement o) => o.LastName));
+            sb.Append(WriteOptionalJavascriptValue((UserManagement o) => o.Email));
+            sb.Append(WriteOptionalJavascriptValue((UserManagement o) => o.Username));
+
+            ContentString = sb.ToString();
         }
 
         public bool SendRequest(string sharedKey, out string responseString)
