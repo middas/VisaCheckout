@@ -7,12 +7,12 @@ using VisaCheckout.VisaHelper.Options;
 
 namespace VisaCheckout.VisaHelper.REST
 {
-    public abstract class VisaRequestBase : RequestBase
+    public abstract class RestBase : RequestBase
     {
         public const string Accept = "application/json ";
         public const string ContentType = "application/json ";
 
-        protected VisaRequestBase(string resourcePath)
+        protected RestBase(string resourcePath)
         {
             ResourcePath = resourcePath;
         }

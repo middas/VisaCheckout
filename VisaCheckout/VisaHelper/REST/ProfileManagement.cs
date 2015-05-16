@@ -9,7 +9,7 @@ namespace VisaCheckout.VisaHelper.REST
     /// <summary>
     /// The REST helper for managing profiles
     /// </summary>
-    public class ProfileManagement : VisaRequestBase, IAdminRestRequest
+    public class ProfileManagement : RestBase, IAdminRestRequest
     {
         public const string ProductionUrl = "https://secure.checkout.visa.com/merchant-api/client/profiles/";
         public const string ResourceName = "client/profiles";

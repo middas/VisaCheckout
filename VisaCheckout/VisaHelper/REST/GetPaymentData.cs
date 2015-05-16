@@ -7,7 +7,7 @@ namespace VisaCheckout.VisaHelper.REST
     /// <summary>
     /// The REST helper for getting payment data
     /// </summary>
-    public class GetPaymentData : VisaRequestBase, IVisaRestRequest
+    public class GetPaymentData : RestBase, IVisaRestRequest
     {
         public const string ProductionUrl = "https://secure.checkout.visa.com/wallet-services-web/payment/data/";
         public const string SandboxUrl = "https://sandbox.secure.checkout.visa.com/wallet-services-web/payment/data/";

@@ -6,7 +6,7 @@ namespace VisaCheckout.VisaHelper.REST
     /// <summary>
     /// The REST helper for updating payment info
     /// </summary>
-    public class UpdatePaymentInfo : VisaRequestBase, IVisaRestRequest
+    public class UpdatePaymentInfo : RestBase, IVisaRestRequest
     {
         public const string ProductionUrl = "https://secure.checkout.visa.com/wallet-services-web/payment/info/";
         public const string ResourceName = "payment/info";

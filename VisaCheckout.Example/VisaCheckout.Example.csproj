@@ -158,6 +158,7 @@
     <Compile Include="Controllers\ApiKeyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -279,6 +280,12 @@
     <Content Include="Views\ApiKey\Index.cshtml" />
     <Content Include="Views\ApiKey\Select.cshtml" />
     <Content Include="Views\ApiKey\Update.cshtml" />
+    <Content Include="Views\Shared\UserManagementLayout.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Select.cshtml" />
+    <Content Include="Views\User\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

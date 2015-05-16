@@ -8,7 +8,7 @@ namespace VisaCheckout.VisaHelper.REST
     /// <summary>
     /// The REST helper for managing API Keys
     /// </summary>
-    public class ApiKeyManagement : VisaRequestBase, IAdminRestRequest
+    public class ApiKeyManagement : RestBase, IAdminRestRequest
     {
         public const string ProductionUrl = "https://secure.checkout.visa.com/merchant-api/client/apikeys/";
         public const string ResourceName = "client/apikeys";

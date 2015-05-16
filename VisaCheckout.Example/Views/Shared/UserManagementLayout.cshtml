@@ -1,0 +1,32 @@
+﻿@model VisaCheckout.Example.Models.SuccessModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Visa Checkout Example";
+}
+@using VisaCheckout;
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Message</h1>
+            </hgroup>
+            @Html.ActionLink("Query Users", "Select")
+            @Html.ActionLink("Create User", "Create")
+            @Html.ActionLink("Update User", "Update")
+            @Html.ActionLink("Delete User", "Delete")
+        </div>
+    </section>
+}
+
+@if (TempData.ContainsKey("error"))
+{
+    <div class="error">Error</div>
+    <code>@TempData["error"]</code>
+}
+else if(Model != null)
+{
+    <h1>Success Result Data:</h1>
+    <code>@Model.UnencryptedData</code>
+}
+@RenderBody()

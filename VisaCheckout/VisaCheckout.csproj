@@ -100,7 +100,7 @@
     <Compile Include="VisaHelper\REST\ProfileManagement.cs" />
     <Compile Include="VisaHelper\REST\UpdatePaymentInfo.cs" />
     <Compile Include="VisaHelper\REST\UserManagement.cs" />
-    <Compile Include="VisaHelper\REST\VisaRequestBase.cs" />
+    <Compile Include="VisaHelper\REST\RestBase.cs" />
     <Compile Include="VisaHelper\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
