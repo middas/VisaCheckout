@@ -7,7 +7,7 @@ namespace VisaCheckout.VisaHelper.Options
     /// <summary>
     /// Options specific to how the button is displayed.
     /// </summary>
-    public class ButtonOptions : OptionsBase, IOptions
+    public class ButtonOptions : RequestBase, IOptions
     {
         /// <summary>
         /// The production URL for the button image

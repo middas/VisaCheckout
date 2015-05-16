@@ -7,7 +7,7 @@ namespace VisaCheckout.VisaHelper.Options
     /// <summary>
     /// Settings specific to the Javascript init.
     /// </summary>
-    public class SettingOptions : OptionsBase, IOptions
+    public class SettingOptions : RequestBase, IOptions
     {
         /// <summary>
         /// (Optional) Override value for the country code, which controls how text displays in the Visa Checkout checkout button and lightbox. By default, Visa Checkout determines the country from the consumer's IP address. Do not use the countryCode attribute unless explicit control over the display is required.

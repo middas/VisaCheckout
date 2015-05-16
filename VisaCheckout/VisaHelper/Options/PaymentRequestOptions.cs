@@ -8,7 +8,7 @@ namespace VisaCheckout.VisaHelper.Options
     /// <summary>
     /// Payment request options.
     /// </summary>
-    public class PaymentRequestOptions : OptionsBase, IOptions
+    public class PaymentRequestOptions : RequestBase, IOptions
     {
         public PaymentRequestOptions()
         {

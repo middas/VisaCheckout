@@ -12,7 +12,7 @@ namespace VisaCheckout.VisaHelper.Options
     /// <summary>
     /// Visa Update Image options.
     /// </summary>
-    public class VisaUpdateImageOptions : OptionsBase, IOptions
+    public class VisaUpdateImageOptions : RequestBase, IOptions
     {
         public const string ProductionUrl = "https://secure.checkout.visa.com/wallet-services-web/payment/updatepaymentinfo.gif";
         public const string SandboxUrl = "https://sandbox.secure.checkout.visa.com/wallet-services-web/payment/updatepaymentinfo.gif";

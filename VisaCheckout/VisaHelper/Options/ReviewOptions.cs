@@ -6,7 +6,7 @@ namespace VisaCheckout.VisaHelper.Options
     /// <summary>
     /// Review options.
     /// </summary>
-    public class ReviewOptions : OptionsBase, IOptions
+    public class ReviewOptions : RequestBase, IOptions
     {
         /// <summary>
         /// (Optional) The button label in the Visa Checkout lightbox.

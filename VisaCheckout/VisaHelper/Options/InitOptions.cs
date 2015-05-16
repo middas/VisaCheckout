@@ -7,7 +7,7 @@ namespace VisaCheckout.VisaHelper.Options
     /// <summary>
     /// The init Javascript options.
     /// </summary>
-    public class InitOptions : OptionsBase, IOptions
+    public class InitOptions : RequestBase, IOptions
     {
         /// <summary>
         /// (Required) The API key that Visa Checkout created when you created the Visa Checkout account. You will use both a live key and a sandbox key, which are different from each other.

@@ -6,7 +6,7 @@ namespace VisaCheckout.VisaHelper.Options
     /// <summary>
     /// Three DS Setup options.
     /// </summary>
-    public class ThreeDSSetupOptions : OptionsBase, IOptions
+    public class ThreeDSSetupOptions : RequestBase, IOptions
     {
         /// <summary>
         /// (Optional) Whether Verified by Visa (VbV) is active for this transaction. If Verified by Visa is configured, you can use threeDSActive to deactivate it for the transaction; otherwise, VbV will be active if it has been configured.

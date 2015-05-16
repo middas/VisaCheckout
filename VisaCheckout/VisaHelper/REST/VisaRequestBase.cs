@@ -7,7 +7,7 @@ using VisaCheckout.VisaHelper.Options;
 
 namespace VisaCheckout.VisaHelper.REST
 {
-    public abstract class VisaRequestBase : OptionsBase
+    public abstract class VisaRequestBase : RequestBase
     {
         public const string Accept = "application/json ";
         public const string ContentType = "application/json ";

@@ -7,7 +7,7 @@ namespace VisaCheckout.VisaHelper.Options
     /// <summary>
     /// Options for three DS eligible brands
     /// </summary>
-    public class ThreeDSEligibleBrandsOptions : OptionsBase, IOptions
+    public class ThreeDSEligibleBrandsOptions : RequestBase, IOptions
     {
         /// <summary>
         /// The constructor

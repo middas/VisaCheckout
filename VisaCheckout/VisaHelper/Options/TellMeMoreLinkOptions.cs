@@ -6,7 +6,7 @@ namespace VisaCheckout.VisaHelper.Options
     /// <summary>
     /// Options for displaying the "Tell Me More" link
     /// </summary>
-    public class TellMeMoreLinkOptions : OptionsBase, IOptions
+    public class TellMeMoreLinkOptions : RequestBase, IOptions
     {
         public TellMeMoreLinkOptions()
         {

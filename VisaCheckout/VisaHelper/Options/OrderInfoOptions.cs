@@ -6,7 +6,7 @@ namespace VisaCheckout.VisaHelper.Options
     /// <summary>
     /// The order information options
     /// </summary>
-    public class OrderInfoOptions : OptionsBase, IOptions
+    public class OrderInfoOptions : RequestBase, IOptions
     {
         /// <summary>
         /// The constructor
