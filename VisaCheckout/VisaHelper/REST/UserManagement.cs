@@ -56,12 +56,12 @@ namespace VisaCheckout.VisaHelper.REST
 
         public void PrepareDeleteRequest()
         {
-            Method = "DELETE";
-
             if (string.IsNullOrEmpty(Username))
             {
                 throw new ArgumentNullException("Username cannot be null.");
             }
+
+            Method = "DELETE";
 
             StringBuilder sb = new StringBuilder(WriteOptionalQueryStringValue((UserManagement o) => o.ApiKey));
             sb.Append(WriteOptionalQueryStringValue((UserManagement o) => o.Username));
@@ -91,6 +91,11 @@ namespace VisaCheckout.VisaHelper.REST
 
         public void PrepareUpdateRequest()
         {
+            if (string.IsNullOrEmpty(Username))
+            {
+                throw new ArgumentNullException("Username cannot be null.");
+            }
+
             Method = "PUT";
 
             StringBuilder sb = new StringBuilder(WriteOptionalQueryStringValue((UserManagement o) => o.ApiKey));
