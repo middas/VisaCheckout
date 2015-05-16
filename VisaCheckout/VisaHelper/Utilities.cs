@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using System.Web;
 
 namespace VisaCheckout.VisaHelper
 {
@@ -17,6 +18,14 @@ namespace VisaCheckout.VisaHelper
             }
 
             return hashString;
+        }
+
+        public static string UrlEncode(string s)
+        {
+            string value = HttpUtility.UrlEncode(s).Replace("%26", "&").Replace("%3d", "=");
+            value = value.Replace("%2d", "-").Replace("2e", ".").Replace("5f", "_").Replace("7e", "~");
+
+            return value;
         }
     }
 }

@@ -221,7 +221,8 @@ namespace VisaCheckout.VisaHelper.Options
                 }
 
                 // The query string must be URL encoded
-                value = HttpUtility.UrlEncode(value).Replace("%26", "&").Replace("%3d", "=");
+                // excepting the following characters, per RFC 3986: hyphen, period, underscore. and tilde
+                value = Utilities.UrlEncode(value);
                 querySb.Append(value);
             }
 

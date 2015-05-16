@@ -33,7 +33,7 @@ namespace VisaCheckout.VisaHelper.REST
         ///         in which the name is separated from the value by an equal sign (=). Parameters are separated
         ///         from each other by an ampersand (&) character. The initial question mark (?) is not included
         ///         in the query string. The query string must be URL encoded, excepting the following characters,
-        ///         perRFC3986: hyphen, period, underscore. and tilde.
+        ///         per RFC3986: hyphen, period, underscore. and tilde.
         ///         5. Complete request body, when a request body exists
         /// </summary>
         /// <returns></returns>
@@ -45,6 +45,10 @@ namespace VisaCheckout.VisaHelper.REST
             }
 
             long unixEpoch = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
+
+            //The query string must be URL encoded, excepting the following characters, 
+            //per RFC3986: hyphen, period, underscore. and tilde.
+            queryString = Utilities.UrlEncode(queryString);
 
             StringBuilder sb = new StringBuilder(sharedKey).Append(unixEpoch).Append(ResourcePath).Append(queryString).Append(body);
 
