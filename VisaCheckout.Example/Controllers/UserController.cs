@@ -12,11 +12,52 @@ namespace VisaCheckout.Example.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            ViewBag.Message = "User Create";
+
+            UserManagement request = new UserManagement(ApiKey)
+            {
+                Email = "donotreply@ldsborrowedandblue.com",
+                FirstName = "first",
+                LastName = "last",
+                Username = "donotreply@ldsborrowedandblue.com"
+            };
+            request.PrepareCreateRequest();
+
+            return SendRequest(request);
         }
 
         public ActionResult Delete()
         {
+            ViewBag.Message = "User Delete (the last user)";
+
+            UserManagement request = new UserManagement(ApiKey);
+            request.PrepareSelectRequest();
+
+            string response;
+            if (request.SendRequest(SharedKey, out response))
+            {
+                dynamic data = JsonConvert.DeserializeObject(response);
+
+                if (data != null && data.users != null && data.users.Count > 0)
+                {
+                    int index = data.users.Count - 1;
+                    string username = data.users[index].username;
+
+                    request.Username = username;
+                    request.PrepareDeleteRequest();
+
+                    return SendRequest(request);
+                }
+                else
+                {
+                    TempData.Add("error", "No users to delete");
+                }
+            }
+            else
+            {
+                TempData.Add("error", string.Format("Could not query users:\r\n{0}", response));
+            }
+
             return View();
         }
 
@@ -38,6 +79,39 @@ namespace VisaCheckout.Example.Controllers
 
         public ActionResult Update()
         {
+            ViewBag.Message = "User Update (the last user)";
+
+            UserManagement request = new UserManagement(ApiKey);
+            request.PrepareSelectRequest();
+
+            string response;
+            if (request.SendRequest(SharedKey, out response))
+            {
+                dynamic data = JsonConvert.DeserializeObject(response);
+
+                if (data != null && data.users != null && data.users.Count > 0)
+                {
+                    int index = data.users.Count - 1;
+                    string username = data.users[index].username;
+
+                    request.Username = username;
+                    request.LastName = "updated";
+                    request.FirstName = data.users[index].firstName;
+                    request.Email = username;
+                    request.PrepareUpdateRequest();
+
+                    return SendRequest(request);
+                }
+                else
+                {
+                    TempData.Add("error", "No users to update");
+                }
+            }
+            else
+            {
+                TempData.Add("error", string.Format("Could not query users:\r\n{0}", response));
+            }
+
             return View();
         }
 

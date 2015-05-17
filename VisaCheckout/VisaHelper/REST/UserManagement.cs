@@ -122,9 +122,14 @@ namespace VisaCheckout.VisaHelper.REST
             string url = Environment.IsSandbox ? SandboxUrl : ProductionUrl;
             ResourcePath = ResourceName;
 
-            if (!string.IsNullOrEmpty(ContentString) && ContentString[ContentString.Length - 1] == ',')
+            if (!string.IsNullOrEmpty(ContentString))
             {
-                ContentString = ContentString.Substring(0, ContentString.Length - 1);
+                if (ContentString[ContentString.Length - 1] == ',')
+                {
+                    ContentString = ContentString.Substring(0, ContentString.Length - 1);
+                }
+
+                ContentString = string.Format("{{{0}}}", ContentString);
             }
 
             if (!string.IsNullOrEmpty(QueryParameters) && QueryParameters[QueryParameters.Length - 1] == '&')

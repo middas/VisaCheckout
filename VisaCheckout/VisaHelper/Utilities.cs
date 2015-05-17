@@ -22,10 +22,15 @@ namespace VisaCheckout.VisaHelper
 
         public static string UrlEncode(string s)
         {
-            string value = HttpUtility.UrlEncode(s).Replace("%26", "&").Replace("%3d", "=");
-            value = value.Replace("%2d", "-").Replace("2e", ".").Replace("5f", "_").Replace("7e", "~");
+            if (!string.IsNullOrEmpty(s))
+            {
+                string value = HttpUtility.UrlEncode(s).Replace("%26", "&").Replace("%3d", "=");
+                value = value.Replace("%2d", "-").Replace("2e", ".").Replace("5f", "_").Replace("7e", "~");
 
-            return value;
+                return value;
+            }
+
+            return s;
         }
     }
 }
