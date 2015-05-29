@@ -4,6 +4,9 @@ using VisaCheckout.VisaHelper.Attributes;
 
 namespace VisaCheckout.VisaHelper.REST
 {
+    /// <summary>
+    /// The REST helper for managing users
+    /// </summary>
     public class UserManagement : RestBase, IAdminRestRequest
     {
         public const string ProductionUrl = "https://secure.checkout.visa.com/merchant-api/client/users";
@@ -13,6 +16,10 @@ namespace VisaCheckout.VisaHelper.REST
         private string ContentString = null;
         private string QueryParameters = null;
 
+        /// <summary>
+        /// The constructor
+        /// </summary>
+        /// <param name="apikey"></param>
         public UserManagement(string apikey)
             : base(ResourceName)
         {
@@ -24,23 +31,44 @@ namespace VisaCheckout.VisaHelper.REST
             ApiKey = apikey;
         }
 
+        /// <summary>
+        /// (Required) Public API key, which is different than the shared secret
+        /// </summary>
         [Option("apikey")]
         public string ApiKey { get; set; }
 
+        /// <summary>
+        /// (Required) Email address of client's secondary contact.
+        /// </summary>
         [Option("email")]
         public string Email { get; set; }
 
+        /// <summary>
+        /// (Required) User's first or given name.
+        /// </summary>
         [Option("firstName")]
         public string FirstName { get; set; }
 
+        /// <summary>
+        /// (Required) User's last name or surname.
+        /// </summary>
         [Option("lastName")]
         public string LastName { get; set; }
 
+        /// <summary>
+        /// The HTTP method type
+        /// </summary>
         public string Method { get; private set; }
 
+        /// <summary>
+        /// User name, which is required with PUT and DELETE methods, not specified as a query parameter for the POST method, and optional for the GET method.
+        /// </summary>
         [Option("username")]
         public string Username { get; set; }
 
+        /// <summary>
+        /// Prepares a request to create a user
+        /// </summary>
         public void PrepareCreateRequest()
         {
             Method = "POST";
@@ -54,6 +82,9 @@ namespace VisaCheckout.VisaHelper.REST
             QueryParameters = WriteOptionalQueryStringValue((UserManagement o) => o.ApiKey);
         }
 
+        /// <summary>
+        /// Prepares a request to delete a user
+        /// </summary>
         public void PrepareDeleteRequest()
         {
             if (string.IsNullOrEmpty(Username))
@@ -69,6 +100,11 @@ namespace VisaCheckout.VisaHelper.REST
             QueryParameters = sb.ToString();
         }
 
+        /// <summary>
+        /// Prepares a request to query users
+        /// </summary>
+        /// <param name="limit">(Optional) The number of results per page; default is 100 clients.</param>
+        /// <param name="page">(Optional) The page number; default is the next page, starting from 1.</param>
         public void PrepareSelectRequest(byte limit = 100, int page = 1)
         {
             Method = "GET";
@@ -89,6 +125,9 @@ namespace VisaCheckout.VisaHelper.REST
             QueryParameters = sb.ToString();
         }
 
+        /// <summary>
+        /// Prepares a request to update a user
+        /// </summary>
         public void PrepareUpdateRequest()
         {
             if (string.IsNullOrEmpty(Username))
@@ -112,6 +151,12 @@ namespace VisaCheckout.VisaHelper.REST
             ContentString = sb.ToString();
         }
 
+        /// <summary>
+        /// Sends the request to Visa
+        /// </summary>
+        /// <param name="sharedKey"></param>
+        /// <param name="responseString"></param>
+        /// <returns></returns>
         public bool SendRequest(string sharedKey, out string responseString)
         {
             if (string.IsNullOrEmpty(Method))
